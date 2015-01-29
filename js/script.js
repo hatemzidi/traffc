@@ -45,7 +45,6 @@ $(function () {
     var citiesBloodhound = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        //prefetch: '../data/films/post_1960.json',
         //prefetch: 'api.php',
         remote: 'api.php?q=%QUERY'
     });
