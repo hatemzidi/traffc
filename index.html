@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>traffc</title>
-    <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
           content="Traffc, maps, roads, traffic">
@@ -12,7 +12,7 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 
     <!-- Latest compiled and minified JavaScript -->
@@ -26,7 +26,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 
 </head>
 
@@ -34,7 +34,7 @@
 
 <nav class="navbar navbar-default">
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
@@ -43,20 +43,38 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="#"><img class="img-responsive" src="icon.maps.png"/></a>
+            <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/icon.maps.png"/></a>
             <a class="navbar-brand brand" href="#">traffc</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                    <div class="navbar-form navbar-left">
+                        <div class="form-group  ">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Refresh">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-repeat"></span>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-default">
-                            <span class="glyphicon glyphicon-search" style="vertical-align:middle"></span>
-                        </button>
+                    </div>
+                </li>
+                <li>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
                     </form>
                 </li>
                 <li class="dropdown">
@@ -65,9 +83,9 @@
                     <ul class="dropdown-menu" role="menu">
                         <!--<li><a href="#">Action</a></li>-->
                         <!--<li><a href="#">Another action</a></li>-->
-                        <li><a href="#">Why this ?</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#whyModal">Why this ?</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
                     </ul>
                 </li>
             </ul>
@@ -86,9 +104,56 @@
     </div>
 </div>
 
+
+<!-- why -->
+<div class="modal fade" id="whyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Why this ?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Just because &hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- About -->
+<div class="modal fade" id="aboutModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">About</h4>
+            </div>
+            <div class="modal-body">
+                <p>Meh &hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
 <footer class="footer">
     <div class="container">
-        <p class="text-muted text-right">&copy; hatem zidi</p>
+        <p class="text-muted text-right">&copy; a footer with no info, yet!</p>
     </div>
 </footer>
 
