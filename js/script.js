@@ -31,7 +31,7 @@ function initialize() {
         map.setCenter(center);
     });
 
-    google.maps.event.addListener(map, 'idle', function (event) {
+    google.maps.event.addListener(map, 'idle', function () {
         mapCenter = map.getCenter();
     });
 }
@@ -42,3 +42,11 @@ $(function () {
     initialize(); // init the map
     $(window).resize(resizeBootstrapMap);
 });
+
+//------- TODOs ----
+//todo geolocate : https://github.com/manuelbieh/jQuery-Geolocation
+//todo ajaxify search to search city from a sql3 db
+//todo set refresh time from input field
+//todo add iphone/mobile touch icon
+//todo fix meta for FB/TWITTER... etc
+//
