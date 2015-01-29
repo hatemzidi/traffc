@@ -49,4 +49,4 @@ $(function () {
 //todo set refresh time from input field
 //todo add iphone/mobile touch icon
 //todo fix meta for FB/TWITTER... etc
-//
+//todo add/update responsive header/menu
