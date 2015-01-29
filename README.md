@@ -8,3 +8,11 @@ There is lot of existing similar service, and may be more sophisticated, but I w
 ## Demo
 The site is available [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 
+## ToDos
+- geolocate : https://github.com/manuelbieh/jQuery-Geolocation
+- ajaxify search to search city from a sql3 db
+- set refresh time from input field
+- add iphone/mobile touch icon
+- fix meta for FB/TWITTER... etc
+- add/update responsive header/menu
+- slimframework for APIs

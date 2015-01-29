@@ -41,12 +41,29 @@ $(function () {
     resizeBootstrapMap(); // first call
     initialize(); // init the map
     $(window).resize(resizeBootstrapMap);
+
+    var citiesBloodhound = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        //prefetch: '../data/films/post_1960.json',
+        //prefetch: 'api.php',
+        remote: 'api.php?q=%QUERY'
+    });
+
+    citiesBloodhound.initialize();
+
+    $('#typeahead').typeahead({
+        minLength: 3,
+        hint: true,
+        highlight: true
+    }, {
+        name: 'cities',
+        displayKey: 'name',
+        source: citiesBloodhound.ttAdapter(),
+        templates: {
+            empty: 'unable to find any City',
+            suggestion: Handlebars.compile('{{asciiname}}')
+        }
+    });
 });
 
-//------- TODOs ----
-//todo geolocate : https://github.com/manuelbieh/jQuery-Geolocation
-//todo ajaxify search to search city from a sql3 db
-//todo set refresh time from input field
-//todo add iphone/mobile touch icon
-//todo fix meta for FB/TWITTER... etc
-//todo add/update responsive header/menu
