@@ -16,3 +16,4 @@ The site is available [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 - fix meta for FB/TWITTER... etc
 - add/update responsive header/menu
 - slimframework for APIs
+- typeahead : add country/flag
