@@ -6,8 +6,7 @@ var map;
 
 function resizeBootstrapMap() {
     var $map = $('#map');
-    var $map_canvas = $('#map_canvas');
-    var mapParentWidth = $map_canvas.width();
+    var mapParentWidth = $('#map_canvas').width();
     $map.width(mapParentWidth);
     $map.height($(window).height() - 115);
 }
@@ -68,7 +67,8 @@ $(function () {
 
 
     $('#typeahead').on('typeahead:selected', function (e, datum) {
-        console.log(datum);
+        var newLatLng = new google.maps.LatLng(datum.latitude, datum.longitude);
+        map.panTo(newLatLng);
     });
 });
 

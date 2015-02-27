@@ -2,7 +2,7 @@
 
 This is just a minimalistic web page using Google Maps traffic layer to visualize your location jam condition.
 
-There is lot of existing similar service, and may be more sophisticated, but I was totally botherd by the design and the ads.
+There is lot of existing similar service, and may be more sophisticated, but I was totally bothered by their design and the ads.
 
 
 ## Demo
@@ -10,7 +10,7 @@ The site is available [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 
 ## ToDos
 - geolocate : https://github.com/manuelbieh/jQuery-Geolocation
-- ajaxify search to search city from a sql3 db
+- use a jquery lib for gmap
 - set refresh time from input field
 - add iphone/mobile touch icon
 - fix meta for FB/TWITTER... etc

@@ -3,6 +3,10 @@
     position: relative;
 }
 
+.twitter-typeahead input {
+    border-radius: 4px !important;
+}
+
 .tt-dropdown-menu {
     width: 100%;
     min-width: 160px;
