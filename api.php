@@ -24,4 +24,3 @@ echo json_encode($counters);
 
 // close connection
 $logdb = null;
-?>
