@@ -5,10 +5,11 @@
 var map;
 
 function resizeBootstrapMap() {
-    var mapParentWidth = $('#map_canvas').width();
-    $('#map')
-        .width(mapParentWidth)
-        .height($(window).height() - 300);
+    var $map = $('#map');
+    var $map_canvas = $('#map_canvas');
+    var mapParentWidth = $map_canvas.width();
+    $map.width(mapParentWidth);
+    $map.height($(window).height() - 115);
 }
 
 function initialize() {
@@ -63,6 +64,11 @@ $(function () {
             empty: 'unable to find any City',
             suggestion: Handlebars.compile('{{asciiname}}')
         }
+    });
+
+
+    $('#typeahead').on('typeahead:selected', function (e, datum) {
+        console.log(datum);
     });
 });
 
