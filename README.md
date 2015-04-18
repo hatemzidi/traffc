@@ -13,6 +13,5 @@ The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 - use a jquery lib for gmap : http://hpneo.github.io/gmaps/
 - set refresh time from input field
 - add iphone/mobile touch icon
-- fix meta for FB/TWITTER... etc
 - add/update responsive header/menu
-- slimframework for APIs
+- slimframework for Asdfsdf
