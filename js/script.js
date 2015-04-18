@@ -3,6 +3,7 @@
  */
 
 var map;
+var trafficLayer;
 
 function resizeBootstrapMap() {
     var $map = $('#map');
@@ -20,9 +21,24 @@ function initialize() {
         streetViewControl: false
     };
 
+    if (!!navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var geolocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            //mapOptions.center = geolocation;
+            map.panTo(geolocation);
+
+            var marker = new google.maps.Marker({
+                position: geolocation,
+                icon: new google.maps.MarkerImage("img/marker_red.png"),
+                map: map
+            });
+        });
+    }
+
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    var trafficLayer = new google.maps.TrafficLayer();
+
+    trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
     google.maps.event.addDomListener(window, "resize", function () {
         resizeBootstrapMap();
@@ -60,8 +76,12 @@ $(function () {
         displayKey: 'name',
         source: citiesBloodhound.ttAdapter(),
         templates: {
-            empty: 'unable to find any City',
-            suggestion: Handlebars.compile('{{asciiname}}')
+            empty: [
+                '<div class="empty-message">',
+                'unable to find your city :(',
+                '</div>'
+            ].join('\n'),
+            suggestion: Handlebars.compile('<img src="img/blank.gif" class="flag flag-{{country}}" alt="{{country}}" /> {{asciiname}}')
         }
     });
 

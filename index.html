@@ -5,13 +5,37 @@
     <title>traffc</title>
     <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-          content="Traffc, maps, roads, traffic">
+
     <!--<meta http-equiv="refresh" content="120">-->
+
+
+
+
+    <!-- for Google -->
+    <meta name="description" content="traffc is your new traffic compagnon." />
+    <meta name="keywords" content="traffc, maps, roads, traffic" />
+    <meta name="copyright" content="2015" />
+    <meta name="application-name" content="traffc" />
     <meta name="author" content="hatem.zidi">
+
+    <!-- for Facebook -->
+    <meta property="og:title" content="traffc" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="http://traffc.hatemzidi.com/img/icon-128.png" />
+    <meta property="og:url" content="http://traffc.hatemzidi.com" />
+    <meta property="og:description" content="traffc is your new traffic compagnon." />
+
+    <!-- for Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content="http://traffc.hatemzidi.com" />
+    <meta property="twitter:creator" content="@tom_z" />
+    <meta property="twitter:title" content="traffc" />
+    <meta property="twitter:description" content="traffc is your new traffic compagnon." />
+    <meta property="twitter:image" content="http://traffc.hatemzidi.com/img/icon-32.png" />
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/typeaheadjs.css">
 
@@ -40,7 +64,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
+                        data-target="#bs-main-menu">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -50,12 +74,12 @@
                 <a class="navbar-brand brand" href="#">traffc</a>
             </div>
 
-            <div class="collapse navbar-collapse">
+            <div id="bs-main-menu" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    <!--<li>
                         <div class="navbar-form navbar-left">
-                            <div class="form-group  ">
-                                <div class="input-group">
+                            <div class="form-group text-right">
+                                <div class="input-group col-md-7">
                                     <input type="text" class="form-control" placeholder="Refresh">
                                 <span class="input-group-btn">
                                     <div class="btn-group" data-toggle="buttons">
@@ -67,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li>-->
                     <li>
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
@@ -82,8 +106,9 @@
                             </div>
                         </form>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu
+                    <li class="dropdown hidden-xs">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-bars"></i>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <!--<li><a href="#">Action</a></li>-->
@@ -93,6 +118,9 @@
                             <li><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
                         </ul>
                     </li>
+                    <li class="visible-xs"><a href="#" data-toggle="modal" data-target="#whyModal">Why this ?</a></li>
+                    <li class="divider visible-xs"></li>
+                    <li class="visible-xs"><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
                 </ul>
             </div>
 

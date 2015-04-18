@@ -29,7 +29,10 @@
 }
 .tt-suggestion {
     display: block;
-    padding: 3px 20px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .twitter-typeahead .tt-suggestion.tt-cursor {
     color: #fff;
@@ -41,10 +44,16 @@
     background-image: linear-gradient(to bottom, #0088cc, #0077b3);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+    cursor: pointer;
 }
 .tt-suggestion.tt-cursor a {
     color: #fff;
 }
 .tt-suggestion p {
     margin: 0;
+}
+
+.twitter-typeahead .empty-message {
+    padding: 5px 10px;
+    text-align: center;
 }

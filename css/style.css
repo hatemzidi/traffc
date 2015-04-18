@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Courgette);
-
+@import url(flags.css);
 
 /* GENERAL SECTION
 -------------------------------------------------- */
@@ -14,7 +14,6 @@ html, body {
     /* Negative indent footer by it's height */
     margin: 0 auto -62px;
 }
-
 
 /* HEAEDER
 -------------------------------------------------- */
@@ -31,7 +30,6 @@ html, body {
     margin-bottom: 0;
     border-radius: 0;
 }
-
 
 /* MAP
 -------------------------------------------------- */
@@ -54,24 +52,24 @@ html, body {
     margin: 0 auto;
 }
 
-.modal-dialog{
+.modal-dialog {
 }
 
-.modal-content{
+.modal-content {
     border: 5px solid #E7E7E7;
 }
 
-.modal-header{
+.modal-header {
     background-color: #E7E7E7;
 }
 
-.modal-header{
+.modal-header {
     background-color: #E7E7E7;
 }
-.modal-title{
+
+.modal-title {
     color: black;
 }
-
 
 /* FOOTER
 -------------------------------------------------- */
@@ -84,7 +82,6 @@ html, body {
 /* Custom page CSS
 -------------------------------------------------- */
 
-
 .container .text-muted {
     margin: 20px 0;
 }
@@ -93,3 +90,4 @@ html, body {
     padding-right: 15px;
     padding-left: 15px;
 }
+
