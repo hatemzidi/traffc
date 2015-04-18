@@ -1,4 +1,4 @@
-# traffc
+# traffc - ![status](https://img.shields.io/codeship/e90f5b40-c196-0132-3cad-3eb2295b72b3/master.svg)
 
 This is just a minimalistic web page using Google Maps traffic layer to visualize your location jam condition.
 
