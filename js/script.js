@@ -53,10 +53,29 @@ function initialize() {
 }
 
 
+function reloadTiles() {
+    console.log('here');
+    var tiles = $("#map_canvas").find("img");
+    for (var i = 0; i < tiles.length; i++) {
+        var src = $(tiles[i]).attr("src");
+        if (/googleapis.com\/vt\?pb=/.test(src)) {
+            var new_src = src.split("&ts")[0] + '&ts=' + (new Date()).getTime();
+            $(tiles[i]).attr("src", new_src);
+        }
+    }
+}
+
+
 $(function () {
     resizeBootstrapMap(); // first call
     initialize(); // init the map
     $(window).resize(resizeBootstrapMap);
+
+    $('#refreshRate, #isRefreshable').on('change', function () {
+        if ($('#isRefreshable').is(':checked')) {
+            setInterval(reloadTiles, $('#refreshRate').val()*1000);
+        }
+    });
 
     var citiesBloodhound = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),

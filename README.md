@@ -10,8 +10,9 @@ The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 
 ## ToDos
 - ~~geolocate : https://github.com/manuelbieh/jQuery-Geolocation~~
+- ~~set refresh time from input field~~
 - use a jquery lib for gmap : http://hpneo.github.io/gmaps/
-- set refresh time from input field
 - add iphone/mobile touch icon
 - add/update responsive header/menu
 - slimframework for API
+- refactor/clean code

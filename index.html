@@ -6,11 +6,6 @@
     <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--<meta http-equiv="refresh" content="120">-->
-
-
-
-
     <!-- for Google -->
     <meta name="description" content="traffc is your new traffic compagnon." />
     <meta name="keywords" content="traffc, maps, roads, traffic" />
@@ -76,22 +71,26 @@
 
             <div id="bs-main-menu" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <!--<li>
+                    <li>
                         <div class="navbar-form navbar-left">
                             <div class="form-group text-right">
                                 <div class="input-group col-md-7">
-                                    <input type="text" class="form-control" placeholder="Refresh">
+                                    <select id="refreshRate" class="form-control" >
+                                        <option value="10">10 sec</option>
+                                        <option value="30">30 sec</option>
+                                        <option value="60">1 mn</option>
+                                    </select>
                                 <span class="input-group-btn">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-default">
-                                            <input type="checkbox"> <span class="glyphicon glyphicon-repeat"></span>
+                                            <input id="isRefreshable" type="checkbox"> <span class="glyphicon glyphicon-repeat"></span>
                                         </label>
                                     </div>
                                 </span>
                                 </div>
                             </div>
                         </div>
-                    </li>-->
+                    </li>
                     <li>
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
@@ -128,13 +127,11 @@
     </nav>
 
 
-    <!--<div class="container">-->
     <div class="body">
         <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
             <div id="map"></div>
         </div>
     </div>
-    <!--</div>-->
 
 
     <!-- why -->
