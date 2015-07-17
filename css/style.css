@@ -26,6 +26,14 @@ html, body {
     font-size: 25px;
 }
 
+.brand.normal {
+    font-size: 15px;
+}
+
+.brand.large {
+    font-size: 25px;
+}
+
 .header {
     margin-bottom: 0;
     border-radius: 0;
