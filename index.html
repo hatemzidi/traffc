@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/typeaheadjs.css">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
 
 
     <!-- Latest compiled and minified JavaScript -->
@@ -41,6 +42,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="js/typeahead.bundle.min.js"></script>
     <script src="js/handlebars.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -74,15 +76,19 @@
                     <li>
                         <div class="navbar-form navbar-left">
                             <div class="form-group text-right">
+
                                 <div class="input-group">
-                                    <select id="refreshRate" class="form-control">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-repeat" ></span></span>
+                                    <select id="refreshRate" data-width="auto" data-style="btn-default no-radius" class="form-control show-tick show-menu-arrow ">
                                         <option value="10">10 sec</option>
                                         <option value="30">30 sec</option>
                                         <option value="60">1 mn</option>
                                     </select>
+
                                 <span class="input-group-btn">
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Refresh">
+                                    <div class="btn-group"  data-toggle="buttons">
+                                        <label class="refreshable btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Refresh">
                                             <input id="isRefreshable" type="checkbox" ><span
                                                 class="glyphicon glyphicon-repeat" ></span>
                                         </label>

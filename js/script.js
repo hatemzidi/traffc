@@ -56,6 +56,7 @@ function initialize() {
 
 
 function reloadTiles() {
+    //console.debug('reloaded');
     var tiles = $("#map_canvas").find("img");
     for (var i = 0; i < tiles.length; i++) {
         var src = $(tiles[i]).attr("src");
@@ -74,6 +75,7 @@ $(function () {
     initialize(); // init the map
     $(window).resize(resizeBootstrapMap); // force responsivness
     $('[data-toggle="tooltip"]').tooltip(); // init tooltips
+    $('#refreshRate').selectpicker();
 
 
     var citiesBloodhound = new Bloodhound({
@@ -102,7 +104,7 @@ $(function () {
         highlight: true
     }, {
         name: 'cities',
-        displayKey: 'name',
+        display: 'asciiname',
         source: citiesBloodhound.ttAdapter(),
         templates: {
             empty: [

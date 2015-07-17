@@ -79,6 +79,33 @@ html, body {
     color: black;
 }
 
+.no-radius{
+    border-radius: 0 !important;
+}
+
+.bootstrap-select .dropdown-menu {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+}
+
+.bootstrap-select *:focus {
+    outline: 0;
+}
+
+/* OVERRIDE BOOTSTRAP SWITCH
+-------------------------------------------------- */
+.bootstrap-switch,
+.bootstrap-switch .bootstrap-switch-handle-on {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+
 /* FOOTER
 -------------------------------------------------- */
 #footer {
@@ -97,5 +124,11 @@ html, body {
 #footer > .container {
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.refreshable.active, .refreshable:active {
+    color: #FFF;
+    background-color: #5CB85C;
+    border-color: #4CAE4C;
 }
 
