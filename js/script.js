@@ -72,6 +72,7 @@ $(function () {
     resizeBootstrapMap(); // first call
     initialize(); // init the map
     $(window).resize(resizeBootstrapMap);
+    $('[data-toggle="tooltip"]').tooltip();
 
     $('#refreshRate, #isRefreshable').on('change', function () {
         if ($('#isRefreshable').is(':checked')) {
