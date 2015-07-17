@@ -7,26 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- for Google -->
-    <meta name="description" content="traffc is your new traffic compagnon." />
-    <meta name="keywords" content="traffc, maps, roads, traffic" />
-    <meta name="copyright" content="2015" />
-    <meta name="application-name" content="traffc" />
+    <meta name="description" content="traffc is your new traffic compagnon."/>
+    <meta name="keywords" content="traffc, maps, roads, traffic"/>
+    <meta name="copyright" content="2015"/>
+    <meta name="application-name" content="traffc"/>
     <meta name="author" content="hatem.zidi">
 
     <!-- for Facebook -->
-    <meta property="og:title" content="traffc" />
-    <meta property="og:type" content="article" />
-    <meta property="og:image" content="http://traffc.hatemzidi.com/img/icon-128.png" />
-    <meta property="og:url" content="http://traffc.hatemzidi.com" />
-    <meta property="og:description" content="traffc is your new traffic compagnon." />
+    <meta property="og:title" content="traffc"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="http://traffc.hatemzidi.com/img/icon-128.png"/>
+    <meta property="og:url" content="http://traffc.hatemzidi.com"/>
+    <meta property="og:description" content="traffc is your new traffic compagnon."/>
 
     <!-- for Twitter -->
-    <meta property="twitter:card" content="summary" />
-    <meta property="twitter:url" content="http://traffc.hatemzidi.com" />
-    <meta property="twitter:creator" content="@tom_z" />
-    <meta property="twitter:title" content="traffc" />
-    <meta property="twitter:description" content="traffc is your new traffic compagnon." />
-    <meta property="twitter:image" content="http://traffc.hatemzidi.com/img/icon-32.png" />
+    <meta property="twitter:card" content="summary"/>
+    <meta property="twitter:url" content="http://traffc.hatemzidi.com"/>
+    <meta property="twitter:creator" content="@tom_z"/>
+    <meta property="twitter:title" content="traffc"/>
+    <meta property="twitter:description" content="traffc is your new traffic compagnon."/>
+    <meta property="twitter:image" content="http://traffc.hatemzidi.com/img/icon-32.png"/>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -75,7 +75,7 @@
                         <div class="navbar-form navbar-left">
                             <div class="form-group text-right">
                                 <div class="input-group">
-                                    <select id="refreshRate" class="form-control" >
+                                    <select id="refreshRate" class="form-control">
                                         <option value="10">10 sec</option>
                                         <option value="30">30 sec</option>
                                         <option value="60">1 mn</option>
@@ -83,7 +83,8 @@
                                 <span class="input-group-btn">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-default">
-                                            <input id="isRefreshable" type="checkbox"> <span class="glyphicon glyphicon-repeat"></span>
+                                            <input id="isRefreshable" type="checkbox"> <span
+                                                class="glyphicon glyphicon-repeat"></span>
                                         </label>
                                     </div>
                                 </span>
@@ -92,7 +93,7 @@
                         </div>
                     </li>
                     <li>
-                        <form class="navbar-form navbar-right" role="search">
+                        <div class="navbar-form navbar-left">
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" id="typeahead" class="form-control" placeholder="Search">
@@ -103,7 +104,16 @@
                                     </span>-->
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <button id="backToPosition" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                </button>
+                            </div>
+                        </div>
                     </li>
                     <li class="dropdown hidden-xs">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -144,8 +154,12 @@
                     <h4 class="modal-title">Why this ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Just because &hellip; I was sick visiting ugly, complicated and full of ads website for such a simple need.</p>
-                    <p>I wanted a minimalistic, flat and yet a light page where i can check the traffic jam quickly. </p>
+                    <p>Just because &hellip; I was sick visiting ugly, complicated and full of ads website for such a
+                        simple need.</p>
+
+                    <p>I wanted a minimalistic, flat and yet a light page where i can check the traffic jam
+                        quickly. </p>
+
                     <p>So, here is <span class="brand normal">traffc</span>. Enjoy ;)</p>
                 </div>
                 <div class="modal-footer">
@@ -170,7 +184,10 @@
                 </div>
                 <div class="modal-body">
                     <p>Made [quickly] by Hatem Zidi (<a href="http://twitter.com/tom_z" target="_blank">@tom_z</a>)</p>
-                    <p>Feel free to contribute here on <a href="https://github.com/hatemzidi/traffc" target="_blank">Github</a>.</p>
+
+                    <p>Feel free to contribute here on <a href="https://github.com/hatemzidi/traffc" target="_blank">Github</a>.
+                    </p>
+
                     <p>&copy; 2015.</p>
                 </div>
                 <div class="modal-footer">

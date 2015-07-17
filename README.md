@@ -13,6 +13,8 @@ The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 - ~~set refresh time from input field~~
 - use a jquery lib for gmap : http://hpneo.github.io/gmaps/
 - add iphone/mobile touch icon
-- add/update responsive header/menu
+- add/update/fix responsive header/menu specially on mobile
+- ~~add "back to my position" button~~
+- [bug] keep selected place on the typeahead
 - slimframework for API
 - refactor/clean code

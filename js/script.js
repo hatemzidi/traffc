@@ -4,6 +4,7 @@
 
 var map;
 var trafficLayer;
+var currentPosition;
 
 function resizeBootstrapMap() {
     var $map = $('#map');
@@ -24,6 +25,7 @@ function initialize() {
     if (!!navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var geolocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            currentPosition = geolocation; // store the location
             //mapOptions.center = geolocation;
             map.panTo(geolocation);
 
@@ -75,6 +77,10 @@ $(function () {
         if ($('#isRefreshable').is(':checked')) {
             setInterval(reloadTiles, $('#refreshRate').val()*1000);
         }
+    });
+
+    $('#backToPosition').on('click',function(){
+        map.setCenter(currentPosition);
     });
 
     var citiesBloodhound = new Bloodhound({
