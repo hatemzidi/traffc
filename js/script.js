@@ -56,7 +56,6 @@ function initialize() {
 
 
 function reloadTiles() {
-    console.log('here');
     var tiles = $("#map_canvas").find("img");
     for (var i = 0; i < tiles.length; i++) {
         var src = $(tiles[i]).attr("src");
@@ -69,20 +68,13 @@ function reloadTiles() {
 
 
 $(function () {
+
+    // INIT ---------
     resizeBootstrapMap(); // first call
     initialize(); // init the map
-    $(window).resize(resizeBootstrapMap);
-    $('[data-toggle="tooltip"]').tooltip();
+    $(window).resize(resizeBootstrapMap); // force responsivness
+    $('[data-toggle="tooltip"]').tooltip(); // init tooltips
 
-    $('#refreshRate, #isRefreshable').on('change', function () {
-        if ($('#isRefreshable').is(':checked')) {
-            setInterval(reloadTiles, $('#refreshRate').val()*1000);
-        }
-    });
-
-    $('#backToPosition').on('click',function(){
-        map.setCenter(currentPosition);
-    });
 
     var citiesBloodhound = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -92,6 +84,17 @@ $(function () {
     });
 
     citiesBloodhound.initialize();
+
+    // EVENTS  ---------
+    $('#backToPosition').on('click',function(){
+        map.setCenter(currentPosition);
+    });
+
+    $('#refreshRate, #isRefreshable').on('change', function () {
+        if ($('#isRefreshable').is(':checked')) {
+            setInterval(reloadTiles, $('#refreshRate').val()*1000);
+        }
+    });
 
     $('#typeahead').typeahead({
         minLength: 3,
