@@ -83,6 +83,16 @@ html, body {
     border-radius: 0 !important;
 }
 
+.no-radius-left{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.no-radius-right{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
 .bootstrap-select .dropdown-menu {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

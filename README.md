@@ -16,5 +16,6 @@ The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 - add/update/fix responsive header/menu specially on mobile
 - ~~add "back to my position" button~~
 - ~~keep selected values (selectd place on the typeahead, toggle state, refresh rate...)~~
+- animate refresh button when in progress
 - slimframework for API
 - refactor/clean code

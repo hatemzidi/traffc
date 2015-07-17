@@ -88,13 +88,13 @@ $(function () {
     citiesBloodhound.initialize();
 
     // EVENTS  ---------
-    $('#backToPosition').on('click',function(){
+    $('#backToPosition').on('click', function () {
         map.setCenter(currentPosition);
     });
 
     $('#refreshRate, #isRefreshable').on('change', function () {
         if ($('#isRefreshable').is(':checked')) {
-            setInterval(reloadTiles, $('#refreshRate').val()*1000);
+            setInterval(reloadTiles, $('#refreshRate').val() * 1000);
         }
     });
 
