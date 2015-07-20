@@ -65,6 +65,13 @@ function reloadTiles() {
             $(tiles[i]).attr("src", new_src);
         }
     }
+
+    // add animation
+    $('#refresh-btn').addClass('spin').delay(1000)
+        .queue(function () {
+            $(this).removeClass('spin');
+            $(this).dequeue();
+        });
 }
 
 
