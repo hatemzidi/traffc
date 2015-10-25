@@ -20,3 +20,4 @@ The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 - slimframework for API
 - refactor/clean code
 - migrate to angular/react (?)
+- start a full-complete CI process
