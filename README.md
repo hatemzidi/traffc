@@ -12,10 +12,11 @@ The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 - ~~geolocate : https://github.com/manuelbieh/jQuery-Geolocation~~
 - ~~set refresh time from input field~~
 - use a jquery lib for gmap : http://hpneo.github.io/gmaps/
-- add iphone/mobile touch icon
-- add/update/fix responsive header/menu specially on mobile
+- ~~add iphone/mobile touch icon~~
+- add/update/fix responsive header/menu specially on mobile : off canvas menu (?)
 - ~~add "back to my position" button~~
 - ~~keep selected values (selectd place on the typeahead, toggle state, refresh rate...)~~
 - ~~animate refresh button when in progress~~
 - slimframework for API
 - refactor/clean code
+- migrate to angular/react (?)
