@@ -75,6 +75,18 @@ html, body {
     background-color: #E7E7E7;
 }
 
+.error .modal-content {
+    border: 5px solid #d9534f;
+}
+
+.error .modal-header {
+    background-color: #d9534f;
+}
+
+.error .modal-header {
+    background-color: #d9534f;
+}
+
 .modal-title {
     color: black;
 }

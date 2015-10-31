@@ -6,6 +6,56 @@
 
 var map;
 var geolocation;
+var marker = undefined;
+var markerIcon = isMobile() ? "img/marker_mobile.png" : "img/marker_red.png";
+var gpsStatus;
+
+
+function geolocateMe() {
+    GMaps.geolocate({
+        success: function (position) {
+            gpsStatus = true;
+            geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+            map.setCenter(geolocation.lat, geolocation.lng);
+
+            if (marker === undefined) {
+                marker = map.addMarker({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    icon: markerIcon
+                });
+            } else {
+                marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+            }
+        },
+        error: function (error) {
+            //alert('Oops! Geolocation failed'); //todo : change this into modal
+            showMsgBox('error', 'Oops','Geolocation failed');
+            gpsStatus = false;
+        },
+        not_supported: function () {
+            alert("Your browser does not support geolocation"); //todo : change this into modal
+            gpsStatus = false;
+        },
+        always: function () {
+            //Done!;
+        }
+    });
+
+}
+
+
+function followMe() {
+    GMaps.geolocate({
+        success: function (position) {
+            geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+            map.setCenter(geolocation.lat, geolocation.lng);
+            marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+        }
+    });
+
+}
 
 function initialize() {
 
@@ -30,29 +80,10 @@ function initialize() {
         }
     });
 
-    GMaps.geolocate({
-        success: function (position) {
+    // geolcate now !
+    geolocateMe();
 
-            geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-
-            map.setCenter(geolocation.lat, geolocation.lng);
-
-            map.addMarker({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-                icon: "img/marker_red.png"
-            });
-        },
-        error: function (error) {
-            alert('Geolocation failed: ' + error.message);
-        },
-        not_supported: function () {
-            alert("Your browser does not support geolocation");
-        },
-        always: function () {
-            //Done!;
-        }
-    });
+    // traffic layer \o/
     map.addLayer('traffic');
 
     // https://github.com/hpneo/gmaps/issues/358
@@ -67,6 +98,26 @@ function initialize() {
         }, 200);
     });
 
+}
+
+function isMobile() {
+    try {
+        document.createEvent("TouchEvent");
+        return true;
+    }
+    catch (e) {
+        return false;
+    }
+}
+
+function showMsgBox(type, title, body){
+    $('#msgBox').addClass(type);
+    $('#msgBox').find('.modal-title').html(title);
+    $('#msgBox').find('.modal-body').html(body);
+    $('#msgBox').modal('show');
+    $('#msgBox').on('hidden.bs.modal', function (e) {
+        $('#msgBox').removeClass(type);
+    })
 }
 
 function resizeBootstrapMap() {
@@ -87,7 +138,7 @@ function reloadTiles() {
         }
     }
 
-    // add animation
+    // add animation to the refresh button
     $('#refresh-btn').addClass('spin').delay(1000)
         .queue(function () {
             $(this).removeClass('spin');
@@ -104,6 +155,10 @@ $(function () {
     $(window).resize(resizeBootstrapMap); // force responsivness
     $('[data-toggle="tooltip"]').tooltip(); // init tooltips
     $('#refreshRate').selectpicker();
+    //if mobile then refresh position
+    if (isMobile() && gpsStatus) {
+        setInterval(followMe, 1000);
+    }
 
     // TYPEAHEAD  ---------
     var citiesBloodhound = new Bloodhound({

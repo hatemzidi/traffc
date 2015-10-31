@@ -17,6 +17,7 @@ The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
 - ~~add "back to my position" button~~
 - ~~keep selected values (selectd place on the typeahead, toggle state, refresh rate...)~~
 - ~~animate refresh button when in progress~~
+- use https://github.com/allmarkedup/purl for querystrings and options
 - slimframework for API
 - refactor/clean code
 - migrate to angular/react (?)
