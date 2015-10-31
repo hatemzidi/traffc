@@ -30,12 +30,11 @@ function geolocateMe() {
             }
         },
         error: function (error) {
-            //alert('Oops! Geolocation failed'); //todo : change this into modal
-            showMsgBox('error', 'Oops','Geolocation failed');
+            showMsgBox('error', 'Oops', 'Geolocation failed');
             gpsStatus = false;
         },
         not_supported: function () {
-            alert("Your browser does not support geolocation"); //todo : change this into modal
+            showMsgBox('error', 'Oops', 'Your browser does not support geolocation');
             gpsStatus = false;
         },
         always: function () {
@@ -110,7 +109,7 @@ function isMobile() {
     }
 }
 
-function showMsgBox(type, title, body){
+function showMsgBox(type, title, body) {
     $('#msgBox').addClass(type);
     $('#msgBox').find('.modal-title').html(title);
     $('#msgBox').find('.modal-body').html(body);
