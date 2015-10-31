@@ -30,20 +30,27 @@ function geolocateMe() {
             }
         },
         error: function (error) {
-            showMsgBox('error', 'Oops', 'Geolocation failed');
+            showMsgBox("error", "Oops", "Sorry, but I'm not able to geolocate you.");
             gpsStatus = false;
         },
         not_supported: function () {
-            showMsgBox('error', 'Oops', 'Your browser does not support geolocation');
+            showMsgBox("error", "Oops", "Your browser does not support geolocation.");
             gpsStatus = false;
         },
         always: function () {
-            //Done!;
+            //Done!
+
+            // this is, so far, the best position to callback gpsStatus
+            // if mobile then refresh position & the traffic condition
+            if (isMobile() && gpsStatus) {
+                setInterval(followMe, 1000);
+                setInterval(reloadTiles, 10 * 1000); // force refresh on mobile every 30s
+                                                     // todo : refactor this by adding canvas off menu
+            }
         }
     });
 
 }
-
 
 function followMe() {
     GMaps.geolocate({
@@ -110,13 +117,16 @@ function isMobile() {
 }
 
 function showMsgBox(type, title, body) {
+
     $('#msgBox').addClass(type);
-    $('#msgBox').find('.modal-title').html(title);
-    $('#msgBox').find('.modal-body').html(body);
-    $('#msgBox').modal('show');
-    $('#msgBox').on('hidden.bs.modal', function (e) {
-        $('#msgBox').removeClass(type);
-    })
+    $('#msgBox').find('.modal-title').html(title);  //todo : use Handlebars ?
+    $('#msgBox').find('.modal-body').html(body); //todo : use Handlebars ?
+
+    $('#msgBox')
+        .modal('show')
+        .on('hidden.bs.modal', function (e) {
+            $('#msgBox').removeClass(type);
+        })
 }
 
 function resizeBootstrapMap() {
@@ -127,7 +137,7 @@ function resizeBootstrapMap() {
 }
 
 function reloadTiles() {
-    //console.debug('reloaded');
+    console.debug('reloaded');
     var tiles = $("#map_canvas").find("img");
     for (var i = 0; i < tiles.length; i++) {
         var src = $(tiles[i]).attr("src");
@@ -137,6 +147,10 @@ function reloadTiles() {
         }
     }
 
+    refreshSpiner();
+}
+
+function refreshSpiner() {
     // add animation to the refresh button
     $('#refresh-btn').addClass('spin').delay(1000)
         .queue(function () {
@@ -154,10 +168,7 @@ $(function () {
     $(window).resize(resizeBootstrapMap); // force responsivness
     $('[data-toggle="tooltip"]').tooltip(); // init tooltips
     $('#refreshRate').selectpicker();
-    //if mobile then refresh position
-    if (isMobile() && gpsStatus) {
-        setInterval(followMe, 1000);
-    }
+
 
     // TYPEAHEAD  ---------
     var citiesBloodhound = new Bloodhound({
