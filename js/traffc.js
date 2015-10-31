@@ -5,9 +5,8 @@
  */
 
 var map;
-var geolocation;
 var marker = undefined;
-var markerIcon = isMobile() ? "img/marker_mobile.png" : "img/marker_red.png";
+var geolocation;
 var gpsStatus;
 
 
@@ -15,27 +14,28 @@ function geolocateMe() {
     GMaps.geolocate({
         success: function (position) {
             gpsStatus = true;
+
             geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
 
             map.setCenter(geolocation.lat, geolocation.lng);
 
             if (marker === undefined) {
                 marker = map.addMarker({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                    icon: markerIcon
+                    lat: geolocation.lat,
+                    lng: geolocation.lng,
+                    icon: "img/marker_mobile.png"
                 });
             } else {
-                marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                marker.setPosition(new google.maps.LatLng(geolocation.lat, geolocation.lng));
             }
         },
         error: function (error) {
-            showMsgBox("error", "Oops", "Sorry, but I'm not able to geolocate you.");
             gpsStatus = false;
+            showMsgBox("error", "Oops", "Sorry, but I'm not able to geolocate you.");
         },
         not_supported: function () {
-            showMsgBox("error", "Oops", "Your browser does not support geolocation.");
             gpsStatus = false;
+            //showMsgBox("error", "Oops", "Your browser does not support geolocation.");
         },
         always: function () {
             //Done!
@@ -186,10 +186,13 @@ $(function () {
     var citiesBloodhound = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: 'api.php?q=%QUERY'
-    });
+        //remote: 'api.php?q=%QUERY'
+        remote: {
+            url: 'api.php?q=%QUERY',
+            wildcard: '%QUERY'
+        }
 
-    citiesBloodhound.initialize();
+    });
 
     $('#typeahead')
         .typeahead({
@@ -197,16 +200,19 @@ $(function () {
             hint: true,
             highlight: true
         }, {
+            limit: isMobile() ? 3 : undefined,
             name: 'cities',
             display: 'asciiname',
-            source: citiesBloodhound.ttAdapter(),
+            source: citiesBloodhound,
             templates: {
                 empty: [
                     '<div class="empty-message">',
                     'unable to find your city :(',
                     '</div>'
                 ].join('\n'),
-                suggestion: Handlebars.compile('<img src="img/blank.gif" class="flag flag-{{country}}" alt="{{country}}" /> {{asciiname}}')
+                suggestion: function (data) {
+                    return '<p><img src="img/blank.gif" class="flag flag-' + data.country + '" alt="' + data.country + '" /> ' + data.asciiname + '</p>';
+                }
             }
         })
         .on('typeahead:selected', function (e, datum) {
