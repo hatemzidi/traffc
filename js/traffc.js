@@ -46,6 +46,19 @@ function geolocateMe() {
                 setInterval(followMe, 1000);
                 setInterval(reloadTiles, 10 * 1000); // force refresh on mobile every 30s
                                                      // todo : refactor this by adding canvas off menu
+
+                // add relocate-position control
+                map.addControl({
+                    id: 'goCenterUI',
+                    position: 'right_bottom',
+                    content: '<i class="fa fa-crosshairs fa-2x"></i>',
+                    events: {
+                        click: function () {
+                            map.setCenter(geolocation);
+                        }
+                    }
+                });
+
             }
         }
     });
@@ -56,7 +69,6 @@ function followMe() {
     GMaps.geolocate({
         success: function (position) {
             geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-            map.setCenter(geolocation.lat, geolocation.lng);
             marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
         }
     });
@@ -133,7 +145,7 @@ function resizeBootstrapMap() {
     var $map = $('#map');
     var mapParentWidth = $('#map_canvas').width();
     $map.width(mapParentWidth);
-    $map.height($(window).height() - 115);
+    $map.height($(window).height() - 100);
 }
 
 function reloadTiles() {
