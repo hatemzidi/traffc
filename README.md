@@ -3,7 +3,7 @@
 This is just a minimalistic web page using Google Maps to ~~quickly~~ visualize your location's traffic condition.
 
 There is lot of existing similar services, and may be more sophisticated, but I was totally bothered by their design and the ads.
-I needed something simple, minimalistic and yet light to render on any web browser (desktop, mobile ..
+I needed something simple, minimalistic and yet light to render on any web browser (desktop, mobile ...)
 
 traffc is a full html page, with almost no backend, except for the city-searching part.
 
