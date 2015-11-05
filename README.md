@@ -1,6 +1,6 @@
 # traffc - ![status](https://img.shields.io/codeship/e90f5b40-c196-0132-3cad-3eb2295b72b3/master.svg)
 
-This is just a minimalistic web page using Google Maps to ~quickly~~ visualize your location's traffic condition.
+This is just a minimalistic web page using Google Maps to ~~quickly~~ visualize your location's traffic condition.
 
 There is lot of existing similar services, and may be more sophisticated, but I was totally bothered by their design and the ads.
 I needed something simple, minimalistic and yet light to render on any web browser (desktop, mobile ..
