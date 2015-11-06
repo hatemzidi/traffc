@@ -1,59 +1,268 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>traffc by hatemzidi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">traffc</h1>
-      <h2 class="project-tagline">Visualize the traffic jam simply and quickly</h2>
-      <a href="https://github.com/hatemzidi/traffc" class="btn">View on GitHub</a>
-      <a href="https://github.com/hatemzidi/traffc/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/hatemzidi/traffc/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+<html lang="en">
+  	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <section class="main-content">
-      <h1>
-<a id="traffc-your-road-companion" class="anchor" href="#traffc-your-road-companion" aria-hidden="true"><span class="octicon octicon-link"></span></a>traffc: your road companion</h1>
 
-<p>This is just a minimalistic web page using Google Maps to <del>quickly</del> visualize your location's traffic condition.</p>
+        <!-- for Google -->
+        <meta name="description" content="traffc is your new road companion."/>
+        <meta name="keywords" content="traffc, maps, roads, traffic"/>
+        <meta name="copyright" content="2015"/>
+        <meta name="application-name" content="traffc"/>
+        <meta name="author" content="hatem.zidi">
 
-<p>There are a lot of existing similar services, web pages or mobile apps, and they are may be more sophisticated, but I was totally bothered by their design and the ads.
-I needed something simple, minimalistic and yet light to render on any web browser (desktop, mobile ...)</p>
+        <!-- for Facebook -->
+        <meta property="og:title" content="traffc"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:image" content="http://traffc.hatemzidi.com/img/icon-128.png"/>
+        <meta property="og:url" content="http://traffc.hatemzidi.com"/>
+        <meta property="og:description" content="traffc is your new road companion."/>
 
-<p>traffc is a full html page, with almost no backend, except for the city-searching part.</p>
+        <!-- for Twitter -->
+        <meta property="twitter:card" content="summary"/>
+        <meta property="twitter:url" content="http://traffc.hatemzidi.com"/>
+        <meta property="twitter:creator" content="@tom_z"/>
+        <meta property="twitter:title" content="traffc"/>
+        <meta property="twitter:description" content="traffc is your new road companion."/>
+        <meta property="twitter:image" content="http://traffc.hatemzidi.com/img/icon-32.png"/>
 
-<h2>
-<a id="live-demo" class="anchor" href="#live-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Live demo</h2>
+        <!-- makeup -->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery.funnyText.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/traffc.css">
 
-<p>The site is available at <a href="http://traffc.hatemzidi.com/">traffc.hatemzidi.com</a></p>
+		<title>traffc</title>
 
-<h2>
-<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+		<!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    	<![endif]-->
 
-<p><em>everyone</em> is encouraged to help improve this project.
-If you discover errors or omissions in the source code, documentation, or website content, please don't hesitate to submit an issue or open a pull request with a fix.
-New contributors are always welcome!</p>
+	</head>
 
-<h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+	<body>
+	
+		<header class="head"> <!-- Head Section Start-->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-xs-6 logo wow fadeIn">
+						<img class="img-responsive float-left" src="images/logo@2x.png" alt="Logo">
+                        <span class="brand x-large float-left" >traffc</span>
+                    </div>
+					<!--<div class="col-md-6 col-xs-6 social wow fadeIn">
+						<a href="index-animated.html#"><img src="images/twitter-icon.png" alt="Twitter"></a>
+						<a href="index-animated.html#"><img src="images/facebook-icon.png" alt="Facebook"></a>
+						<a href="index-animated.html#"><img src="images/google-plus-icon.png" alt="Google Plus"></a>
+					</div>-->
+				</div><!-- Row End-->
 
-<p>traffc is licensed under the GPL v2 or later.</p>
+				<div class="row">
+					<div class="col-md-6 col-sm-12 main-content wow fadeInLeft">
+						<h1 class="funnytext">Your road companion.</h1>
+						<p>The minimalistic tool to check, in real time, your area's traffic condition.<br/> it's just light, simple and instantaneously available.</p>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/hatemzidi/traffc">traffc</a> is maintained by <a href="https://github.com/hatemzidi">hatemzidi</a>.</span>
+						<a href="http://traffc.hatemzidi.com"><button type="button" class="btn btn-default home-btn">Visit Now</button></a>
+						<!--<a href="index-animated.html#"><button type="button" class="btn btn-default home-btn">Watch Demo Video</button></a>-->
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+					</div>
+					<div class="col-md-6 col-sm-12 phone-mockup wow fadeInRight">
+						<img class="img-responsive" src="images/iphoneinhand.png" alt="Phone">
+					</div>
+				</div><!-- Row End -->
+			</div><!-- Container End -->
+		</header><!-- Head Section End -->
 
-    </section>
+	<section class="services"><!-- Head Section Start -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-4 services-list wow fadeInUp">
+					<img src="images/service-icon-1.png" alt="icon">
+					<h4>ULTIMATE DESIGN</h4>
+					<p>Focus on the essentials without bothering yourself clicking here and there.</p>
+				</div>
 
-  
-  </body>
-</html>
+				<div class="col-md-4 col-sm-4 services-list wow fadeInUp">
+					<img src="images/service-icon-2.png" alt="icon">
+					<h4>LIFETIME FREE</h4>
+					<p>No ads, no fees, you just use it happily with no extras.</p>
+				</div>
+
+				<div class="col-md-4 col-sm-4 services-list wow fadeInUp">
+					<img src="images/service-icon-3.png" alt="icon">
+					<h4>AMAZING FEATURE</h4>
+					<p>No special installation nor heavy backend. Works fine on your desktop as well as on your smartphone.</p>
+				</div>
+
+			</div><!-- Row End -->
+		</div><!-- Container End -->
+	</section><!-- Services Section End -->
+
+	<section class="container features"><!-- Features Container Start -->
+		<div class="row">
+			<div class="col-md-12 features-title wow fadeIn">
+				<h1 >Why <span class="brand" >traffc</span></h1>
+				<div class="dark-stroke"></div>
+				<p class="title-description">There are a lot of similar existing services, web pages or mobile apps, and they are may be more sophisticated, but we were totally bothered by their design and the ads.<br/>
+                    We needed something simple, minimalistic and yet light to render and use easily on any web browser on a desktop or a mobile device.</p>
+			</div>
+			<div class="col-md-4 col-sm-4 features-left">
+				<div class="features-list-1 wow fadeInLeft">
+					<img src="images/features-icon-1.png" alt="icon">
+					<h4>Ultimate Design</h4>
+					<p>Minimalistic, Flat,  Light and Yet easy to use.</p>
+				</div>
+				<div class="features-list-2 wow fadeInLeft">
+					<img src="images/features-icon-2.png" alt="icon">
+					<h4>Always Free</h4>
+					<p>No charges, No flying Ads. Use it at will.</p>
+				</div>
+				<!--div class="features-list-3 wow fadeInLeft">
+					<img src="images/features-icon-3.png" alt="icon">
+					<h4>Fast to Take Photo</h4>
+					<p>This is a paragraph. Click here to add  and edit your own text here.</p>
+				</div-->
+			</div>
+
+			<div class="col-md-4 col-sm-4 appmockup wow fadeInUp">
+				<img class="phone-mockup" src="images/iphonemockup.png" alt="phone mockup">
+				<!--<img class="phone-img" src="images/appimage.png" alt="phone image">-->
+			</div>
+
+			<div class="col-md-4 col-sm-4 features-right">
+				<div class="features-list-4 wow fadeInRight">
+					<img src="images/features-icon-4.png" alt="icon">
+					<h4>No Install Needed</h4>
+					<p>Bookmark it on your desktop browser. Pin it to your home on your mobile. No apps or stores.</p>
+				</div>
+				<div class="features-list-5 wow fadeInRight">
+					<img src="images/features-icon-5.png" alt="icon">
+					<h4>Take Your Time</h4>
+					<p>Drive safe ;)</p>
+				</div>
+				<!--div class="features-list-6 wow fadeInRight">
+					<img src="images/features-icon-6.png" alt="icon">
+					<h4>Animate Your Photos</h4>
+					<p>This is a paragraph. Click here to add  and edit your own text here.</p>
+				</div-->
+			</div>
+		</div><!-- Row End -->
+	</section><!-- Features Container End -->
+
+
+
+	<section class="our-clients"><!-- Clients Section Start -->
+		<!--<div class="container">
+			<div class="row">
+				<div class="col-md-12 clients-title wow fadeIn">
+					<h1 >OUR CLIENTS LOVES OUR APP</h1>
+					<div class="dark-stroke"></div>
+					<p class="title-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy <br> dolor istamet nibh euismod escaptecular.</p>
+				</div>
+			</div>
+			<div class="row clients-list">
+				<div class="col-md-4 wow fadeInUp">
+					<img src="images/client-1.png" alt="client">
+					<h4>Jonathan Doe</h4>
+					<p><i>Bpple Company / Manager</i></p>
+					<div class="clients-stroke"></div>
+					<p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy dolor istamet nibh euismod escaptecular."</p>
+				</div>
+				<div class="col-md-4 wow fadeInUp">
+					<img src="images/client-2.png" alt="client">
+					<h4>Jenniffer Doe</h4>
+					<p><i>Bpple Company / Manager</i></p>
+					<div class="clients-stroke"></div>
+					<p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy dolor istamet nibh euismod escaptecular."</p>
+				</div>
+				<div class="col-md-4 wow fadeInUp">
+					<img src="images/client-3.png" alt="client">
+					<h4>John Doe</h4>
+					<p><i>Bpple Company / Manager</i></p>
+					<div class="clients-stroke"></div>
+					<p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy dolor istamet nibh euismod escaptecular."</p>
+				</div>
+			</div>&lt;!&ndash; Row End &ndash;&gt;
+		</div>--><!-- Container End -->
+	</section><!-- Clients Section End -->
+
+	<section class="clients-logos wow fadeIn"><!-- Clients Logos Section Start -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<img src="images/clients-logos.png" class="img-responsive" alt="clients logos">
+				</div>
+			</div><!-- Row End -->
+		</div><!-- Container End -->
+	</section><!-- Clients Logos Section End -->
+
+
+        <footer class="footer-info"><!-- Footer Section Start -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-4 wow fadeInLeft">
+                    <img class="img-responsive float-left" src="images/logo@2x.png" alt="footer-logo">
+                    <span class="navbar-brand brand  float-left" >traffc</span>
+				</div>
+				<div class="col-md-4 col-sm-4 footer-nav wow fadeInUp">
+					<!--ul>
+						<li><a href="index-animated.html#">Company</a></li>
+						<li><a href="index-animated.html#">About</a></li>
+						<li><a href="index-animated.html#">Contact</a></li>
+					</ul-->
+				</div>
+				<div class="col-md-4 col-sm-4 wow fadeInRight">
+					<p>All Rights Reserved &copy; - 2015</p>
+				</div>
+			</div><!-- Row End -->
+		</div><!-- Container End -->
+	</footer><!-- Footer Section End -->
+
+
+		<!-- scripts starts here-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.funnyText.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script src="js/queryloader2.min.js" type="text/javascript"></script>
+		<!-- scripts end here-->
+
+		<!-- Preloader Script-->
+		<script type="text/javascript">
+    		window.addEventListener('DOMContentLoaded', function() {
+       		new QueryLoader2(document.querySelector("body"), {
+            barColor: "#efefef",
+            backgroundColor: "#111",
+            percentage: true,
+            barHeight: 1,
+            minimumTime: 200,
+            fadeOutTime: 1000
+        	});
+    	});
+		</script>
+
+		<!-- Animations Script-->
+		 <script>
+            new WOW().init();
+         </script>
+
+         <!-- Funny Text Jquery Script-->
+		<script type="text/javascript">
+			$(document).ready(function() {
+	   			 $('.funnytext').funnyText({
+		        speed: 200,
+		        borderColor: 'none',
+		        activeColor: 'white',
+		        color: 'white',
+		        fontSize: '44px',
+		        direction: 'both'
+	    		});
+			});
+
+		</script>
+
+	</body>
+
