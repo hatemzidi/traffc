@@ -4,24 +4,77 @@
     <meta charset="utf-8">
     <title>traffc</title>
     <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-          content="Traffc, maps, roads, traffic">
-    <meta http-equiv="refresh" content="120">
+
+    <!-- no cache -->
+    <meta http-equiv="cache-control" content="max-age=0"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+
+
+    <!-- for Google -->
+    <meta name="description" content="traffc is your new road companion."/>
+    <meta name="keywords" content="traffc, maps, roads, traffic"/>
+    <meta name="copyright" content="2015"/>
+    <meta name="application-name" content="traffc"/>
     <meta name="author" content="hatem.zidi">
+
+    <!-- for Facebook -->
+    <meta property="og:title" content="traffc"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="http://traffc.hatemzidi.com/img/icon-128.png"/>
+    <meta property="og:url" content="http://traffc.hatemzidi.com"/>
+    <meta property="og:description" content="traffc is your new road companion."/>
+
+    <!-- for Twitter -->
+    <meta property="twitter:card" content="summary"/>
+    <meta property="twitter:url" content="http://traffc.hatemzidi.com"/>
+    <meta property="twitter:creator" content="@tom_z"/>
+    <meta property="twitter:title" content="traffc"/>
+    <meta property="twitter:description" content="traffc is your new road companion."/>
+    <meta property="twitter:image" content="http://traffc.hatemzidi.com/img/icon-32.png"/>
+
+
+    <!-- Allow web app to be run in full-screen mode. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Make the app title different than the page title. -->
+    <meta name="apple-mobile-web-app-title" content="traffc">
+
+    <!-- Configure the status bar. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Set the viewport. -->
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <!-- Disable automatic phone number detection. -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/icon-128.png">
+    <!-- For iPhone with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icon-128.png">
+    <!-- For first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icon-72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="img/icon-32.png">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/traffc.css">
     <link rel="stylesheet" href="css/typeaheadjs.css">
 
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Latest useful, compiled and/or minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script src="http://hpneo.github.io/gmaps/gmaps.js"></script>
+    <script src="http://imulus.github.io/retinajs/assets/retina.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
     <script src="js/typeahead.bundle.min.js"></script>
-    <script src="js/handlebars.min.js"></script>
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -29,134 +82,188 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <script src="js/script.js"></script>
+    <script src="js/traffc.js"></script>
 
 </head>
 
 <body>
+<div id="wrap">
+    <nav class="header navbar navbar-default">
 
-<nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-main-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo.png"/></a>
+                <a class="navbar-brand brand large" href="#">traffc</a>
+            </div>
 
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/icon.maps.png"/></a>
-            <a class="navbar-brand brand" href="#">traffc</a>
-        </div>
+            <div id="bs-main-menu" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden-xs">
+                        <div class="navbar-form navbar-left">
+                            <div class="form-group text-right">
 
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <div class="navbar-form navbar-left">
-                        <div class="form-group  ">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Refresh">
+                                <div class="input-group">
+                                    <select id="refreshRate" data-width="auto" data-style="btn-default no-radius-right"
+                                            class="form-control show-tick show-menu-arrow ">
+                                        <option value="10">10 sec</option>
+                                        <option value="30">30 sec</option>
+                                        <option value="60">1 mn</option>
+                                    </select>
+
                                 <span class="input-group-btn">
                                     <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-default">
-                                            <input type="checkbox"> <span class="glyphicon glyphicon-repeat"></span>
+                                        <label class="refreshable btn btn-default" data-toggle="tooltip"
+                                               data-placement="bottom" title="Refresh">
+                                            <input id="isRefreshable" type="checkbox"><span id="refresh-btn"
+                                                                                            class="glyphicon glyphicon-repeat"></span>
                                         </label>
                                     </div>
                                 </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" id="typeahead" class="form-control" placeholder="Search">
-                                <span class="input-group-btn">
-                                    <button type="submit"  class="btn btn-default">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
+                    </li>
+                    <li class="hidden-xs">
+                        <div class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" id="typeahead" class="form-control" placeholder="Search"
+                                           data-toggle="tooltip" data-placement="bottom" title="Find a location">
+                                    <!--<span class="input-group-btn">
+                                        <button type="submit"  class="btn btn-default">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>-->
+                                </div>
                             </div>
                         </div>
-                    </form>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <!--<li><a href="#">Action</a></li>-->
-                        <!--<li><a href="#">Another action</a></li>-->
-                        <li><a href="#" data-toggle="modal" data-target="#whyModal">Why this ?</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
-                    </ul>
-                </li>
-            </ul>
+                    </li>
+                    <li class="hidden-xs">
+                        <div class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <button id="backToPosition" class="btn btn-default" data-toggle="tooltip"
+                                        data-placement="bottom" title="Back to my location">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown hidden-xs">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-bars"></i>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <!--<li><a href="#">Action</a></li>-->
+                            <!--<li><a href="#">Another action</a></li>-->
+                            <li><a href="#" data-toggle="modal" data-target="#whyModal">Why this ?</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
+                        </ul>
+                    </li>
+                    <li class="visible-xs"><a href="#" data-toggle="modal" data-target="#whyModal">Why this ?</a></li>
+                    <li class="divider visible-xs"></li>
+                    <li class="visible-xs"><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
+                </ul>
+            </div>
+
         </div>
+    </nav>
 
-    </div>
-</nav>
 
-</nav>
-
-<div class="container">
-    <div class="row">
-        <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered jumbotron">
+    <div class="body">
+        <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
             <div id="map"></div>
         </div>
     </div>
-</div>
 
 
-<!-- why -->
-<div class="modal fade" id="whyModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Why this ?</h4>
+    <!-- why -->
+    <div class="modal fade" id="whyModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Why this ?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>It strated when I became sick visiting ugly, complicated and full of ads websites or mobile apps for such a
+                        simple need : checking quickly the traffic condition in my area.</p>
+
+                    <p>I wanted a minimalistic, flat and yet a light view where I can check the traffic jam
+                        quickly even on my mobile without waiting for quite long or being bothered clicking here and there. </p>
+
+                    <p>Here is <span class="brand normal">traffc</span>, my new road comapnion and may be yoors too. Enjoy ;)</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Just because &hellip;</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+    <!-- /.modal -->
 
 
-<!-- About -->
-<div class="modal fade" id="aboutModal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">About</h4>
+    <!-- About -->
+    <div class="modal fade" id="aboutModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">About</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Made [quickly] by Hatem Zidi (<a href="http://twitter.com/tom_z" target="_blank">@tom_z</a>)</p>
+
+                    <p>Feel free to contribute here on <a href="https://github.com/hatemzidi/traffc" target="_blank">Github</a>.
+                    </p>
+
+                    <p>&copy; 2015.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Meh &hellip;</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal -->
+
+
+    <!-- msgBox -->
+    <div class="modal fade" id="msgBox">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </div>
-<!-- /.modal -->
 
-
-<footer class="footer">
+<footer id="footer">
     <div class="container">
         <p class="text-muted text-right">&copy; 2015. a footer with no info, yet!</p>
     </div>

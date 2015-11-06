@@ -12,16 +12,17 @@ $dbname = 'traffc.sq3';
 //connect
 $logdb = new PDO("sqlite:" . $dbfolder . $dbname);
 
-
-$searchTerm = isset($_GET['q']) ? $_GET['q'] : '';
+$searchTerm = isset($_GET['q']) ? $_GET['q'] : ''; //todo if no q then return. no need to call the db for nothing.
 $counters = array();
 
+$list = $logdb->query("SELECT latitude, longitude, asciiname, LOWER(\"country code\") AS country " .
+    "FROM geoname " .
+    "WHERE upper(name) LIKE '%" . strtoupper($searchTerm) . "%'" .
+    "ORDER BY length(asciiname) ASC ");
 
-$list = $logdb->query("SELECT * FROM geoname WHERE name LIKE '%$searchTerm%'");
 $counters = $list->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode($counters);
 
 // close connection
 $logdb = null;
-?>
