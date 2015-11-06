@@ -37,10 +37,11 @@ A copy of the license is included in the root of this repository. The file is na
 - ~~add "back to my position" button~~
 - ~~keep selected values (selectd place on the typeahead, toggle state, refresh rate...)~~
 - ~~animate refresh button when in progress~~
+- ~~start a full-complete CI process~~
+- add Unit Tests (?)
 - add iphone/mobile touch icon
 - add/update/fix responsive header/menu specially on mobile
 - use https://github.com/allmarkedup/purl for querystrings and options
 - slimframework for API
 - refactor/clean code
 - migrate to angular/react (?)
-- start a full-complete CI process
