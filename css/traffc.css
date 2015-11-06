@@ -159,6 +159,11 @@ html, body {
     animation: spin 1000ms infinite linear;
 }
 
+.version {
+    color : #8E8E8E;
+    font-size: 11px;
+}
+
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
