@@ -12,6 +12,11 @@
     line-height: 20px;
 }
 
+.head .logo img {
+    width: 64px;
+    height: auto;
+}
+
 .footer-info .brand {
     padding: 3px 15px;
     height: 32px !important;
