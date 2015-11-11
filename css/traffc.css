@@ -13,7 +13,9 @@
 }
 
 .footer-info .brand {
-    padding: 7px 15px;
+    padding: 3px 15px;
+    height: 32px !important;
+    line-height: normal !important;
 }
 
 .x-large {
