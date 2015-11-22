@@ -8,7 +8,7 @@ I needed something simple, minimalistic and yet light to render on any web brows
 traffc is a full html page, with almost no backend, except for the city-searching part.
 
 ## Live demo
-The site is available at [traffc.hatemzidi.com](http://traffc.hatemzidi.com/)
+The site is available at [traffc.info](http://traffc.info/)
 
 ## Contributing
 
