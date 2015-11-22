@@ -145,6 +145,10 @@ html, body {
     border: 1px solid #E7E7E7;
 }
 
+#footer a {
+    color: #777;
+}
+
 /* Custom page CSS
 -------------------------------------------------- */
 
