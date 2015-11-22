@@ -21,9 +21,18 @@ html, body {
     padding-top: 8px;
 }
 
+.logo img {
+    height: 32px;
+    width: auto;
+}
+
 .brand {
     font-family: 'Courgette', cursive;
     font-size: 25px;
+}
+
+.brand.small {
+    font-size: 9px;
 }
 
 .brand.normal {
