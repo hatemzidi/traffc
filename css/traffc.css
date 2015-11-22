@@ -35,3 +35,30 @@
 .our-clients, .clients-logos {
     display: none;
 }
+
+
+.textarea-box {
+    height: 200px !important;
+}
+
+
+
+
+html, body {
+    height: 100%;
+}
+.thankyou .head {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -98px;
+}
+.thankyou .head:after {
+    content: "";
+    display: block;
+}
+.thankyou footer, .thankyou .head:after {
+    height: 98px;
+}
+.thankyou footer {
+
+}

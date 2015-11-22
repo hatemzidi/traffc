@@ -219,19 +219,20 @@ h1, h2, h3, h4, h5, h6, p, img, .btn {
 	transform: scale(1.0);
 }
 
-.form-inline{
+.form-box{
 	padding-top: 20px;
 }
 
-.form-inline .form-control{
-	width: 412px;
+.form-box .form-control{
+	/*width: 412px;*/
 	height: 46px;
 	background-color: #545151;
 	color: #fff;
 	border-color: #666666;
+	margin: 5px 0;
 }
 
-.form-inline .btn{
+.form-box .btn{
 	width: 120px;
 	height: 46px;
 	background-color: #545151;
@@ -437,7 +438,7 @@ h1, h2, h3, h4, h5, h6, p, img, .btn {
 			margin: 0px auto;
 		}
 
-		.form-inline .form-control{
+		.form-box .form-control{
 		display: block;
 		margin: 0px auto;
 		}
@@ -455,11 +456,11 @@ h1, h2, h3, h4, h5, h6, p, img, .btn {
 			width: 100%;
 		}
 
-		.form-inline .form-control{
+		.form-box .form-control{
 		width: 100%;
 		}
 
-		.form-inline .btn{
+		.form-box .btn{
 		width: 50%;
 		}
 
