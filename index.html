@@ -74,7 +74,7 @@ it's just light, simple and instantaneously available."/>
     <link rel="manifest" href="manifest.json">
 
     <!-- windows desktop & phone -->
-    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <meta name="msapplication-config" content="/browserconfig.xml"/>
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="msapplication-TileImage" content="favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -82,7 +82,8 @@ it's just light, simple and instantaneously available."/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/traffc.css">
     <link rel="stylesheet" href="css/typeaheadjs.css">
 
@@ -92,7 +93,7 @@ it's just light, simple and instantaneously available."/>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     <script src="http://hpneo.github.io/gmaps/gmaps.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
-    <script src="js/retina.js"></script>
+    <!--<script src="js/retina.js"></script>-->
     <script src="js/typeahead.bundle.min.js"></script>
 
 
@@ -118,7 +119,7 @@ it's just light, simple and instantaneously available."/>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo.png"/></a>
+                <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
                 <a class="navbar-brand brand large" href="#">traffc</a>
             </div>
 
@@ -174,23 +175,26 @@ it's just light, simple and instantaneously available."/>
                             </div>
                         </div>
                     </li>
+                    <!-- todo merge this ... -->
                     <li class="dropdown hidden-xs">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <i class="fa fa-bars"></i>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <!--<li><a href="#">Action</a></li>-->
-                            <!--<li><a href="#">Another action</a></li>-->
-                            <li class="disabled"><a href="#" data-toggle="modal" data-target="#whyModal">Settings</a></li>
+                            <li class="disabled"><a href="#">Settings</a></li>
                             <li class="divider"></li>
                             <li><a href="#" data-toggle="modal" data-target="#whyModal">Why this ?</a></li>
                             <li class="divider"></li>
                             <li><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
                         </ul>
                     </li>
+
+                    <li class="disabled visible-xs"><a href="#">Settings</a></li>
+                    <li class="divider visible-xs"></li>
                     <li class="visible-xs"><a href="#" data-toggle="modal" data-target="#whyModal">Why this ?</a></li>
                     <li class="divider visible-xs"></li>
                     <li class="visible-xs"><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
+                    <!-- todo ... together! -->
                 </ul>
             </div>
 
@@ -215,13 +219,16 @@ it's just light, simple and instantaneously available."/>
                     <h4 class="modal-title">Why this ?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>It strated when I became sick visiting ugly, complicated and full of ads websites or mobile apps for such a
+                    <p>It strated when I became sick visiting ugly, complicated and full of ads websites or mobile apps
+                        for such a
                         simple need : checking quickly the traffic condition in my area.</p>
 
                     <p>I wanted a minimalistic, flat and yet a light view where I can check the traffic jam
-                        quickly even on my mobile without waiting for quite long or being bothered clicking here and there. </p>
+                        quickly even on my mobile without waiting for quite long or being bothered clicking here and
+                        there. </p>
 
-                    <p>Here is <span class="brand normal">traffc</span>, my new road comapnion and may be yours too. Enjoy ;)</p>
+                    <p>Here is <span class="brand normal">traffc</span>, my new road comapnion and may be yours too.
+                        Enjoy ;)</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -246,7 +253,7 @@ it's just light, simple and instantaneously available."/>
                 <div class="modal-body">
                     <p>Made [quickly] by Hatem Zidi (<a href="http://twitter.com/tom_z" target="_blank">@tom_z</a>)</p>
 
-                    <p>Feel free to contribute here on <a href="https://github.com/hatemzidi/traffc" target="_blank">Github</a>.
+                    <p>Feel free to contribute on <a href="https://github.com/hatemzidi/traffc" target="_blank">Github</a>.
                     </p>
 
                     <p>&copy; 2015 &hyphen; <span class="version">v 0.9 (__VERSION__)</span></p>
@@ -286,7 +293,8 @@ it's just light, simple and instantaneously available."/>
 
 <footer id="footer">
     <div class="container">
-        <p class="text-muted text-right">&copy; 2015. a footer with no info, yet!</p>
+        <!--<span class="text-muted text-left"><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></span>-->
+        <p class="text-muted text-right">&copy; <span class="brand normal">traffc</span> 2015</p>
     </div>
 </footer>
 <script>
