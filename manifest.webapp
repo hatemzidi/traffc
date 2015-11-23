@@ -12,6 +12,17 @@ it's just light, simple and instantaneously available.",
     "name": "Hatem ZIDI",
     "url": "http://whatis.traffc.info"
   },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "permissions": {
+    "desktop-notification": {
+      "description": "To show you notifications"
+    },
+    "geolocation": {
+      "description": "Getting your location"
+    }
+  },
   "default_locale": "en",
   "type" : "privileged",
   "fullscreen": "true",
