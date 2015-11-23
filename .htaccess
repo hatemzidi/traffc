@@ -1,0 +1,13 @@
+# prepare error page
+ErrorDocument 403 /403.html
+#ErrorDocument 404 /404.html
+#ErrorDocument 500 /500.html
+
+# limit indexing of directories
+Options -Indexes -MultiViews 
+
+# disable the server signature
+ServerSignature Off
+
+# force mime for .webapp (firefox OS Only)
+AddType application/x-web-app-manifest+json .webapp

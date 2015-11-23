@@ -1,0 +1,30 @@
+{
+    "name": "traffc",
+    "version": "0.8",
+    "description": "traffc is your new road companion. The minimalistic tool to check, in real time, your area's traffic condition. It's just light, simple and instantaneously available.",
+    "launch_path": "/index.html",
+    "icons": {
+        "512": "/img/icon-512.png",
+        "128": "/img/icon-128.png"
+    },
+    "developer": {
+        "name": "Hatem ZIDI",
+        "url": "http://hatemzidi.com"
+    },
+    "installs_allowed_from": [
+        "*"
+    ],
+    "permissions": {
+        "desktop-notification": {
+            "description": "To show you notifications"
+        },
+        "geolocation": {
+            "description": "Getting your location"
+        }
+    },
+    "default_locale": "en",
+    "fullscreen": "true",
+    "chrome": {
+        "navigation": false
+    }
+}
