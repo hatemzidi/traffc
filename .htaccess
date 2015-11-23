@@ -1,0 +1,21 @@
+# limit indexing of directories
+Options All -Indexes
+
+# protect the htaccess file,
+# this is done by default with apache config file,
+# but you never know.
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+# disable the server signature
+ServerSignature Off
+
+# prepare error page
+ErrorDocument 404 /404.html
+ErrorDocument 500 /50x.html
+
+
+# force mime for .webapp (firefox OS Only)
+AddType application/x-web-app-manifest+json .webapp
