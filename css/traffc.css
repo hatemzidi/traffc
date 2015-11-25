@@ -146,7 +146,7 @@ html, body {
 }
 
 #footer a {
-    color: #777;
+    color: #777 !important;
 }
 
 /* Custom page CSS
