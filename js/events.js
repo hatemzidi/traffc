@@ -33,5 +33,6 @@ $(function () {
     }).on('touchstart click', '.onX, .x', function (ev) {
         ev.preventDefault();
         $(this).removeClass('x onX').val('').change();
+        $(this).blur();
     });
 });
