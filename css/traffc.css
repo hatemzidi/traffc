@@ -48,6 +48,16 @@ html, body {
     border-radius: 0;
 }
 
+#AllFavorites span,
+#getFavoriteUI i {
+    color: #e2264d;
+}
+
+#AddFavorite span,
+#addMarkerUI i {
+    color: #f0ad4e;
+}
+
 /* MAP
 -------------------------------------------------- */
 #map_canvas {
@@ -100,16 +110,16 @@ html, body {
     color: black;
 }
 
-.no-radius{
+.no-radius {
     border-radius: 0 !important;
 }
 
-.no-radius-left{
+.no-radius-left {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
 }
 
-.no-radius-right{
+.no-radius-right {
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
@@ -136,7 +146,6 @@ html, body {
     border-bottom-left-radius: 0 !important;
 }
 
-
 /* FOOTER
 -------------------------------------------------- */
 #footer {
@@ -149,16 +158,21 @@ html, body {
     color: #777 !important;
 }
 
+#footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.version {
+    color: #8E8E8E;
+    font-size: 11px;
+}
+
 /* Custom page CSS
 -------------------------------------------------- */
 
 .container .text-muted {
     margin: 17px 0;
-}
-
-#footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
 }
 
 .refreshable.active, .refreshable:active {
@@ -172,11 +186,6 @@ html, body {
     animation: spin 1000ms infinite linear;
 }
 
-.version {
-    color : #8E8E8E;
-    font-size: 11px;
-}
-
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -187,6 +196,7 @@ html, body {
         transform: rotate(359deg);
     }
 }
+
 @keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -200,16 +210,22 @@ html, body {
 
 /* GMaps controls CSS
 -------------------------------------------------- */
-
+#addMarkerUI,
+#getFavoriteUI,
 #goCenterUI {
     background-color: #fff;
     color: #747474;
     border: 2px solid #fff;
-    border-radius: 3px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
     cursor: pointer;
     margin: 8px;
     text-align: center;
     width: 28px;
     height: 27px;
+    -webkit-user-select: none;
+}
+
+#addMarkerUI {
+    bottom: 42px !important;
 }

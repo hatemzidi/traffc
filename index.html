@@ -102,6 +102,8 @@ it's just light, simple and instantaneously available."/>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    <script src="js/utils.js"></script>
+    <script src="js/geolocation.js"></script>
     <script src="js/traffc.js"></script>
 
 </head>
@@ -172,6 +174,14 @@ it's just light, simple and instantaneously available."/>
                                         data-placement="bottom" title="Back to my location">
                                     <span class="glyphicon glyphicon-record"></span>
                                 </button>
+                                <button id="AllFavorites" class="btn btn-default" data-toggle="tooltip"
+                                        data-placement="bottom" title="Favorite locations">
+                                    <span class="fa fa-heart"></span>
+                                </button>
+                                <button id="AddFavorite" class="btn btn-default" data-toggle="tooltip"
+                                        data-placement="bottom" title="Add Favorite">
+                                    <span class="fa fa-plus-square"></span>
+                                </button>
                             </div>
                         </div>
                     </li>
@@ -219,12 +229,14 @@ it's just light, simple and instantaneously available."/>
                     <h4 class="modal-title">Why this?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>It started when I became sick of visiting ugly, complicated and ad-heavy websites or having to use mobile apps
+                    <p>It started when I became sick of visiting ugly, complicated and ad-heavy websites or having to
+                        use mobile apps
                         for such a
                         simple need : quickly checking the traffic condition in my area.</p>
 
                     <p>I wanted a minimalistic, flat and yet light view where I can check for traffic jams
-                        quickly even on my mobile without waiting for very long or being bothered clicking around here and there. </p>
+                        quickly even on my mobile without waiting for very long or being bothered clicking around here
+                        and there. </p>
 
                     <p>Here is <span class="brand normal">traffc</span>, my new road companion and maybe yours too.
                         Enjoy ;)</p>
@@ -252,10 +264,11 @@ it's just light, simple and instantaneously available."/>
                 <div class="modal-body">
                     <p>Made [quickly] by Hatem Zidi (<a href="http://twitter.com/tom_z" target="_blank">@tom_z</a>)</p>
 
-                    <p>Feel free to contribute on <a href="https://github.com/hatemzidi/traffc" target="_blank">Github</a>.
+                    <p>Feel free to contribute on <a href="https://github.com/hatemzidi/traffc"
+                                                     target="_blank">Github</a>.
                     </p>
 
-                    <p>more info on  <a href="http://whatis.traffc.info" target="_blank">http://whatis.traffc.info</a>.
+                    <p>more info on <a href="http://whatis.traffc.info" target="_blank">http://whatis.traffc.info</a>.
                     </p>
 
                     <p>&copy; 2015 &hyphen; <span class="version">v 0.8 (__VERSION__)</span></p>
@@ -291,14 +304,39 @@ it's just light, simple and instantaneously available."/>
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+
 </div>
 
 <footer id="footer">
     <div class="container">
         <!--<span class="text-muted text-left"><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></span>-->
-        <p class="text-muted text-right">&copy; <a class="brand normal" href="http://whatis.traffc.info">traffc</a> 2015</p>
+        <p class="text-muted text-right">&copy; <a class="brand normal" href="http://whatis.traffc.info">traffc</a> 2015
+        </p>
     </div>
 </footer>
+
+<script type="text/html" id="fav_marker_template">
+
+        <div class="form-group">
+
+
+            <div class="input-group">
+                <input type="text" class="form-control" id="name" placeholder="Name">
+                <span class="input-group-btn">
+                    <button type="submit"  class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button type="reset"  class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+
+</script>
+
+
 <script>
     //__GOOGLE_ANALYTICS__
 </script>
