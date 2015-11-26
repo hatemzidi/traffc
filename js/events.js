@@ -30,7 +30,7 @@ $(function () {
         $(this)[togFnClass(this.value)]('x');
     }).on('mousemove', '.x', function (e) {
         $(this)[togFnClass(this.offsetWidth - 18 < e.clientX - this.getBoundingClientRect().left)]('onX');
-    }).on('touchstart click', '.onX', function (ev) {
+    }).on('touchstart click', '.onX, .x', function (ev) {
         ev.preventDefault();
         $(this).removeClass('x onX').val('').change();
     });
