@@ -46,6 +46,7 @@ $(function () {
             lng: $('#markerdata').data('lng'),
             name: $(this).parents('.input-group').find('#name').val()
         };
+
         favMarker.infoWindow.close();
         map.removeMarker(favMarker);
         addFavotireMarker(marker);
@@ -54,6 +55,11 @@ $(function () {
         fav.push(marker);
         storage.set('_traffc_favorite_places', fav);
 
-    })
+    });
+
+    $(document).on('touchstart click', '.trash-btn', function () {
+
+
+    });
 
 });

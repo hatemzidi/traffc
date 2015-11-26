@@ -1,0 +1,17 @@
+CACHE MANIFEST
+# __VERSION__
+
+# Explicitly cached 'master entries'.
+CACHE:
+# Explicitly cached entries
+index.html
+css/style.css
+
+# Resources that require the user to be online.
+NETWORK:
+*
+
+
+FALLBACK:
+/ /offline.html
+img img/offline.jpg

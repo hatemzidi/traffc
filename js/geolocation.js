@@ -173,6 +173,7 @@ function addFavotireMarker(d) {
     var template = $('#fav_marker').text();
     var content = template.replace(/{{name}}/g, d.name);
 
+    //todo use marker index
     favMarker = map.addMarker({
         lat: d.lat,
         lng: d.lng,
@@ -187,12 +188,11 @@ function addFavotireMarker(d) {
             content: content,
             maxWidth: 200
         },
-        click : function (e) {
+        click: function (e) {
             map.panTo(new google.maps.LatLng(d.lat, d.lng));
         }
 
     });
-
 }
 
 function getFavoritePlaces() {

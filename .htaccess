@@ -11,3 +11,6 @@ ServerSignature Off
 
 # force mime for .webapp (firefox OS Only)
 AddType application/x-web-app-manifest+json .webapp
+
+# force mime for appcache
+AddType text/cache-manifest .appcache
