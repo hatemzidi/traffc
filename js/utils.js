@@ -16,15 +16,17 @@ function isMobile() {
 
 function showMsgBox(type, title, body) {
 
-    $('#msgBox').addClass(type);
-    $('#msgBox').find('.modal-title').html(title);  //todo : use Handlebars ?
-    $('#msgBox').find('.modal-body').html(body); //todo : use Handlebars ?
-
-    $('#msgBox')
-        .modal('show')
-        .on('hidden.bs.modal', function (e) {
-            $('#msgBox').removeClass(type);
-        })
+    bootbox.alert({
+        title: title,
+        className : type,
+        message: body,
+        buttons: {
+            ok: {
+                label: "close",
+                className: "btn-default"
+            }
+        }
+    });
 }
 
 

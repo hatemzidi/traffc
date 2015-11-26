@@ -10,6 +10,9 @@ $(function () {
         $('#map-location-search').removeClass('x onX').val('').change();
     });
 
+    $('.whyModal').on('click',showWhyThisModal);
+    $('.aboutModal').on('click',showAboutModal);
+
     $('#AddFavorite').on('click', addFavoriteMarker);
     $('#addMarkerUI').on('click', function () {
         addFavoriteMarker();

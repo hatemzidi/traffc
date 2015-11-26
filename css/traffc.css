@@ -17,6 +17,10 @@ html, body {
 
 /* HEAEDER
 -------------------------------------------------- */
+.header {
+    z-index: 100;
+}
+
 .logo {
     padding-top: 8px;
 }
@@ -214,20 +218,27 @@ html, body {
 #goCenterUI {
     background-color: #fff;
     color: #747474;
-    border: 2px solid #fff;
     border-radius: 2px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
     cursor: pointer;
     margin: 8px;
     text-align: center;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     -webkit-user-select: none;
+    position: absolute;
+    z-index: 4;
+    border: 1px solid #bbb;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    -ms-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
 }
 
 #getFavoriteUI i,
 #goCenterUI i {
-    margin-top: 6px;
+    margin-top: 10px;
 }
 
 .gm-style-iw .form-group {
@@ -237,7 +248,7 @@ html, body {
 .container-map-location-search .glyphicon {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 2px;
     width: 40px;
     height: 40px;
     z-index: 1;
@@ -298,7 +309,7 @@ html, body {
     background-repeat: no-repeat;
     background-size: 15px 15px;
     border: 1px solid #999;
-    padding: 3px 32px 3px 4px; /* Use the same right padding (18) in jQ! */
+    padding: 3px 32px 3px 10px; /* Use the same right padding (18) in jQ! */
     border-radius: 3px;
     transition: background 0.4s;
 }

@@ -167,6 +167,7 @@ function addFavoriteMarker() {
 }
 
 
+
 function followMe() {
     GMaps.geolocate({
         success: function (position) {
