@@ -53,8 +53,7 @@ html, body {
     color: #e2264d;
 }
 
-#AddFavorite span,
-#addMarkerUI i {
+#AddFavorite span {
     color: #f0ad4e;
 }
 
@@ -210,7 +209,7 @@ html, body {
 
 /* GMaps controls CSS
 -------------------------------------------------- */
-#addMarkerUI,
+
 #getFavoriteUI,
 #goCenterUI {
     background-color: #fff;
@@ -226,6 +225,60 @@ html, body {
     -webkit-user-select: none;
 }
 
-#addMarkerUI {
-    bottom: 42px !important;
+.gm-style-iw .form-group {
+    margin-bottom: 0 !important;
+}
+
+.container-map-location-search .glyphicon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    color: #777;
+    line-height: 40px;
+    text-align: center;
+}
+
+.container-map-location-search {
+    position: absolute;
+    top: 66px;
+    right: 20px;
+    z-index: 4;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    -ms-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+}
+
+.container-map-location-search #map-location-search:focus {
+    width: 250px;
+    border: none;
+    opacity: 1;
+    cursor: text;
+}
+
+.container-map-location-search #map-location-search {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    -moz-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    -ms-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    -o-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    -webkit-transition: all .25s cubic-bezier(.345, 0, .25, 1);
+    -moz-transition: all .25s cubic-bezier(.345, 0, .25, 1);
+    -ms-transition: all .25s cubic-bezier(.345, 0, .25, 1);
+    -o-transition: all .25s cubic-bezier(.345, 0, .25, 1);
+    transition: all .25s cubic-bezier(.345, 0, .25, 1);
 }

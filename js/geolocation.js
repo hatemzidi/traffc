@@ -22,6 +22,7 @@ function renderMap() {
         scaleControl: false,
         mapTypeControl: false,
         streetViewControl: false,
+        styles: mapStyle.getStyle('light'),
         resize: function () {
             this.setCenter(geolocation);
         }
@@ -29,6 +30,15 @@ function renderMap() {
 
     // traffic layer \o/
     map.addLayer('traffic');
+
+    // add autocomplete
+    var autocomplete = new google.maps.places.Autocomplete($("#map-location-search")[0]);
+    autocomplete.bindTo('bounds', map);
+
+    google.maps.event.addListener(autocomplete, "place_changed", function() {
+        var n = autocomplete.getPlace();
+        n.geometry && (n.geometry.viewport ? map.fitBounds(n.geometry.viewport) : map.setCenter(n.geometry.location));
+    });
 
     // https://github.com/hpneo/gmaps/issues/358
     // Trigger resize event of the map when the window is resized — but only when
@@ -94,18 +104,6 @@ function geolocateMe() {
                     events: {
                         click: function () {
                             map.setCenter(geolocation);
-                        }
-                    }
-                });
-
-                // add favorite location control
-                map.addControl({
-                    id: 'addMarkerUI',
-                    position: 'right_top',
-                    content: '<i class="fa fa-plus-square fa-2x"></i>',
-                    events: {
-                        click: function () {
-                            addFavoriteMarker();
                         }
                     }
                 });
