@@ -5,7 +5,7 @@ CACHE MANIFEST
 CACHE:
 # Explicitly cached entries
 index.html
-css/style.css
+css/traffc.css
 
 # Resources that require the user to be online.
 NETWORK:
