@@ -23,6 +23,6 @@ var mapStyle = {
     }],
     dark : [],
     getStyle : function(s){
-        return this.light;
+        return this[s];
     }
 };
