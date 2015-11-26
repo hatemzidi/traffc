@@ -36,17 +36,10 @@ function renderMap() {
     autocomplete.bindTo('bounds', map);
 
     google.maps.event.addListener(autocomplete, "place_changed", function() {
-        this.one("blur",function(){
-            this.val("");
-        });
-
         var places = autocomplete.getPlace();
         //todo why changing zoom ?
         places.geometry && (places.geometry.viewport ? map.fitBounds(places.geometry.viewport) : map.setCenter(places.geometry.location));
 
-        setTimeout(function(){
-            this.val("");
-        },10);
     });
 
     // https://github.com/hpneo/gmaps/issues/358
