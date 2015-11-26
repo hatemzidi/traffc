@@ -39,7 +39,7 @@ $(function () {
         $(this).blur();
     });
 
-    $(document).on('click', '.edit_marker', function () {
+    $(document).on('touchstart click', '.edit_marker', function () {
 
         var marker = {
             lat: $('#markerdata').data('lat'),
