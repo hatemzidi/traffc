@@ -14,4 +14,4 @@ NETWORK:
 
 FALLBACK:
 / /offline.html
-img img/offline.jpg
+/img img/offline.png
