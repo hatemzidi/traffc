@@ -10,12 +10,12 @@ $(function () {
         $('#map-location-search').removeClass('x onX').val('').change();
     });
 
-    $('.whyModal').on('click',showWhyThisModal);
-    $('.aboutModal').on('click',showAboutModal);
+    $('.whyModal').on('click', showWhyThisModal);
+    $('.aboutModal').on('click', showAboutModal);
 
-    $('#AddFavorite').on('click', addFavoriteMarker);
+    $('#AddFavorite').on('click', setFavotireMarker);
     $('#addMarkerUI').on('click', function () {
-        addFavoriteMarker();
+        setFavotireMarker();
         $('#bs-main-menu').collapse('hide'); // collapse the nav menu 'immediately'
     });
 
@@ -38,4 +38,22 @@ $(function () {
         $(this).removeClass('x onX').val('').change();
         $(this).blur();
     });
+
+    $(document).on('click', '.edit_marker', function () {
+
+        var marker = {
+            lat: $('#markerdata').data('lat'),
+            lng: $('#markerdata').data('lng'),
+            name: $(this).parents('.input-group').find('#name').val()
+        };
+        favMarker.infoWindow.close();
+        map.removeMarker(favMarker);
+        addFavotireMarker(marker);
+
+        var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
+        fav.push(marker);
+        storage.set('_traffc_favorite_places', fav);
+
+    })
+
 });

@@ -213,6 +213,14 @@ html, body {
 
 /* GMaps controls CSS
 -------------------------------------------------- */
+.gm-style {
+    font-family: inherit !important;
+}
+
+.gm-style .gm-style-iw {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
 
 #getFavoriteUI,
 #goCenterUI {
@@ -243,6 +251,10 @@ html, body {
 
 .gm-style-iw .form-group {
     margin-bottom: 0 !important;
+}
+
+.gm-style-iw .form-group.info{
+    margin-top: 1px !important;
 }
 
 .container-map-location-search .glyphicon {
@@ -324,10 +336,11 @@ html, body {
 }
 
 /* (jQ) hover cursor style */
-.clearable::-ms-clear {
+.clearable::-ms-clear {  /* Remove IE default X */
     display: none;
     width: 0;
     height: 0;
 }
 
-/* Remove IE default X */
+
+

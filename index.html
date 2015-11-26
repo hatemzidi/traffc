@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>__APPNAME__</title>
+    <title>traffc</title>
     <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
 
     <!-- no cache -->
@@ -92,6 +92,7 @@ it's just light, simple and instantaneously available."/>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
     <script src="http://hpneo.github.io/gmaps/gmaps.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+    <script src="js/jquery.storageapi.min.js"></script>
     <script src="js/bootbox.min.js"></script>
 
 
@@ -223,7 +224,7 @@ it's just light, simple and instantaneously available."/>
         </p>
     </div>
 </footer>
-
+<input type="hidden" id="markerdata"/>
 <script type="text/html" id="fav_marker_template">
 
     <div class="form-group">
@@ -233,11 +234,29 @@ it's just light, simple and instantaneously available."/>
                     <button type="submit" class="btn btn-success edit_marker">
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
-                    <button type="reset" class="btn btn-danger">
+                    <!--<button type="reset" class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash"></span>
-                    </button>
+                    </button>-->
                 </span>
         </div>
+    </div>
+
+</script>
+
+<script type="text/html" id="fav_marker">
+
+    <div class="form-group info">
+
+    <span class="place">{{name}}</span>
+    <span class="btn-group">
+        <button type="submit" class="btn btn-warning setdefault">
+            <span class="glyphicon glyphicon glyphicon-star"></span>
+        </button>
+        <button type="reset" class="btn btn-danger trash-btnr">
+            <span class="glyphicon glyphicon-trash"></span>
+        </button>
+    </span>
+
     </div>
 
 </script>

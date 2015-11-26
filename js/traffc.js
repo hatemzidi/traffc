@@ -6,8 +6,10 @@
 
 var map;
 var marker = undefined;
+var favmarker = undefined;
 var geolocation;
 var gpsStatus;
+var storage = $.localStorage;
 
 
 $(function () {
@@ -19,6 +21,9 @@ $(function () {
 
     // geolcate now !
     geolocateMe();
+
+    // get favorite palces
+    getFavoritePlaces();
 
     $(window).resize(resizeBootstrapMap); // force responsivness
     $('[data-toggle="tooltip"]').tooltip(); // init tooltips

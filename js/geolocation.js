@@ -35,7 +35,7 @@ function renderMap() {
     var autocomplete = new google.maps.places.Autocomplete($("#map-location-search")[0]);
     autocomplete.bindTo('bounds', map);
 
-    google.maps.event.addListener(autocomplete, "place_changed", function() {
+    google.maps.event.addListener(autocomplete, "place_changed", function () {
         var places = autocomplete.getPlace();
         //todo why changing zoom ?
         places.geometry && (places.geometry.viewport ? map.fitBounds(places.geometry.viewport) : map.setCenter(places.geometry.location));
@@ -130,11 +130,11 @@ function geolocateMe() {
 }
 
 
-function addFavoriteMarker() {
+function setFavotireMarker() {
 
     var template = $('#fav_marker_template').text();
 
-    var favMarker = map.addMarker({
+    favMarker = map.addMarker({
         lat: geolocation.lat,
         lng: geolocation.lng,
         draggable: true,
@@ -157,15 +157,52 @@ function addFavoriteMarker() {
             this.infoWindow.close();
         },
         dragend: function (e) {
-            //http://hpneo.github.io/gmaps/examples/interacting.html
-            google.maps.event.trigger(this, 'click');
-            //todo save name, location; make it undraggable
 
+            this.infoWindow.open(this.map, this);
+            //todo : to find another way to store this
+            $('#markerdata').data('lat', e.latLng.lat());
+            $('#markerdata').data('lng', e.latLng.lng());
         }
     });
 
 }
 
+
+function addFavotireMarker(d) {
+
+    var template = $('#fav_marker').text();
+    var content = template.replace(/{{name}}/g, d.name);
+
+    favMarker = map.addMarker({
+        lat: d.lat,
+        lng: d.lng,
+        animation: google.maps.Animation.DROP,
+        icon: {
+            url: "img/marker_fav.png",
+            scaledSize: new google.maps.Size(40, 40),
+            anchor: new google.maps.Point(9, 38)
+        },
+        details: {},
+        infoWindow: {
+            content: content,
+            maxWidth: 200
+        },
+        click : function (e) {
+            map.panTo(new google.maps.LatLng(d.lat, d.lng));
+        }
+
+    });
+
+}
+
+function getFavoritePlaces() {
+
+    var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
+
+    $.each(fav, function (i, item) {
+        addFavotireMarker(item)
+    });
+}
 
 
 function followMe() {
