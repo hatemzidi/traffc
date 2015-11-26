@@ -36,8 +36,9 @@ function renderMap() {
     autocomplete.bindTo('bounds', map);
 
     google.maps.event.addListener(autocomplete, "place_changed", function() {
-        var n = autocomplete.getPlace();
-        n.geometry && (n.geometry.viewport ? map.fitBounds(n.geometry.viewport) : map.setCenter(n.geometry.location));
+        var places = autocomplete.getPlace();
+        //todo why changing zoom ?
+        places.geometry && (places.geometry.viewport ? map.fitBounds(places.geometry.viewport) : map.setCenter(places.geometry.location));
     });
 
     // https://github.com/hpneo/gmaps/issues/358

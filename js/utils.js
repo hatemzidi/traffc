@@ -45,3 +45,9 @@ function resizeBootstrapMap() {
     $map.height($(window).height() - 100);
 }
 
+
+function togFnClass(v) {
+    return v ? 'addClass' : 'removeClass';
+}
+
+
