@@ -13,6 +13,7 @@ html, body {
     height: 100%;
     /* Negative indent footer by it's height */
     margin: 0 auto -51px;
+    background-color: #f8f8f8;
 }
 
 /* HEAEDER
@@ -311,8 +312,7 @@ html, body {
     transition: all .25s cubic-bezier(.345, 0, .25, 1);
 }
 
-/* General css
--------------------------------------------------- */
+
 
 .clearable {
     background-color: white;
@@ -344,3 +344,42 @@ html, body {
 
 
 
+/* Offline css
+-------------------------------------------------- */
+.responsive-container {
+    position: relative;
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+.dummy {
+    padding-top: 100%; /* forces 1:1 aspect ratio */
+}
+
+.img-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    text-align:center; /* Align center inline elements */
+    font: 0/0 a;
+}
+
+.img-container:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.img-container img {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+p.message {
+    text-align: center;
+    font-size: 25px;
+}
