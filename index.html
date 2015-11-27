@@ -224,12 +224,12 @@ it's just light, simple and instantaneously available."/>
         </p>
     </div>
 </footer>
-<input type="hidden" id="markerdata"/>
+
 <script type="text/html" id="fav_marker_template">
 
     <div class="form-group">
         <div class="input-group">
-            <input type="text" class="form-control" id="name" placeholder="Name">
+            <input type="text" class="form-control" id="name" placeholder="Name" value="">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-success edit_marker">
                         <span class="glyphicon glyphicon-ok"></span>
@@ -247,12 +247,12 @@ it's just light, simple and instantaneously available."/>
 
     <div class="form-group info">
 
-    <span class="place">{{name}}</span>
+        <span class="place">{{name}}</span>
     <span class="btn-group">
-        <button type="submit" class="btn btn-warning setdefault">
+        <button data-marker-index="{{index}}" type="submit" class="btn btn-warning setdefault">
             <span class="glyphicon glyphicon glyphicon-star"></span>
         </button>
-        <button type="reset" class="btn btn-danger trash-btn">
+        <button data-marker-index="{{index}}" type="reset" class="btn btn-danger trash-btn">
             <span class="glyphicon glyphicon-trash"></span>
         </button>
     </span>

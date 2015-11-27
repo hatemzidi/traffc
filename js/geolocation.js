@@ -66,19 +66,24 @@ function geolocateMe() {
 
             map.setCenter(geolocation.lat, geolocation.lng);
 
-            if (marker === undefined) {
-                marker = map.addMarker({
+            if (markers['user'] === undefined) {
+                var marker = map.addMarker({
                     lat: geolocation.lat,
                     lng: geolocation.lng,
                     animation: google.maps.Animation.DROP,
+                    details: {},
                     icon: {
                         url: "img/marker_user.png",
                         scaledSize: new google.maps.Size(40, 40)
                     }
                 });
+                markers['user'] = map.markers.indexOf(marker);
+
+                //todo review this else, is it useful ?
             } else {
-                marker.setPosition(new google.maps.LatLng(geolocation.lat, geolocation.lng));
+                map.markers[markers['user']].setPosition(new google.maps.LatLng(geolocation.lat, geolocation.lng));
             }
+
         },
         error: function (error) {
             gpsStatus = false;
@@ -94,9 +99,8 @@ function geolocateMe() {
             // this is, so far, the best position to callback gpsStatus
             // if mobile then refresh position & the traffic condition
             if (isMobile() && gpsStatus) {
-                setInterval(followMe, 1000);
-                setInterval(reloadTiles, 10 * 1000); // force refresh on mobile every 30s
-                                                     // todo : refactor this by adding canvas off menu
+                setInterval(followMe, 1000); // follow the user every 1 sec // todo add it to settings
+                setInterval(reloadTiles, 10 * 1000); // force refresh on mobile every 30s // todo add it to settings
 
                 // relocate-position control
                 map.addControl({
@@ -109,7 +113,6 @@ function geolocateMe() {
                         }
                     }
                 });
-
 
                 // add favorite location control
                 map.addControl({
@@ -133,8 +136,9 @@ function geolocateMe() {
 function setFavotireMarker() {
 
     var template = $('#fav_marker_template').text();
+    markers['fav'] = {id: undefined, lat: undefined, lng: undefined};
 
-    favMarker = map.addMarker({
+    var marker = map.addMarker({
         lat: geolocation.lat,
         lng: geolocation.lng,
         draggable: true,
@@ -150,31 +154,27 @@ function setFavotireMarker() {
             content: template,
             maxWidth: 300,
             closeclick: function () {
-                map.removeMarker(favMarker);
+                map.removeMarker(map.markers[markers['fav'].id]);
             }
         },
         dragstart: function () {
             this.infoWindow.close();
         },
         dragend: function (e) {
-
+            markers['fav'].lat = e.latLng.lat();
+            markers['fav'].lng = e.latLng.lng();
             this.infoWindow.open(this.map, this);
-            //todo : to find another way to store this
-            $('#markerdata').data('lat', e.latLng.lat());
-            $('#markerdata').data('lng', e.latLng.lng());
         }
     });
+
+    markers['fav'].id = map.markers.indexOf(marker);
 
 }
 
 
 function addFavotireMarker(d) {
 
-    var template = $('#fav_marker').text();
-    var content = template.replace(/{{name}}/g, d.name);
-
-    //todo use marker index
-    favMarker = map.addMarker({
+    var marker = map.addMarker({
         lat: d.lat,
         lng: d.lng,
         animation: google.maps.Animation.DROP,
@@ -183,16 +183,23 @@ function addFavotireMarker(d) {
             scaledSize: new google.maps.Size(40, 40),
             anchor: new google.maps.Point(9, 38)
         },
-        details: {},
+        details: {id: undefined},
         infoWindow: {
-            content: content,
+            content: '',
             maxWidth: 200
         },
-        click: function (e) {
+        click: function () {
             map.panTo(new google.maps.LatLng(d.lat, d.lng));
         }
-
     });
+
+    // get marker index and set it
+    var template = $('#fav_marker').text();
+    var index = d.id === undefined ? map.markers.indexOf(marker) : d.id;
+    var content = template.replace(/{{name}}/g, d.name).replace(/{{index}}/g, index);
+    marker.infoWindow.setContent(content);
+    marker.details.id = index;
+    return index;
 }
 
 function getFavoritePlaces() {
@@ -209,7 +216,7 @@ function followMe() {
     GMaps.geolocate({
         success: function (position) {
             geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-            marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+            map.markers[markers['user']].setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
         }
     });
 
@@ -217,7 +224,7 @@ function followMe() {
 
 
 function reloadTiles() {
-    console.debug('reloaded');
+    //debug console.debug('reloaded');
     var tiles = $("#map_canvas").find("img");
     for (var i = 0; i < tiles.length; i++) {
         var src = $(tiles[i]).attr("src");

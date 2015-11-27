@@ -5,8 +5,7 @@
  */
 
 var map;
-var marker = undefined;
-var favmarker = undefined;
+var markers = [];
 var geolocation;
 var gpsStatus;
 var storage = $.localStorage;
