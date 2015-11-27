@@ -18,7 +18,7 @@ function showMsgBox(type, title, body) {
 
     bootbox.alert({
         title: title,
-        className : type,
+        className: type,
         message: body,
         buttons: {
             ok: {
@@ -52,4 +52,12 @@ function togFnClass(v) {
     return v ? 'addClass' : 'removeClass';
 }
 
+
+Array.prototype.removeValue = function (name, value) {
+    var array = $.map(this, function (v, i) {
+        return v[name] === value ? null : v;
+    });
+    this.length = 0; //clear original array
+    this.push.apply(this, array); //push all elements except the one we want to delete
+};
 
