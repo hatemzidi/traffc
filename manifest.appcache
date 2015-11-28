@@ -4,14 +4,28 @@ CACHE MANIFEST
 # Explicitly cached 'master entries'.
 CACHE:
 # Explicitly cached entries
-index.html
-css/traffc.css
+/offline.html
+/css/traffc.css
+/js/jquery.storageapi.min.js
+/js/bootbox.min.js
+/img/offline.png
+/img/logo@2x.png
+# jquery
+https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
+# boostrap
+https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css
+https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js
+# fontawesome
+http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.woff2?v=4.4.0
+http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.woff?v=4.4.0
+http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf?v=4.4.0
+
+FALLBACK:
+/ /offline.html
 
 # Resources that require the user to be online.
 NETWORK:
 *
 
 
-FALLBACK:
-/ /offline.html
-/img img/offline.png
