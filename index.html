@@ -247,19 +247,25 @@ it's just light, simple and instantaneously available."/>
 <script type="text/html" id="fav_marker">
 
     <div class="form-group info">
-
-        <span class="place">{{name}}</span>
-    <span class="btn-group">
-        <button data-marker-index="{{index}}" type="submit" class="btn btn-warning setdefault">
-            <span class="glyphicon glyphicon glyphicon-star"></span>
-        </button>
-        <button data-marker-index="{{index}}" type="reset" class="btn btn-danger trash-btn">
-            <span class="glyphicon glyphicon-trash"></span>
-        </button>
-    </span>
-
+        <span class="place col-md-9" style="width:250px">{{name}}</span>
     </div>
 
+</script>
+
+<script type="text/html" id="fav_places">
+    <div class="row">
+        <div class="col-sm-8 col-xs-6"><p class="form-control-static truncate">{{name}}</p></div>
+        <div class="col-sm-4 col-xs-6  no-padding-left text-right">
+            <div class="btn-group" role="group">
+                <button data-marker-index="{{index}}" type="reset" class="btn btn-success pin-btn"><span
+                        class="glyphicon glyphicon-record"></span></button>
+                <button data-marker-index="{{index}}" type="reset" class="btn btn-default fav-btn"><span
+                        class="glyphicon glyphicon-star-empty"></span></button>
+                <button data-marker-index="{{index}}" type="reset" class="btn btn-danger trash-btn"><span
+                        class="glyphicon glyphicon-trash"></span></button>
+            </div>
+        </div>
+    </div>
 </script>
 
 

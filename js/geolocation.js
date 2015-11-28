@@ -6,7 +6,7 @@
 
 function renderMap() {
 
-    geolocation = {lat: 44.832500, lng: -0.593262}; // Bordeaux, France -- as Default :)
+    geolocation = getDefaultLocation();
 
     map = new GMaps({
         div: '#map',
@@ -14,10 +14,7 @@ function renderMap() {
         lng: geolocation.lng,
         zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_TOP
-        },
+        zoomControl: false,
         rotateControl: false,
         scaleControl: false,
         mapTypeControl: false,
@@ -27,6 +24,16 @@ function renderMap() {
             this.setCenter(geolocation);
         }
     });
+
+    // show zoom control if not mobile
+    if (!isMobile()) {
+        map.setOptions({
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_TOP
+            }
+        });
+    }
 
     // traffic layer \o/
     map.addLayer('traffic');
@@ -121,7 +128,7 @@ function geolocateMe() {
                     content: '<i class="fa fa-heart fa-2x"></i>',
                     events: {
                         click: function () {
-                            showMsgBox("", "Favorites", "list of favorite places"); // on click, pin to that place
+                            showFavoritePlacesModal();
                         }
                     }
                 });
@@ -138,9 +145,11 @@ function setFavotireMarker() {
     var template = $('#fav_marker_template').text();
     markers['fav'] = {id: undefined, lat: undefined, lng: undefined};
 
+    var center = map.getCenter();
+
     var marker = map.addMarker({
-        lat: geolocation.lat,
-        lng: geolocation.lng,
+        lat: center.lat(),
+        lng: center.lng(),
         draggable: true,
         animation: google.maps.Animation.DROP,
         icon: {
@@ -172,12 +181,12 @@ function setFavotireMarker() {
 }
 
 
-function addFavotireMarker(d) {
+function addFavotireMarker(data, defaultId) {
 
     var marker = map.addMarker({
-        lat: d.lat,
-        lng: d.lng,
-        animation: google.maps.Animation.DROP,
+        lat: data.lat,
+        lng: data.lng,
+        //animation: google.maps.Animation.DROP,
         icon: {
             url: "img/marker_fav.png",
             scaledSize: new google.maps.Size(40, 40),
@@ -186,31 +195,72 @@ function addFavotireMarker(d) {
         details: {id: undefined},
         infoWindow: {
             content: '',
-            maxWidth: 200
+            maxWidth: 400
         },
         click: function () {
-            map.panTo(new google.maps.LatLng(d.lat, d.lng));
+            map.panTo(new google.maps.LatLng(data.lat, data.lng));
         }
     });
 
     // get marker index and set it
     var template = $('#fav_marker').text();
-    var index = d.id === undefined ? map.markers.indexOf(marker) : d.id;
-    var content = template.replace(/{{name}}/g, d.name).replace(/{{index}}/g, index);
+    var id = data.id === undefined ? map.markers.indexOf(marker) : data.id;
+    var content = template.replace(/{{name}}/g, data.name).replace(/{{index}}/g, id);
+    if (id == defaultId) {
+        marker.setIcon({
+            url: "img/marker_default.png",
+            scaledSize: new google.maps.Size(30, 30)
+        });
+    }
+
     marker.infoWindow.setContent(content);
-    marker.details.id = index;
-    return index;
+    marker.details.id = id;
+    return id;
 }
 
-function getFavoritePlaces() {
+function removeMarker(itemId) {
+    //search for the marker since the markers array indexes change after delete
+    var marker = $.grep(map.markers, function (e) {
+        return e.details.id !== undefined ? e.details.id == itemId : false;
+    })[0];
+
+    map.removeMarker(marker);
+}
+
+function removeMarkers() {
 
     var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
 
     $.each(fav, function (i, item) {
-        addFavotireMarker(item)
+        removeMarker(item.id);
     });
 }
 
+function getFavoritePlaces(animation) {
+
+    var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
+    var id = storage.isSet('_traffc_default_location') ? storage.get('_traffc_default_location') : 0;
+
+    $.each(fav, function (i, item) {
+        addFavotireMarker(item, id, animation);
+    });
+}
+
+function getDefaultLocation() {
+    var l =  {lat: 44.832500, lng: -0.593262}; // Bordeaux, France -- as Default :)
+
+    var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
+    var id = storage.isSet('_traffc_default_location') ? storage.get('_traffc_default_location') : 0;
+
+    if ( fav !== [] && id !== 0) {
+        l = $.grep(fav, function (e) {
+            return e.id == id;
+        })[0];
+    }
+
+    return l;
+
+}
 
 function followMe() {
     GMaps.geolocate({

@@ -12,7 +12,7 @@ function showWhyThisModal() {
         '<p>Here is <span class="brand normal">traffc</span>, my new road companion and maybe yours too. Enjoy ;)</p>',
         buttons: {
             ok: {
-                label: "close",
+                label: "Close",
                 className: "btn-default"
             }
         }
@@ -28,9 +28,44 @@ function showAboutModal() {
         '<p>&copy; 2015 &hyphen; <span class="version">v 0.8 (__VERSION__)</span></p>',
         buttons: {
             ok: {
-                label: "close",
+                label: "Close",
                 className: "btn-default"
             }
         }
     });
+}
+
+
+function showFavoritePlacesModal() {
+    //prepare data
+    var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
+    var id = storage.isSet('_traffc_default_location') ? storage.get('_traffc_default_location') : 0;
+
+
+    //prepare template
+    var template = $('#fav_places').text();
+    var content = '', text='';
+
+    $.each(fav, function (i, item) {
+        text = template.replace(/{{name}}/g, item.name).replace(/{{index}}/g, item.id);
+        if ( id === item.id ) {
+            text = text.replace('-default','-warning').replace('-empty','');
+        }
+        content += text;
+    });
+
+    content = '<div class="places_grid">' + content + '</div>';
+
+    //show modal
+    bootbox.alert({
+        title: "Favorite",
+        message: content,
+        buttons: {
+            ok: {
+                label: "Close",
+                className: "btn-default"
+            }
+        }
+    });
+
 }

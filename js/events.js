@@ -20,7 +20,7 @@ $(function () {
     });
 
     $('#AllFavorites').on('click', function () {
-        showMsgBox("", "Favorites", "list of favorite places"); // on click, pin to that place
+        showFavoritePlacesModal();
     });
 
     $('#refreshRate, #isRefreshable').on('change', function () {
@@ -72,13 +72,12 @@ $(function () {
                 }
             },
             callback: function (result) {
-                if (result !== null) {
+                if (result === true) {
 
-                    //search for the marker since the markers array indexes change after delete
-                    var marker = $.grep(map.markers, function (e) {
-                        return e.details.id !== undefined ? e.details.id == $(self).data('marker-index') : false;
-                    });
-                    map.removeMarker(marker[0]);
+                    removeMarker($(self).data('marker-index'));
+
+                    //remove the line from the grid
+                    $(self).closest('.row').remove();
 
                     var fav = storage.get('_traffc_favorite_places');
                     fav.removeValue('id', $(self).data('marker-index'));
@@ -88,5 +87,51 @@ $(function () {
         });
 
     });
+
+
+    $(document).on('touchstart click', '.pin-btn', function () {
+        var self = this;
+        var fav = storage.get('_traffc_favorite_places');
+
+        var p = $.grep(fav, function (e) {
+            return e.id == $(self).data('marker-index');
+        })[0];
+
+        map.panTo(new google.maps.LatLng(p.lat, p.lng));
+
+    });
+
+    $(document).on('touchstart click', '.fav-btn', function () {
+        var self = this;
+        var defaultPlace;
+
+
+        //todo and what about toggle ?
+        if ( $(self).hasClass('btn-default')) {
+            var other = $(self).parents('.places_grid').find('.btn-warning');
+            other.removeClass('btn-warning').addClass('btn-default');
+            other.find('span').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+
+
+            $(self).removeClass('btn-default').addClass('btn-warning');
+            $(self).find('span').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+            //todo set marker with a default icon
+            defaultPlace = $(self).data('marker-index');
+        } else {
+            $(self).removeClass('btn-warning').addClass('btn-default');
+            $(self).find('span').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+            defaultPlace = {};
+        }
+
+        storage.set('_traffc_default_location', defaultPlace);
+
+        removeMarkers();
+        getFavoritePlaces();
+
+    });
+
+
+
+
 
 });
