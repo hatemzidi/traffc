@@ -56,6 +56,7 @@ $(function () {
         fav.push(marker);
         storage.set('_traffc_favorite_places', fav);
 
+        return false;
     });
 
     $(document).on('touchstart click', '.trash-btn', function () {
@@ -86,6 +87,7 @@ $(function () {
             }
         });
 
+        return false;
     });
 
 
@@ -98,7 +100,7 @@ $(function () {
         })[0];
 
         map.panTo(new google.maps.LatLng(p.lat, p.lng));
-
+        return false;
     });
 
     $(document).on('touchstart click', '.fav-btn', function () {
@@ -127,7 +129,7 @@ $(function () {
 
         removeMarkers();
         getFavoritePlaces();
-
+        return false;
     });
 
 
