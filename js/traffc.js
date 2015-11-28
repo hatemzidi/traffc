@@ -24,7 +24,7 @@ $(function () {
     // geolcate now !
     geolocateMe();
 
-    // get favorite palces
+    // get favorite places and set them on the map
     getFavoritePlaces();
 
     $(window).resize(resizeBootstrapMap); // force responsivness

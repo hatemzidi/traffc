@@ -293,6 +293,11 @@ html, body {
     margin-top: 1px !important;
 }
 
+.pac-item {
+    padding: 5px 4px;
+    font-size: 14px;
+}
+
 .container-map-location-search .glyphicon {
     position: absolute;
     top: 0;
