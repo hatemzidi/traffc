@@ -157,7 +157,7 @@ html, body {
 }
 
 .places_grid:empty:before {
-    content: 'No Favorite Places.';
+    content: 'No Places.';
     height: 50px;
 }
 

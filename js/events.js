@@ -83,6 +83,11 @@ $(function () {
                     var fav = storage.get('_traffc_favorite_places');
                     fav.removeValue('id', $(self).data('marker-index'));
                     storage.set('_traffc_favorite_places', fav);
+
+                    //check if no fav, if yes reset favorites
+                    if (fav.length === 0) {
+                        storage.set('_traffc_default_location', 0);
+                    }
                 }
             }
         });

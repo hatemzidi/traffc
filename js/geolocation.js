@@ -69,29 +69,22 @@ function geolocateMe() {
         success: function (position) {
             gpsStatus = true;
 
-            geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+            var location = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-            map.setCenter(geolocation.lat, geolocation.lng);
+            // todo add center map as option
+            // map.setCenter(location.lat, location.lng);
 
-            if (markers['user'] === undefined) {
-                var marker = map.addMarker({
-                    lat: geolocation.lat,
-                    lng: geolocation.lng,
-                    animation: google.maps.Animation.DROP,
-                    details: {id: undefined},
-                    icon: {
-                        url: "img/marker_user.png",
-                        scaledSize: new google.maps.Size(40, 40)
-                    }
-                });
-                markers['user'] = map.markers.indexOf(marker);
-                marker.details.id = map.markers.indexOf(marker);
-
-                //todo review this else, is it useful ?
-            } else {
-                map.markers[markers['user']].setPosition(new google.maps.LatLng(geolocation.lat, geolocation.lng));
-            }
-
+            var marker = map.addMarker({
+                lat: location.lat,
+                lng: location.lng,
+                animation: google.maps.Animation.DROP,
+                details: {id: undefined},
+                icon: {
+                    url: "img/marker_user.png",
+                    scaledSize: new google.maps.Size(40, 40)
+                }
+            });
+            marker.details.id = 'user';
         },
         error: function (error) {
             gpsStatus = false;
@@ -221,10 +214,10 @@ function addFavotireMarker(data, defaultId) {
 
 function getMarker(itemId) {
     //search for the marker since the markers array indexes change after delete
-    var marker = $.grep(map.markers, function (e) {
+    return $.grep(map.markers, function (e) {
         return e.details.id !== undefined ? e.details.id == itemId : false;
     })[0];
-    return marker;
+
 }
 
 function removeMarker(itemId) {
@@ -241,13 +234,13 @@ function removeMarkers() {
     });
 }
 
-function getFavoritePlaces(animation) {
+function getFavoritePlaces() {
 
     var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
     var id = storage.isSet('_traffc_default_location') ? storage.get('_traffc_default_location') : 0;
 
     $.each(fav, function (i, item) {
-        addFavotireMarker(item, id, animation);
+        addFavotireMarker(item, id);
     });
 }
 
@@ -258,12 +251,12 @@ function getDefaultLocation() {
     var id = storage.isSet('_traffc_default_location') ? storage.get('_traffc_default_location') : 0;
 
     if (fav.length !== 0 && id !== 0) {
-        l = $.grep(fav, function (e) {
+        var p = $.grep(fav, function (e) {
             return e.id == id;
         })[0];
     }
 
-    return l;
+    return !p ? l : p;
 
 }
 
@@ -271,7 +264,7 @@ function followMe() {
     GMaps.geolocate({
         success: function (position) {
             geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-            var marker = getMarker(markers['user']);
+            var marker = getMarker('user');
             marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
         }
     });

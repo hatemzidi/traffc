@@ -58,7 +58,7 @@ function showFavoritePlacesModal() {
 
     //show modal
     bootbox.alert({
-        title: "Favorite places",
+        title: "Places",
         message: content,
         buttons: {
             ok: {
