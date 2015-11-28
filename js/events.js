@@ -5,10 +5,6 @@
 
 //todo comments and stuff
 $(function () {
-    $('#backToPosition').on('click', function () {
-        map.setCenter(geolocation.lat, geolocation.lng);
-        $('#map-location-search').removeClass('x onX').val('').change();
-    });
 
     $('.whyModal').on('click', showWhyThisModal);
     $('.aboutModal').on('click', showAboutModal);
@@ -27,6 +23,15 @@ $(function () {
         if ($('#isRefreshable').is(':checked')) {
             setInterval(reloadTiles, $('#refreshRate').val() * 1000);
         }
+    });
+
+
+    /* GMaps controls
+     -------------------------------------------------- */
+
+    $('#backToPosition').on('click', function () {
+        map.setCenter(geolocation.lat, geolocation.lng);
+        $('#map-location-search').removeClass('x onX').val('').change();
     });
 
     $(document).on('input', '.clearable', function () {
@@ -114,7 +119,7 @@ $(function () {
 
 
         //todo and what about toggle ?
-        if ( $(self).hasClass('btn-default')) {
+        if ($(self).hasClass('btn-default')) {
             var other = $(self).parents('.places_grid').find('.btn-warning');
             other.removeClass('btn-warning').addClass('btn-default');
             other.find('span').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
@@ -136,9 +141,6 @@ $(function () {
         getFavoritePlaces();
         return false;
     });
-
-
-
 
 
 });
