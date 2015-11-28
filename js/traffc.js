@@ -13,6 +13,9 @@ var storage = $.localStorage;
 
 $(function () {
 
+    //storage.set('_traffc_default_location', 0);
+    //storage.set('_traffc_favorite_places', []);
+
     resizeBootstrapMap(); // boostrap the map
 
     // init the map

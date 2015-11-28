@@ -78,13 +78,14 @@ function geolocateMe() {
                     lat: geolocation.lat,
                     lng: geolocation.lng,
                     animation: google.maps.Animation.DROP,
-                    details: {},
+                    details: {id: undefined},
                     icon: {
                         url: "img/marker_user.png",
                         scaledSize: new google.maps.Size(40, 40)
                     }
                 });
                 markers['user'] = map.markers.indexOf(marker);
+                marker.details.id = map.markers.indexOf(marker);
 
                 //todo review this else, is it useful ?
             } else {
@@ -218,12 +219,16 @@ function addFavotireMarker(data, defaultId) {
     return id;
 }
 
-function removeMarker(itemId) {
+function getMarker(itemId) {
     //search for the marker since the markers array indexes change after delete
     var marker = $.grep(map.markers, function (e) {
         return e.details.id !== undefined ? e.details.id == itemId : false;
     })[0];
+    return marker;
+}
 
+function removeMarker(itemId) {
+    var marker = getMarker(itemId);
     map.removeMarker(marker);
 }
 
@@ -247,12 +252,12 @@ function getFavoritePlaces(animation) {
 }
 
 function getDefaultLocation() {
-    var l =  {lat: 44.832500, lng: -0.593262}; // Bordeaux, France -- as Default :)
+    var l = {lat: 44.832500, lng: -0.593262}; // Bordeaux, France -- as Default :)
 
     var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
     var id = storage.isSet('_traffc_default_location') ? storage.get('_traffc_default_location') : 0;
 
-    if ( fav !== [] && id !== 0) {
+    if (fav.length !== 0 && id !== 0) {
         l = $.grep(fav, function (e) {
             return e.id == id;
         })[0];
@@ -266,7 +271,8 @@ function followMe() {
     GMaps.geolocate({
         success: function (position) {
             geolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
-            map.markers[markers['user']].setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+            var marker = getMarker(markers['user']);
+            marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
         }
     });
 
