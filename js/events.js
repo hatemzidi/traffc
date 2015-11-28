@@ -120,7 +120,7 @@ $(function () {
         } else {
             $(self).removeClass('btn-warning').addClass('btn-default');
             $(self).find('span').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
-            defaultPlace = {};
+            defaultPlace = 0;
         }
 
         storage.set('_traffc_default_location', defaultPlace);
