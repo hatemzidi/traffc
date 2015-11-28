@@ -58,7 +58,8 @@ html, body {
     color: #e2264d;
 }
 
-#AddFavorite span {
+#AddFavorite span,
+#setFavoriteUI i{
     color: #f0ad4e;
 }
 
@@ -125,15 +126,15 @@ html, body {
 }
 
 .no-padding {
-    padding : 0 !important
+    padding: 0 !important
 }
 
 .no-padding-right {
-    padding-right : 0 !important
+    padding-right: 0 !important
 }
 
 .no-padding-left {
-    padding-left : 0 !important
+    padding-left: 0 !important
 }
 
 .truncate {
@@ -255,6 +256,7 @@ html, body {
 }
 
 #getFavoriteUI,
+#setFavoriteUI,
 #goCenterUI {
     background-color: #fff;
     color: #747474;
@@ -277,8 +279,12 @@ html, body {
 }
 
 #getFavoriteUI i,
+#setFavoriteUI i,
 #goCenterUI i {
     margin-top: 10px;
+}
+#getFavoriteUI {
+    bottom: 26px !important;
 }
 
 .place {
@@ -380,8 +386,6 @@ html, body {
     width: 0;
     height: 0;
 }
-
-
 
 /* Offline css
 -------------------------------------------------- */

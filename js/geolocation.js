@@ -106,7 +106,7 @@ function geolocateMe() {
                 // relocate-position control
                 map.addControl({
                     id: 'goCenterUI',
-                    position: 'right_bottom',
+                    position: 'left_bottom',
                     content: '<i class="fa fa-crosshairs fa-2x"></i>',
                     events: {
                         click: function () {
@@ -115,7 +115,7 @@ function geolocateMe() {
                     }
                 });
 
-                // add favorite location control
+                // get favorite places modal
                 map.addControl({
                     id: 'getFavoriteUI',
                     position: 'right_bottom',
@@ -126,6 +126,20 @@ function geolocateMe() {
                         }
                     }
                 });
+
+                // add favorite location control
+                map.addControl({
+                    id: 'setFavoriteUI',
+                    position: 'right_bottom',
+                    content: '<i class="fa fa-flag fa-2x"></i>',
+                    events: {
+                        click: function () {
+                            setFavotireMarker();
+                        }
+                    }
+                });
+
+
 
             }
         }
@@ -180,11 +194,12 @@ function addFavotireMarker(data, defaultId) {
     var marker = map.addMarker({
         lat: data.lat,
         lng: data.lng,
+        draggable: true,
         //animation: google.maps.Animation.DROP,
         icon: {
             url: "img/marker_fav.png",
             scaledSize: new google.maps.Size(40, 40),
-            anchor: new google.maps.Point(9, 38)
+            anchor: new google.maps.Point(20, 35)
         },
         details: {id: undefined},
         infoWindow: {
@@ -203,7 +218,8 @@ function addFavotireMarker(data, defaultId) {
     if (id == defaultId) {
         marker.setIcon({
             url: "img/marker_default.png",
-            scaledSize: new google.maps.Size(30, 30)
+            scaledSize: new google.maps.Size(30, 30),
+            anchor: new google.maps.Point(15, 28)
         });
     }
 
