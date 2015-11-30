@@ -33,6 +33,45 @@ function renderMap() {
                 position: google.maps.ControlPosition.LEFT_TOP
             }
         });
+    } else {
+        // show controls only on mobile
+        // relocate-position control
+        map.addControl({
+            id: 'goCenterUI',
+            position: 'left_bottom',
+            content: '<i class="fa fa-crosshairs fa-2x"></i>',
+            events: {
+                click: function () {
+                    map.setCenter(geolocation);
+                }
+            }
+        });
+
+        // get favorite places modal
+        map.addControl({
+            id: 'getFavoriteUI',
+            position: 'right_bottom',
+            content: '<i class="fa fa-heart fa-2x"></i>',
+            events: {
+                click: function () {
+                    showFavoritePlacesModal();
+                }
+            }
+        });
+
+        // add favorite location control
+        map.addControl({
+            id: 'setFavoriteUI',
+            position: 'right_bottom',
+            content: '<i class="fa fa-flag fa-2x"></i>',
+            events: {
+                click: function () {
+                    setFavotireMarker();
+                }
+            }
+        });
+
+
     }
 
     // traffic layer \o/
@@ -102,45 +141,6 @@ function geolocateMe() {
             if (isMobile() && gpsStatus) {
                 setInterval(followMe, 1000); // follow the user every 1 sec // todo add it to settings
                 setInterval(reloadTiles, 10 * 1000); // force refresh on mobile every 30s // todo add it to settings
-
-                // relocate-position control
-                map.addControl({
-                    id: 'goCenterUI',
-                    position: 'left_bottom',
-                    content: '<i class="fa fa-crosshairs fa-2x"></i>',
-                    events: {
-                        click: function () {
-                            map.setCenter(geolocation);
-                        }
-                    }
-                });
-
-                // get favorite places modal
-                map.addControl({
-                    id: 'getFavoriteUI',
-                    position: 'right_bottom',
-                    content: '<i class="fa fa-heart fa-2x"></i>',
-                    events: {
-                        click: function () {
-                            showFavoritePlacesModal();
-                        }
-                    }
-                });
-
-                // add favorite location control
-                map.addControl({
-                    id: 'setFavoriteUI',
-                    position: 'right_bottom',
-                    content: '<i class="fa fa-flag fa-2x"></i>',
-                    events: {
-                        click: function () {
-                            setFavotireMarker();
-                        }
-                    }
-                });
-
-
-
             }
         }
     });
@@ -174,7 +174,7 @@ function setFavotireMarker() {
                 map.removeMarker(map.markers[markers['fav'].id]);
             }
         },
-        dragstart: function () {
+        dragstart: function (e) {
             this.infoWindow.close();
         },
         dragend: function (e) {
@@ -183,6 +183,7 @@ function setFavotireMarker() {
             this.infoWindow.open(this.map, this);
         }
     });
+
 
     markers['fav'].id = map.markers.indexOf(marker);
 
