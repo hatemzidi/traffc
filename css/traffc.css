@@ -12,7 +12,9 @@ html, body {
     height: auto !important;
     height: 100%;
     /* Negative indent footer by it's height */
-    margin: 0 auto -51px;
+    /*margin: 0 auto -51px;*/
+
+    margin: 0 auto;
     background-color: #f8f8f8;
 }
 

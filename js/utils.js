@@ -44,7 +44,7 @@ function resizeBootstrapMap() {
     var $map = $('#map');
     var mapParentWidth = $('#map_canvas').width();
     $map.width(mapParentWidth);
-    $map.height($(window).height() - 100);
+    $map.height($(window).height() - 50);
 }
 
 
