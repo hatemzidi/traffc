@@ -10,10 +10,11 @@ $(function () {
     $('.aboutModal').on('click', showAboutModal);
 
     $('#AddFavorite').on('click', setFavotireMarker);
-    $('#addMarkerUI').on('click', function () {
-        setFavotireMarker();
-        $('#bs-main-menu').collapse('hide'); // collapse the nav menu 'immediately'
-    });
+
+    //$('#addMarkerUI').on('click', function () {
+    //    setFavotireMarker();
+    //    $('#bs-main-menu').collapse('hide'); // collapse the nav menu 'immediately'
+    //});
 
     $('#AllFavorites').on('click', function () {
         showFavoritePlacesModal();
