@@ -13,7 +13,7 @@ function renderMap() {
         div: '#map',
         lat: geolocation.lat,
         lng: geolocation.lng,
-        zoom: settings.defaultZoom,
+        zoom: settings.defaultZoom ? settings.defaultZoom : 12 ,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControl: false,
         rotateControl: false,
