@@ -8,6 +8,7 @@ $(function () {
 
     $('.whyModal').on('click', showWhyThisModal);
     $('.aboutModal').on('click', showAboutModal);
+    $('.settingsModal').on('click', showSettingsModal);
 
     $('#AddFavorite').on('click', setFavotireMarker);
 
@@ -25,6 +26,7 @@ $(function () {
             setInterval(reloadTiles, $('#refreshRate').val() * 1000);
         }
     });
+
 
 
     /* GMaps controls
@@ -128,7 +130,6 @@ $(function () {
 
             $(self).removeClass('btn-default').addClass('btn-warning');
             $(self).find('span').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
-            //todo set marker with a default icon
             defaultPlace = $(self).data('marker-index');
         } else {
             $(self).removeClass('btn-warning').addClass('btn-default');
@@ -138,8 +139,10 @@ $(function () {
 
         storage.set('_traffc_default_location', defaultPlace);
 
+        //set marker with a default icon
         removeMarkers();
         getFavoritePlaces();
+
         return false;
     });
 

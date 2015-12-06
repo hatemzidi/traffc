@@ -7,19 +7,20 @@
 function renderMap() {
 
     geolocation = getDefaultLocation();
+    var settings = storage.isSet('_traffc_settings') ? storage.get('_traffc_settings') : {};
 
     map = new GMaps({
         div: '#map',
         lat: geolocation.lat,
         lng: geolocation.lng,
-        zoom: 12,
+        zoom: settings.defaultZoom,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControl: false,
         rotateControl: false,
         scaleControl: false,
         mapTypeControl: false,
         streetViewControl: false,
-        styles: mapStyle.getStyle('light'),
+        styles: mapStyle.getStyle(),
         resize: function () {
             this.setCenter(geolocation);
         }
@@ -104,14 +105,18 @@ function renderMap() {
 
 
 function geolocateMe() {
+
+    var settings = storage.isSet('_traffc_settings') ? storage.get('_traffc_settings') : {};
+
     GMaps.geolocate({
         success: function (position) {
             gpsStatus = true;
 
             var location = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-            // todo add center map as option
-            // map.setCenter(location.lat, location.lng);
+           if (settings.centerMap === "user") {
+                map.setCenter(location.lat, location.lng);
+           }
 
             var marker = map.addMarker({
                 lat: location.lat,
@@ -139,8 +144,8 @@ function geolocateMe() {
             // this is, so far, the best position to callback gpsStatus
             // if mobile then refresh position & the traffic condition
             if (isMobile() && gpsStatus) {
-                setInterval(followMe, 1000); // follow the user every 1 sec // todo add it to settings
-                setInterval(reloadTiles, 10 * 1000); // force refresh on mobile every 30s // todo add it to settings
+                setInterval(followMe, 1000); // follow the user every 1 sec
+                setInterval(reloadTiles, 20 * 1000); // force refresh on mobile every 20s // todo may be add it to settings
             }
         }
     });

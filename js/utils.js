@@ -53,6 +53,14 @@ function togFnClass(v) {
 }
 
 
+function isEvening() {
+    var now = new Date();
+    var hours = now.getHours();
+
+
+    return hours >= 18;
+}
+
 Array.prototype.removeValue = function (name, value) {
     var array = $.map(this, function (v, i) {
         return v[name] === value ? null : v;
@@ -60,4 +68,20 @@ Array.prototype.removeValue = function (name, value) {
     this.length = 0; //clear original array
     this.push.apply(this, array); //push all elements except the one we want to delete
 };
+
+navigator.sayswho = (function () {
+    var ua = navigator.userAgent, tem,
+        M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if (/trident/i.test(M[1])) {
+        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE ' + (tem[1] || '');
+    }
+    if (M[1] === 'Chrome') {
+        tem = ua.match(/\bOPR\/(\d+)/)
+        if (tem != null) return 'Opera ' + tem[1];
+    }
+    M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+    if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+    return M[0];
+})();
 

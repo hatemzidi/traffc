@@ -9,12 +9,15 @@ var markers = [];
 var geolocation;
 var gpsStatus;
 var storage = $.localStorage;
+var browser = navigator.sayswho.toLowerCase();
 
 
 $(function () {
 
     //storage.set('_traffc_default_location', 0);
     //storage.set('_traffc_favorite_places', []);
+
+    $('body').addClass(browser);
 
     resizeBootstrapMap(); // boostrap the map
 

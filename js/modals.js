@@ -44,12 +44,12 @@ function showFavoritePlacesModal() {
 
     //prepare template
     var template = $('#fav_places').text();
-    var content = '', text='';
+    var content = '', text = '';
 
     $.each(fav, function (i, item) {
         text = template.replace(/{{name}}/g, item.name).replace(/{{index}}/g, item.id);
-        if ( id === item.id ) {
-            text = text.replace('-default','-warning').replace('-empty','');
+        if (id === item.id) {
+            text = text.replace('-default', '-warning').replace('-empty', '');
         }
         content += text;
     });
@@ -67,5 +67,51 @@ function showFavoritePlacesModal() {
             }
         }
     });
+
+}
+
+function showSettingsModal() {
+    //prepare data
+    var settings = storage.isSet('_traffc_settings') ? storage.get('_traffc_settings') : {};
+
+
+    //prepare template
+    var template = $('#settings').text();
+    var content = '<div class="settings_grid">' + template + '</div>';
+
+    //show modal
+    bootbox.alert({
+        title: "Settings",
+        message: content,
+        buttons: {
+            ok: {
+                label: "Close",
+                className: "btn-default"
+            }
+        }
+    }).init(function () {
+        $('#zoomRange').val(settings.defaultZoom);
+        $('.zoom-label').html(settings.defaultZoom);
+        $('#centermap').attr("checked", settings.centerMap === "location");
+        $('#nightmode').attr("checked", settings.nightMode === "on");
+    });
+
+    $('#zoomRange').on('input change', function () {
+        var range = parseInt($(this).val());
+        settings.defaultZoom = range;
+        $(".zoom-label").html(range);
+        storage.set('_traffc_settings', settings);
+    });
+
+    $('#centermap').on('change', function () {
+        settings.centerMap = $(this).is(':checked') ? "location" : "user";
+        storage.set('_traffc_settings', settings);
+    });
+
+    $('#nightmode').on('change', function () {
+        settings.nightMode = $(this).is(':checked') ? "on" : "off";
+        storage.set('_traffc_settings', settings);
+    });
+
 
 }
