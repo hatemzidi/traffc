@@ -567,14 +567,14 @@ img.settings {
 .centermapswitch-inner:before {
     content: "";
     padding-left: 10px;
-    background-color: #66D675;
+    background-color: #42A5F5;
     color: #FFFFFF;
 }
 
 .centermapswitch-inner:after {
     content: "";
     padding-right: 10px;
-    background-color: #66D675;
+    background-color: #42A5F5;
     color: #FFFFFF;
     text-align: right;
 }
@@ -602,6 +602,11 @@ img.settings {
     right: 0px;
 }
 
+@media (max-width: 767px) {
+    .settings_grid label.control-label {
+      padding-top: 7px;
+    }
+}
 
 /* Input range   --------- */
 
@@ -625,6 +630,7 @@ img.settings {
     background-color: #fff;
     margin-top: 6px;
 }
+
 .safari input[type='range']::-webkit-slider-thumb,
 .chrome input[type='range']::-webkit-slider-thumb,
 .opera input[type='range']::-webkit-slider-thumb {
@@ -641,12 +647,14 @@ img.settings {
 .firefox input[type=range] {
     width: 100%;
 }
+
 .firefox input[type=range]::-moz-range-track {
     border-radius: 8px;
     height: 7px;
     border: 1px solid #bdc3c7;
     background-color: #fff;
 }
+
 .firefox input[type=range]::-moz-range-thumb {
     background: #ecf0f1;
     border: 1px solid #bdc3c7;
@@ -661,12 +669,14 @@ img.settings {
 .ie input[type="range"]::-ms-fill-upper {
     background: transparent;
 }
+
 .ie input[type="range"]::-ms-track {
     border-radius: 8px;
     height: 7px;
     border: 1px solid #bdc3c7;
     background-color: #fff;
 }
+
 .ie input[type="range"]::-ms-thumb {
     background-color: #ecf0f1;
     border: 1px solid #bdc3c7;

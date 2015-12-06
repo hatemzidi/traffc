@@ -125,7 +125,7 @@ it's just light, simple and instantaneously available."/>
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
-                <a class="navbar-brand brand large" href="#">__APPNAME__</a>
+                <a class="navbar-brand brand large" href="#"><!--__SUB__-->traffc</a>
             </div>
 
             <div id="bs-main-menu" class="collapse navbar-collapse">
@@ -264,19 +264,22 @@ it's just light, simple and instantaneously available."/>
 
         <!-- Zoom -->
         <div class="form-group">
-            <label class="col-md-4 col-xs-4 control-label" for="zoomRange">Default Zoom</label>
+            <label class="col-md-4 col-xs-5 control-label" for="zoomRange">Default Zoom</label>
 
-            <div class="col-md-8 col-xs-8" style="padding-top: 7px">
-                <div class="col-md-8 col-xs-8"><input id="zoomRange" type="range" name="zoom" min="1" max="19" step="1" value="12"> </div>
+            <div class="col-md-8 col-xs-7" style="padding-top: 7px">
+                <div class="col-md-5 col-xs-8 no-padding">
+                    <input id="zoomRange" type="range" name="zoom" min="1" max="19" step="1"
+                           value="12">
+                </div>
                 <label class="col-md-4 col-xs-4 zoom-label">12</label>
             </div>
         </div>
 
         <!-- Center to ? -->
         <div class="form-group">
-            <label class="col-md-4 col-xs-4 control-label">Center Map</label>
+            <label class="col-md-4 col-xs-5 control-label">Center Map</label>
 
-            <div class="col-md-8 col-xs-8">
+            <div class="col-md-8 col-xs-7">
                 <div class="float-left">
                     <img class="settings" src="img/marker_user.png">
                 </div>
@@ -297,15 +300,23 @@ it's just light, simple and instantaneously available."/>
 
         <!-- is night mode activated -->
         <div class="form-group">
-            <label class="col-md-4 col-xs-4 control-label" for="nightmode">Night Mode</label>
+            <label class="col-md-4 col-xs-5 control-label" for="nightmode">Night Mode</label>
 
-            <div class="col-md-8 col-xs-8">
-                <div class="onoffswitch">
-                    <input type="checkbox" name="nightmode" class="onoffswitch-checkbox" id="nightmode" checked>
-                    <label class="onoffswitch-label" for="nightmode">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
+            <div class="col-md-8 col-xs-7">
+                <div class="float-left">
+                    <img class="settings">
+                </div>
+                <div class="float-left">
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="nightmode" class="onoffswitch-checkbox" id="nightmode" checked>
+                        <label class="onoffswitch-label" for="nightmode">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="float-left">
+                    <img class="settings">
                 </div>
             </div>
         </div>
