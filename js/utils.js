@@ -55,10 +55,8 @@ function togFnClass(v) {
 
 function isEvening() {
     var now = new Date();
-    var hours = now.getHours();
 
-
-    return hours >= 18;
+    return now.getHours() >= 18;
 }
 
 Array.prototype.removeValue = function (name, value) {

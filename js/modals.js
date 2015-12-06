@@ -54,7 +54,7 @@ function showFavoritePlacesModal() {
         content += text;
     });
 
-    content = '<div class="places_grid">' + content + '</div>';
+    content = '<div class="places-grid">' + content + '</div>';
 
     //show modal
     bootbox.alert({
@@ -77,7 +77,7 @@ function showSettingsModal() {
 
     //prepare template
     var template = $('#settings').text();
-    var content = '<div class="settings_grid">' + template + '</div>';
+    var content = '<div class="settings-grid">' + template + '</div>';
 
     //show modal
     bootbox.alert({

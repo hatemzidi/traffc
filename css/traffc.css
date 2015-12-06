@@ -168,22 +168,28 @@ html, body {
     outline: 0;
 }
 
-.places_grid:empty:before {
+.places-grid:empty:before {
     content: 'No Places.';
     height: 50px;
 }
 
-.places_grid .row {
+.places-grid .row {
     padding: 2px 0;
 }
 
-/*.places_grid .row:nth-child(odd) > div {
+/*.places-grid .row:nth-child(odd) > div {
     background-color: #E7E7E7;
 }
 
-.places_grid .row:nth-child(even) > div {
+.places-grid .row:nth-child(even) > div {
     background-color: white;
 }*/
+
+.help-block {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: normal;
+}
 
 /* OVERRIDE BOOTSTRAP SWITCH
 -------------------------------------------------- */
@@ -603,8 +609,12 @@ img.settings {
 }
 
 @media (max-width: 767px) {
-    .settings_grid label.control-label {
+    .settings-grid label.control-label {
       padding-top: 7px;
+    }
+
+    .navbar-brand.brand{
+        padding-left: 0px;
     }
 }
 
