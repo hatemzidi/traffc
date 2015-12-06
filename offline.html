@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="manifest.appcache">
 <head>
     <meta charset="utf-8">
     <title>traffc</title>
@@ -82,32 +82,11 @@ it's just light, simple and instantaneously available."/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/traffc.css?v=1">
 
     <!-- Latest useful, compiled and/or minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
-    <script src="http://hpneo.github.io/gmaps/gmaps.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
-    <script src="js/jquery.storageapi.min.js"></script>
-    <script src="js/bootbox.min.js"></script>
-
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- todo minify/uglufy/compress all this into one file-->
-    <script src="js/utils.js?v=1"></script>
-    <script src="js/modals.js?v=1"></script>
-    <script src="js/events.js?v=1"></script>
-    <script src="js/map.style.js?v=1"></script>
-    <script src="js/geolocation.js?v=1"></script>
-    <script src="js/traffc.js?v=1"></script>
 
 </head>
 
@@ -125,7 +104,7 @@ it's just light, simple and instantaneously available."/>
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
-                <a class="navbar-brand brand large" href="#"><!--__SUB__-->traffc</a>
+                <a class="navbar-brand brand large" href="#">__APPNAME__</a>
             </div>
 
             <div id="bs-main-menu" class="collapse navbar-collapse">
@@ -134,24 +113,7 @@ it's just light, simple and instantaneously available."/>
                         <div class="navbar-form navbar-left">
                             <div class="form-group text-right">
 
-                                <div class="input-group">
-                                    <select id="refreshRate" data-width="auto" data-style="btn-default no-radius-right"
-                                            class="form-control show-tick show-menu-arrow ">
-                                        <option value="10">10 sec</option>
-                                        <option value="30">30 sec</option>
-                                        <option value="60">1 mn</option>
-                                    </select>
 
-                                <span class="input-group-btn">
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="refreshable btn btn-default" data-toggle="tooltip"
-                                               data-placement="bottom" title="Refresh">
-                                            <input id="isRefreshable" type="checkbox"><span id="refresh-btn"
-                                                                                            class="glyphicon glyphicon-repeat"></span>
-                                        </label>
-                                    </div>
-                                </span>
-                                </div>
                             </div>
                         </div>
                     </li>
@@ -180,7 +142,7 @@ it's just light, simple and instantaneously available."/>
                             <i class="fa fa-bars"></i>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#" class="settingsModal">Settings</a></li>
+                            <li class="disabled"><a href="#">Settings</a></li>
                             <li class="divider"></li>
                             <li><a href="#" class="whyModal">Why this?</a></li>
                             <li class="divider"></li>
@@ -188,7 +150,9 @@ it's just light, simple and instantaneously available."/>
                         </ul>
                     </li>
 
-                    <li class="visible-xs"><a href="#" class="settingsModal">Settings</a></li>
+                    <li class="disabled visible-xs"><a href="#" id="addMarkerUI">Add a favorite location</a></li>
+                    <li class="divider visible-xs"></li>
+                    <li class="visible-xs"><a href="#">Settings</a></li>
                     <li class="divider visible-xs"></li>
                     <li class="visible-xs"><a href="#" class="whyModal">Why this?</a></li>
                     <li class="divider visible-xs"></li>
@@ -201,133 +165,30 @@ it's just light, simple and instantaneously available."/>
     </nav>
 
 
-    <div class="body">
-        <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
-            <div id="map"></div>
-        </div>
+    <div class="responsive-container">
+        <div class="dummy"></div>
 
-        <div class="container-map-location-search">
-            <i class="glyphicon glyphicon-search"></i>
-            <input type="text" class="form-control clearable" id="map-location-search"
-                   placeholder="Search for a location..." autocomplete="off">
+        <div class="img-container">
+            <img src="img/offline.png" alt="" />
+
+            <p class="message">Oops! No internet, buddy.</p>
         </div>
     </div>
 
 
 </div>
 
-
-<script type="text/html" id="fav_marker_template">
-
-    <div class="form-group">
-        <div class="input-group">
-            <input type="text" class="form-control" id="name" placeholder="Name" value="">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success edit_marker">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </button>
-                    <!--<button type="reset" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>-->
-                </span>
-        </div>
+<footer id="footer">
+    <div class="container">
+        <!--<span class="text-muted text-left"><a href="#">Terms</a> <a href="#">Privacy</a> <a href="#">Contact</a></span>-->
+        <p class="text-muted text-right">&copy; <a class="brand normal" href="http://whatis.traffc.info">traffc</a> 2015
+        </p>
     </div>
-
-</script>
-
-<script type="text/html" id="fav_marker">
-
-    <div class="form-group info">
-        <span class="place col-md-9" style="width:250px">{{name}}</span>
-    </div>
-
-</script>
-
-<script type="text/html" id="fav_places">
-    <div class="row">
-        <div class="col-sm-8 col-xs-6"><p class="form-control-static truncate">{{name}}</p></div>
-        <div class="col-sm-4 col-xs-6  no-padding-left text-right">
-            <div class="btn-group" role="group">
-                <button data-marker-index="{{index}}" type="button" class="btn btn-success pin-btn"><span
-                        class="glyphicon glyphicon-record"></span></button>
-                <button data-marker-index="{{index}}" type="button" class="btn btn-default fav-btn"><span
-                        class="glyphicon glyphicon-star-empty"></span></button>
-                <button data-marker-index="{{index}}" type="button" class="btn btn-danger trash-btn"><span
-                        class="glyphicon glyphicon-trash"></span></button>
-            </div>
-        </div>
-    </div>
-</script>
-
-<script type="text/html" id="settings">
-    <form class="form-horizontal">
-
-        <!-- Zoom -->
-        <div class="form-group">
-            <label class="col-md-5 col-xs-5 control-label" for="zoomRange">Default Zoom</label>
-
-            <div class="col-md-7 col-xs-7" style="padding-top: 7px">
-                <div class="col-md-5 col-xs-8 no-padding">
-                    <input id="zoomRange" type="range" name="zoom" min="1" max="19" step="1"
-                           value="12">
-                </div>
-                <label class="col-md-4 col-xs-4 zoom-label">12</label>
-            </div>
-        </div>
-
-        <!-- Center to ? -->
-        <div class="form-group">
-            <label class="col-md-5 col-xs-5 control-label">Center Map</label>
-
-            <div class="col-md-7 col-xs-7 no-padding">
-                <div class="float-left">
-                    <img class="settings" src="img/marker_user.png">
-                </div>
-                <div class="float-left">
-                    <div class="centermapswitch">
-                        <input type="checkbox" name="centermap" class="centermapswitch-checkbox" id="centermap" checked>
-                        <label class="centermapswitch-label" for="centermap">
-                            <span class="centermapswitch-inner"></span>
-                            <span class="centermapswitch-switch"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="float-left">
-                    <img class="settings" src="img/marker_default.png">
-                </div>
-            </div>
-        </div>
-
-        <!-- is night mode activated -->
-        <div class="form-group">
-            <label class="col-md-5 col-xs-5 control-label" for="nightmode">Night Mode<span class="help-block">Active after 18:00</span></label>
-
-            <div class="col-md-7 col-xs-7 no-padding">
-                <div class="float-left">
-                    <img class="settings" src="img/blank.gif">
-                </div>
-                <div class="float-left">
-                    <div class="onoffswitch">
-                        <input type="checkbox" name="nightmode" class="onoffswitch-checkbox" id="nightmode" checked>
-                        <label class="onoffswitch-label" for="nightmode">
-                            <span class="onoffswitch-inner"></span>
-                            <span class="onoffswitch-switch"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="float-left">
-                    <img class="settings" src="img/blank.gif">
-                </div>
-            </div>
-        </div>
-        </div>
-    </form>
-</script>
+</footer>
 
 
-<script>
-    //__GOOGLE_ANALYTICS__
-</script>
+
+
 
 </body>
 </html>
