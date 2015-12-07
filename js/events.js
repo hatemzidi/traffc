@@ -28,7 +28,6 @@ $(function () {
     });
 
 
-
     /* GMaps controls
      -------------------------------------------------- */
 
@@ -58,6 +57,8 @@ $(function () {
 
         map.markers[markers['fav'].id].infoWindow.close();
         map.removeMarker(map.markers[markers['fav'].id]);
+        markers['fav'] = undefined;
+
         marker.id = addFavotireMarker(marker);
 
         var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];

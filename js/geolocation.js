@@ -13,7 +13,7 @@ function renderMap() {
         div: '#map',
         lat: geolocation.lat,
         lng: geolocation.lng,
-        zoom: settings.defaultZoom ? settings.defaultZoom : 12 ,
+        zoom: settings.defaultZoom ? settings.defaultZoom : 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControl: false,
         rotateControl: false,
@@ -115,9 +115,9 @@ function geolocateMe() {
 
             var location = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-           if (settings.centerMap === "user") {
+            if (settings.centerMap === "user") {
                 map.setCenter(location.lat, location.lng);
-           }
+            }
 
             var marker = map.addMarker({
                 lat: location.lat,
@@ -157,9 +157,18 @@ function geolocateMe() {
 function setFavotireMarker() {
 
     var template = $('#fav_marker_template').text();
-    markers['fav'] = {id: undefined, lat: undefined, lng: undefined};
+
+    // reset old marker and allow one fav marker at a time
+    // fixbug : https://github.com/hatemzidi/traffc/issues/2
+    if (markers['fav'] !== undefined) {
+        map.removeMarker(map.markers[markers['fav'].id]);
+        markers['fav'] = undefined;
+    }
+
 
     var center = map.getCenter();
+    markers['fav'] = {id: undefined, lat: center.lat(), lng: center.lng()};
+
 
     var marker = map.addMarker({
         lat: center.lat(),
@@ -178,6 +187,7 @@ function setFavotireMarker() {
             maxWidth: 300,
             closeclick: function () {
                 map.removeMarker(map.markers[markers['fav'].id]);
+                markers['fav'] = undefined;
             }
         },
         dragstart: function (e) {

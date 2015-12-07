@@ -47,7 +47,7 @@ function showFavoritePlacesModal() {
     var content = '', text = '';
 
     $.each(fav, function (i, item) {
-        text = template.replace(/{{name}}/g, item.name).replace(/{{index}}/g, item.id);
+        text = template.replace(/{{name}}/g, item.name).replace(/{{index}}/g, item.id).replace(/^\s+|\s+$/g, '');
         if (id === item.id) {
             text = text.replace('-default', '-warning').replace('-empty', '');
         }
@@ -65,6 +65,31 @@ function showFavoritePlacesModal() {
                 label: "Close",
                 className: "btn-default"
             }
+        }
+    });
+
+    $('.place-name').editable({
+        mode : 'inline',
+        escape : true,
+        type: 'text',
+        title: 'Enter name',
+        success: function (response, newValue) {
+            var self = this;
+            var fav = storage.get('_traffc_favorite_places');
+
+            var p = $.grep(fav, function (e) {
+                return e.id == $(self).data('marker-index');
+            })[0];
+            fav.removeValue('id', $(self).data('marker-index'));
+
+            p.name = newValue;
+            fav.push(p);
+            storage.set('_traffc_favorite_places', fav);
+
+            //todo make this less complecated
+            //refresh all markers
+            removeMarkers();
+            getFavoritePlaces();
         }
     });
 
