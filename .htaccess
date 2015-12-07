@@ -18,3 +18,14 @@ AddType text/cache-manifest .appcache
     ExpiresActive On
     ExpiresByType text/cache-manifest "access plus 0 seconds"
 </ifmodule>
+
+#force no cache
+<filesMatch "\.(html|js|css)$">
+  FileETag None
+  <ifModule mod_headers.c>
+     Header unset ETag
+     Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+     Header set Pragma "no-cache"
+     Header set Expires "Tue, 01 Jan 1980 1:00:00 GMT"
+  </ifModule>
+</filesMatch>
