@@ -86,7 +86,8 @@ function renderMap() {
         var places = autocomplete.getPlace();
         //todo why changing zoom ?
         places.geometry && (places.geometry.viewport ? map.fitBounds(places.geometry.viewport) : map.setCenter(places.geometry.location));
-
+        // resest autocomplete input field
+        $("input.clearable").removeClass('x onX').val('').change();
     });
 
     // https://github.com/hpneo/gmaps/issues/358
