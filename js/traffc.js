@@ -34,6 +34,5 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip(); // init tooltips
     $('#refreshRate').selectpicker();
 
-
 });
 

@@ -177,6 +177,16 @@ html, body {
     padding: 2px 0;
 }
 
+.place-name {
+    border: 0;
+    font-weight: normal;
+     padding-bottom: 0;
+}
+
+.editable-cancel {
+    display: none;
+}
+
 /*.places-grid .row:nth-child(odd) > div {
     background-color: #E7E7E7;
 }
