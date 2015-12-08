@@ -55,6 +55,7 @@ function showFavoritePlacesModal() {
     });
 
     content = '<div class="places-grid">' + content + '</div>';
+    content += '<span class="help-block">Click/Tap Name to edit</span>';
 
     //show modal
     bootbox.alert({

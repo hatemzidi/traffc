@@ -201,6 +201,14 @@ html, body {
     font-weight: normal;
 }
 
+.places-grid + .help-block {
+    margin-bottom: 0;
+}
+
+.places-grid:empty + .help-block {
+    display: none;
+}
+
 /* OVERRIDE BOOTSTRAP SWITCH
 -------------------------------------------------- */
 .bootstrap-switch,
