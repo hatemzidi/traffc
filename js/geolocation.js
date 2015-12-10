@@ -146,9 +146,7 @@ function geolocateMe() {
             // this is, so far, the best position to callback gpsStatus
             // if mobile then refresh position & the traffic condition
             if (isMobile() && gpsStatus) {
-                if (settings.centerMap === "user") {
-                    setInterval(followMe, 1000); // follow the user every 1 sec
-                }
+                setInterval(followMe, 1000); // follow the user every 1 sec  // todo add settings to center map when following
                 setInterval(reloadTiles, 20 * 1000); // force refresh on mobile every 20s // todo may be add it to settings
             }
         }
