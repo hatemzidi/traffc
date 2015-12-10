@@ -17,6 +17,11 @@ $(function () {
     //storage.set('_traffc_default_location', 0);
     //storage.set('_traffc_favorite_places', []);
 
+    //init settings if first usage
+    if (!storage.isSet('_traffc_settings')) {
+        storage.set('_traffc_settings', {"defaultZoom":12,"nightMode":"off","centerMap":"user"});
+    }
+
     $('body').addClass(browser);
 
     resizeBootstrapMap(); // boostrap the map
