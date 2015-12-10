@@ -133,7 +133,7 @@ function geolocateMe() {
         },
         error: function (error) {
             gpsStatus = false;
-            showMsgBox("error", "Oops", "Sorry, but I'm not able to geolocate you.");
+            showMsgBox("error", "Oops", "Sorry, I'm not able to geolocate you.<br/><span class='help-block'>Hint : You may have to check your privacy settings.</span>");
         },
         not_supported: function () {
             gpsStatus = false;
