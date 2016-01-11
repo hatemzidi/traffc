@@ -284,6 +284,8 @@ function getDefaultLocation() {
     if (params.geo != undefined) {
         var geo = params.geo.split(',');
         l = {lat: geo[0], lng: geo[1]};
+
+        return l; // force location.
     }
 
     var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
