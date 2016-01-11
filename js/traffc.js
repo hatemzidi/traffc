@@ -10,6 +10,8 @@ var geolocation;
 var gpsStatus;
 var storage = $.localStorage;
 var browser = navigator.sayswho.toLowerCase();
+var params = {};
+
 
 
 $(function () {
@@ -19,18 +21,23 @@ $(function () {
 
     //init settings if first usage
     if (!storage.isSet('_traffc_settings')) {
-        storage.set('_traffc_settings', {"defaultZoom":12,"nightMode":"off","centerMap":"user"});
+        storage.set('_traffc_settings', {"defaultZoom": 12, "nightMode": "off", "centerMap": "user"});
     }
 
     $('body').addClass(browser);
 
     resizeBootstrapMap(); // boostrap the map
 
+    checkQueryString(); // check the querystring and sets the params object
+
     // init the map
     renderMap();
 
     // geolcate now !
-    geolocateMe();
+    if (params.locate === 'yes') {
+        geolocateMe();
+    }
+
 
     // get favorite places and set them on the map
     getFavoritePlaces();

@@ -47,6 +47,30 @@ function resizeBootstrapMap() {
     $map.height($(window).height() - 52);
 }
 
+//todo refactor this
+function checkQueryString() {
+    if (/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/.test($.url().fparam('geo'))) {
+        params.geo = $.url().fparam('geo');
+        console.debug('geo :' + params.geo);
+    }
+
+    if (/^(?:yes|no)$/.test($.url().fparam('locate'))) {
+        params.locate = $.url().fparam('locate');
+        console.debug('geolocate :' + params.locate);
+    }
+
+    if (/^(?:yes|no)$/.test($.url().fparam('refresh'))) {
+        params.refresh = $.url().fparam('refresh');
+        console.debug('refresh :' + params.refresh);
+    }
+
+
+    if (/^0[1-9]|1[0-2]$/.test($.url().fparam('zoom'))) {
+        params.zoom = $.url().fparam('zoom');
+        console.debug('zoom :' + params.zoom);
+    }
+}
+
 
 function togFnClass(v) {
     return v ? 'addClass' : 'removeClass';

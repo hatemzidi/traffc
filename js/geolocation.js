@@ -281,6 +281,11 @@ function getFavoritePlaces() {
 function getDefaultLocation() {
     var l = {lat: 44.832500, lng: -0.593262}; // Bordeaux, France -- as Default :)
 
+    if (params.geo != undefined) {
+        var geo = params.geo.split(',');
+        l = {lat: geo[0], lng: geo[1]};
+    }
+
     var fav = storage.isSet('_traffc_favorite_places') ? storage.get('_traffc_favorite_places') : [];
     var id = storage.isSet('_traffc_default_location') ? storage.get('_traffc_default_location') : 0;
 
@@ -307,7 +312,8 @@ function followMe() {
 
 
 function reloadTiles() {
-    //debug console.debug('reloaded');
+    //debug
+    console.debug('reloaded');
     var tiles = $("#map_canvas").find("img");
     for (var i = 0; i < tiles.length; i++) {
         var src = $(tiles[i]).attr("src");
