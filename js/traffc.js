@@ -34,7 +34,7 @@ $(function () {
     renderMap();
 
     // geolcate now !
-    if (params.locate === 'yes') {
+    if (params.locate !== 'no') {
         geolocateMe();
     }
 
