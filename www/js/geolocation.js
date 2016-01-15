@@ -26,54 +26,44 @@ function renderMap() {
         }
     });
 
-    // show zoom control if not mobile
-    if (!isMobile()) {
-        map.setOptions({
-            zoomControl: true,
-            zoomControlOptions: {
-                position: google.maps.ControlPosition.LEFT_TOP
-            }
-        });
-    } else {
-        // show controls only on mobile
-        // relocate-position control
-        map.addControl({
-            id: 'goCenterUI',
-            position: 'left_bottom',
-            content: '<i class="fa fa-crosshairs fa-2x"></i>',
-            events: {
-                click: function () {
-                    map.setCenter(geolocation);
-                }
-            }
-        });
 
-        // get favorite places modal
-        map.addControl({
-            id: 'getFavoriteUI',
-            position: 'right_bottom',
-            content: '<i class="fa fa-heart fa-2x"></i>',
-            events: {
-                click: function () {
-                    showFavoritePlacesModal();
-                }
+    // show controls
+    // relocate-position control
+    map.addControl({
+        id: 'goCenterUI',
+        position: 'left_bottom',
+        content: '<i class="fa fa-crosshairs fa-2x"></i>',
+        events: {
+            click: function () {
+                map.setCenter(geolocation);
             }
-        });
+        }
+    });
 
-        // add favorite location control
-        map.addControl({
-            id: 'setFavoriteUI',
-            position: 'right_bottom',
-            content: '<i class="fa fa-flag fa-2x"></i>',
-            events: {
-                click: function () {
-                    setFavotireMarker();
-                }
+    // get favorite places modal
+    map.addControl({
+        id: 'getFavoriteUI',
+        position: 'right_bottom',
+        content: '<i class="fa fa-heart fa-2x"></i>',
+        events: {
+            click: function () {
+                showFavoritePlacesModal();
             }
-        });
+        }
+    });
 
+    // add favorite location control
+    map.addControl({
+        id: 'setFavoriteUI',
+        position: 'right_bottom',
+        content: '<i class="fa fa-flag fa-2x"></i>',
+        events: {
+            click: function () {
+                setFavotireMarker();
+            }
+        }
+    });
 
-    }
 
     // traffic layer \o/
     map.addLayer('traffic');
@@ -145,7 +135,7 @@ function geolocateMe() {
 
             // this is, so far, the best position to callback gpsStatus
             // if mobile then refresh position & the traffic condition
-            if (isMobile() && gpsStatus) {
+            if (gpsStatus) {
                 setInterval(followMe, 1000); // follow the user every 1 sec  // todo add settings to center map when following
                 setInterval(reloadTiles, 20 * 1000); // force refresh on mobile every 20s // todo may be add it to settings
             }
