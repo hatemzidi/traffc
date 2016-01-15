@@ -1,0 +1,24 @@
+{
+  "name": "traffc",
+  "version": "0.0.1",
+  "description": "traffc is your new road companion. The minimalistic tool to check, in real time, your area's traffic condition. It's just light, simple and instantaneously available.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hatem ZIDI",
+  "license": "GPL",
+  "platforms": [
+    "ios",
+    "android"
+  ],
+  "plugins": [
+    "org.apache.cordova.console",
+    "org.apache.cordova.device",
+    "org.apache.cordova.geolocation",
+    "org.apache.cordova.statusbar",
+    "org.apache.cordova.whitelist"
+  ],
+  "devDependencies": {},
+  "dependencies": {}
+}

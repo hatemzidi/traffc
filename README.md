@@ -1,6 +1,6 @@
 # traffc: your road companion - ![status](https://img.shields.io/codeship/e90f5b40-c196-0132-3cad-3eb2295b72b3/master.svg)
 
-This is just a minimalistic web page using Google Maps to ~~quickly~~ visualize your location's traffic condition.
+This is just a minimalistic mobile application using Google Maps to ~~quickly~~ visualize your location's traffic condition.
 
 There are a lot of existing similar services, web pages or mobile apps, and they are may be more sophisticated, but I was totally bothered by their design and the ads.
 I needed something simple, minimalistic and yet light to render on any web browser (desktop, mobile ...)
@@ -10,7 +10,7 @@ traffc is a full html page, with almost no backend, except for the city-searchin
 You can check [whatis.traffc.info](http://whatis.traffc.info/) for more info.
 
 ## Live demo
-The site is available at [traffc.info](http://traffc.info/)
+A similar web app version is available at [traffc.info](http://traffc.info/)
 
 ## Contributing
 
