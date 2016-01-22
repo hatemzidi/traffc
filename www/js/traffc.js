@@ -1,44 +1,57 @@
-/**
- * hatem zidi (hatem.zidi@gmail.com) on 29/01/2015.
- *
- * Main App file
- */
+'use strict';
 
-var map;
-var markers = [];
-var geolocation;
-var gpsStatus;
-var storage = $.localStorage;
-var browser = navigator.sayswho.toLowerCase();
+angular.module('traffc', [
+    'ngCookies',
+    'ngSanitize',
+    'uiGmapgoogle-maps',
+    'ngGeolocation',
+    'ngBootbox',
+    'xeditable',
+    'angular-bootstrap-select',
+    'LocalStorageModule'
+]).config(['uiGmapGoogleMapApiProvider', 'localStorageServiceProvider', function (GoogleMapApi, $storage) {
 
 
-document.addEventListener('deviceready', function () {
+    $storage.setPrefix('traffc');
 
-    //storage.set('_traffc_default_location', 0);
-    //storage.set('_traffc_favorite_places', []);
+    GoogleMapApi.configure({
+        //key: 'your api key',
+        //v: '3.21',
+        //sensor : true,
+        //libraries: 'places'
+    });
 
-    navigator.splashscreen.hide();
+}]).run(['localStorageService', '$markers', '$rootScope', 'editableOptions', function ($storage, $markers, editableOptions) {
+
+    editableOptions.theme = 'bs3';
 
     //init settings if first usage
-    if (!storage.isSet('_traffc_settings')) {
-        storage.set('_traffc_settings', {"defaultZoom": 12, "nightMode": "off", "centerMap": "user"});
+    if (!$storage.get('_traffc_settings')) {
+        $storage.set('_traffc_settings', {
+            defaultZoom: 12,
+            nightMode: 'off',
+            centerMap: 'user'
+        });
     }
 
-    $('body').addClass(browser);
+    //init list of places if first usage
+    if (!$storage.get('_traffc_favorite_places')) {
+        $storage.set('_traffc_favorite_places', []);
+    }
 
-    resizeBootstrapMap(); // boostrap the map
 
-    // init the map
-    renderMap();
+    var places = $storage.get('_traffc_favorite_places');
+    _.forEach(places, function (p) {
 
-    geolocateMe();
+        $markers.set({
+            id: p.id,
+            isFavorite: p.isFavorite,
+            coords: p.coords,
+            label: p.label,
+            icon: p.isFavorite ? 'img/marker_fav_place.3.png' : 'img/marker_place.png'
+        });
 
-    // get favorite places and set them on the map
-    getFavoritePlaces();
 
-    $(window).resize(resizeBootstrapMap); // force responsivness
-    $('[data-toggle="tooltip"]').tooltip(); // init tooltips
-    $('#refreshRate').selectpicker();
+    });
 
-}, false);
-
+}]);

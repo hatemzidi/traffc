@@ -4,6 +4,8 @@
 -------------------------------------------------- */
 html, body {
     height: 100%;
+    width: 100%;
+    margin: 0px;
 }
 
 *:focus,
@@ -82,6 +84,15 @@ html, body {
 #map {
     display: block;
 }
+
+.angular-google-map-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: block;
+}
+
+
 
 /* OVERRIDE BOOTSTRAP
 -------------------------------------------------- */
@@ -167,9 +178,13 @@ html, body {
     outline: 0;
 }
 
-.places-grid:empty:before {
+.places-grid .empty {
+    height:38px;
+    padding: 5px 0;
+}
+.places-grid:empty:before,
+.places-grid .empty:before{
     content: 'No Places.';
-    height: 50px;
 }
 
 .places-grid .row {
@@ -179,7 +194,7 @@ html, body {
 .place-name {
     border: 0;
     font-weight: normal;
-     padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 .editable-cancel {
@@ -340,7 +355,7 @@ html, body {
     font-size: 14px;
 }
 
-.container-map-location-search .glyphicon {
+#container-map-location-search .glyphicon {
     position: absolute;
     top: 0;
     left: 2px;
@@ -352,7 +367,7 @@ html, body {
     text-align: center;
 }
 
-.container-map-location-search {
+#container-map-location-search {
     position: absolute;
     top: 66px;
     right: 7px;
@@ -368,14 +383,14 @@ html, body {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
 }
 
-.container-map-location-search #map-location-search:focus {
+#container-map-location-search #map-location-search:focus {
     width: 300px;
     border: none;
     opacity: 1;
     /*cursor: text;*/
 }
 
-.container-map-location-search #map-location-search {
+#container-map-location-search #map-location-search {
     position: relative;
     width: 40px;
     height: 40px;
@@ -628,10 +643,10 @@ img.settings {
 
 @media (max-width: 767px) {
     .settings-grid label.control-label {
-      padding-top: 7px;
+        padding-top: 7px;
     }
 
-    .navbar-brand.brand{
+    .navbar-brand.brand {
         padding-left: 0px;
     }
 }
@@ -713,3 +728,4 @@ img.settings {
     border-radius: 10px;
     cursor: pointer;
 }
+

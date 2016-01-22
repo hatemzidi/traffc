@@ -1,0 +1,60 @@
+<form class="form-horizontal" ng-controller="modalCtrl">
+    <!-- Zoom -->
+    <div class="form-group">
+        <label class="col-md-5 col-xs-5 control-label" for="zoomRange">Default Zoom</label>
+
+        <div class="col-md-7 col-xs-7" style="padding-top: 7px">
+            <div class="col-md-5 col-xs-8 no-padding">
+                <input id="zoomRange" type="range" name="zoom" min="1" max="19" step="1"
+                       value="{{settings.defaultZoom}}" ng-model="settings.defaultZoom">
+            </div>
+            <label class="col-md-4 col-xs-4 zoom-label">{{settings.defaultZoom}}</label>
+        </div>
+    </div>
+
+    <!-- Center to ? -->
+    <div class="form-group">
+        <label class="col-md-5 col-xs-5 control-label">Center Map</label>
+
+        <div class="col-md-7 col-xs-7 no-padding">
+            <div class="float-left">
+                <img class="settings" src="img/marker_user.png">
+            </div>
+            <div class="float-left">
+                <div class="centermapswitch">
+                    <input type="checkbox" name="centermap" class="centermapswitch-checkbox" id="centermap" ng-model="settings.centerMap">
+                    <label class="centermapswitch-label" for="centermap">
+                        <span class="centermapswitch-inner"></span>
+                        <span class="centermapswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="float-left">
+                <img class="settings" src="img/marker_fav_place.3.png">
+            </div>
+        </div>
+    </div>
+
+    <!-- is night mode activated -->
+    <div class="form-group">
+        <label class="col-md-5 col-xs-5 control-label" for="nightmode">Night Mode<span class="help-block">Active after 18:00</span></label>
+
+        <div class="col-md-7 col-xs-7 no-padding">
+            <div class="float-left">
+                <img class="settings" src="img/blank.gif">
+            </div>
+            <div class="float-left">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="nightmode" class="onoffswitch-checkbox" id="nightmode" ng-model="settings.nightMode">
+                    <label class="onoffswitch-label" for="nightmode">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="float-left">
+                <img class="settings" src="img/blank.gif">
+            </div>
+        </div>
+    </div>
+</form>

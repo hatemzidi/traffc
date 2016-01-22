@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>traffc</title>
-
     <!-- Allow web app to be run in full-screen mode. -->
     <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -13,38 +12,25 @@
     <!-- Disable automatic phone number detection. -->
     <meta name="format-detection" content="telephone=no">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="css/bootstrap-editable.css"/>
-    <link rel="stylesheet" href="css/traffc.css?v=1">
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/angular-xeditable/dist/css/xeditable.css" >
 
-    <!-- Latest useful, compiled and/or minified JavaScript -->
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/gmaps.js"></script>
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/bootstrap-editable.min.js"></script>
-    <script src="js/jquery.storageapi.min.js"></script>
-    <script src="js/bootbox.min.js"></script>
 
-    <!-- todo minify/uglufy/compress all this into one file-->
-    <script src="js/utils.js?v=1"></script>
-    <script src="js/modals.js?v=1"></script>
-    <script src="js/events.js?v=1"></script>
-    <script src="js/map.style.js?v=1"></script>
-    <script src="js/geolocation.js?v=1"></script>
-    <script src="js/traffc.js?v=1"></script>
+    <link rel="stylesheet" href="lib/bootstrap-select/bootstrap-select.css">
+    <!-- endbower -->
+    <!-- endbuild -->
 
-    <script src="cordova.js"></script>
 
+    <link rel="stylesheet" href="css/traffc.css">
+    <!-- endbuild -->
 </head>
-
 <body>
+
 <div id="wrap">
-    <nav class="header navbar navbar-default">
+    <nav class="header navbar navbar-default" ng-controller="navCtrl">
 
         <div class="container-fluid">
             <div class="navbar-header">
@@ -56,150 +42,216 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
-                <a class="navbar-brand brand large" href="#">traffc</a>
+                <a class="navbar-brand brand large" href="#"><!--__SUB__-->traffc</a>
             </div>
 
-            <div id="bs-main-menu" class="collapse navbar-collapse">
+            <div id="bs-main-menu" class="collapse navbar-collapse" ng-controller="modalCtrl">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" class="settingsModal">Settings</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#" class="whyModal">Why this?</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#" class="aboutModal">About</a></li>
-                  </ul>
+                    <li class="hidden-xs">
+                        <div class="navbar-form navbar-left">
+                            <div class="form-group text-right">
+                                <div class="input-group">
+                                    <select id="refreshRate"
+                                            selectpicker d
+                                            ata-width="auto"
+                                            data-style="btn-default no-radius-right"
+                                            class="form-control show-tick show-menu-arrow">
+                                        <option value="10">10 sec</option>
+                                        <option value="30">30 sec</option>
+                                        <option value="60">1 mn</option>
+                                    </select>
+
+                                <span class="input-group-btn">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="refreshable btn btn-default"
+                                               data-toggle="tooltip"
+                                               data-placement="bottom" title="Refresh">
+                                            <input id="isRefreshable" type="checkbox">
+                                            <span id="refresh-btn"
+                                                  class="glyphicon glyphicon-repeat"></span>
+                                        </label>
+                                    </div>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="hidden-xs">
+                        <div class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <button id="backToPosition" class="btn btn-default" data-toggle="tooltip"
+                                        data-placement="bottom" title="Back to my location"
+                                        ng-click="backToMyPosition()">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                </button>
+                                <button id="AllFavorites" class="btn btn-default" data-toggle="tooltip"
+                                        data-placement="bottom" title="Favorite locations"
+                                        ng-bootbox-custom-dialog
+                                        ng-bootbox-options="placesModalOptions">
+                                    <span class="fa fa-heart"></span>
+                                </button>
+                                <button id="AddFavorite" class="btn btn-default" data-toggle="tooltip"
+                                        data-placement="bottom" title="Add Favorite" ng-click="addPlace()">
+                                    <span class="fa fa-plus-square"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- todo merge this ... -->
+                    <li class="dropdown hidden-xs" ng-controller="modalCtrl">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-bars"></i>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" class="settingsModal"
+                                   ng-bootbox-custom-dialog
+                                   ng-bootbox-options="settingsModalOptions">Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" class="whyModal"
+                                   ng-bootbox-custom-dialog
+                                   ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" class="aboutModal"
+                                   ng-bootbox-custom-dialog
+                                   ng-bootbox-options="aboutModalOptions">About</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="visible-xs"><a href="#" class="settingsModal"
+                                              ng-bootbox-custom-dialog
+                                              ng-bootbox-options="settingsModalOptions">Settings</a></li>
+                    <li class="divider visible-xs"></li>
+                    <li class="visible-xs"><a href="#" class="whyModal"
+                                              ng-bootbox-custom-dialog
+                                              ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
+                    <li class="divider visible-xs"></li>
+                    <li class="visible-xs"><a href="#" class="aboutModal"
+                                              ng-bootbox-custom-dialog
+                                              ng-bootbox-options="aboutModalOptions">About</a></li>
+                    <!-- todo ... together! -->
+                </ul>
             </div>
 
         </div>
     </nav>
 
 
-    <div class="body">
+    <div class="body-view" ng-controller="mapCtrl">
         <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
-            <div id="map"></div>
+            <div id="map">
+                <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
+                    <ui-gmap-layer type="TrafficLayer" show="true"></ui-gmap-layer>
+
+                    <ui-gmap-marker coords="userMarker.coords" options="userMarker.options" idkey="userMarker.id">
+                    </ui-gmap-marker>
+
+
+                    <ui-gmap-marker idkey="newPlaceMarker.id"
+                                    coords="newPlaceMarker.coords"
+                                    options="newPlaceMarker.options"
+                                    events="newPlaceMarker.events">
+                    </ui-gmap-marker>
+                    <ui-gmap-window show="newPlaceMarker.infoWindow.show"
+                                    coords="newPlaceMarker.coords"
+                                    options="newPlaceMarker.infoWindow.options"
+                                    templateurl="newPlaceMarker.infoWindow.templateUrl"
+                                    templateParameter="newPlaceMarker.infoWindow.params"
+                                    closeClick="newPlaceMarker.infoWindow.closeClick()"
+                                    ng-cloak>
+                    </ui-gmap-window>
+
+
+                    <ui-gmap-marker ng-repeat="m in markers"
+                                    idkey="m.id"
+                                    coords="m.coords"
+                                    options="m.options"
+                                    events="m.events"
+                                    ng-cloak>
+                        <ui-gmap-window show="m.infoWindow.show"
+                                        coords="m.coords"
+                                        options="m.infoWindow.options"
+                                        closeClick="m.infoWindow.closeClick()">
+                            {{m.infoWindow.label}}
+                        </ui-gmap-window>
+                    </ui-gmap-marker>
+
+
+                    <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+                                        events="searchbox.events" parentdiv="searchbox.parentdiv">
+                    </ui-gmap-search-box>
+
+
+                    <ui-gmap-map-control template="goCenter.tpl.html" position="left-bottom" index="1"
+                                         controller="modalCtrl"
+                                         ></ui-gmap-map-control>
+                    <ui-gmap-map-control template="getPlaces.tpl.html" position="right-bottom" index="1"
+                                         controller="modalCtrl"
+                                        ></ui-gmap-map-control>
+                    <ui-gmap-map-control template="addPlace.tpl.html" position="right-bottom"
+                                         index="1" controller="navCtrl"
+                                        ></ui-gmap-map-control>
+
+                </ui-gmap-google-map>
+            </div>
         </div>
 
-        <div class="container-map-location-search">
+        <div id="container-map-location-search">
             <i class="glyphicon glyphicon-search"></i>
-            <input type="text" class="form-control clearable" id="map-location-search"
-                   placeholder="Search for a location..." autocomplete="off">
+            <div id="container-location-search"></div>
         </div>
     </div>
-
-
 </div>
 
 
-<script type="text/html" id="fav_marker_template">
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/es5-shim/es5-shim.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/json3/lib/json3.min.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/angular-cookies/angular-cookies.js"></script>
+<script src="lib/angular-sanitize/angular-sanitize.js"></script>
 
-    <div class="form-group">
-        <div class="input-group">
-            <input type="text" class="form-control" id="name" placeholder="Name" value="">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success edit_marker">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </button>
-                    <!--<button type="reset" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>-->
-                </span>
-        </div>
-    </div>
+<script src="lib/bootbox/bootbox.js"></script>
+<script src="lib/ngBootbox/dist/ngBootbox.js"></script>
 
-</script>
+<script src='lib/lodash/lodash.js'></script>
+<script src='lib/angular-simple-logger/dist/angular-simple-logger.js'></script>
+<script src='lib/angular-google-maps/dist/angular-google-maps.js'></script>
 
-<script type="text/html" id="fav_marker">
+<script src="lib/bootstrap-select/bootstrap-select.js"></script>
+<script src='lib/angular-bootstrap-select/build/angular-bootstrap-select.js'></script>
 
-    <div class="form-group info">
-        <span class="place col-md-9" style="width:250px">{{name}}</span>
-    </div>
+<script src='lib/ngGeolocation/ngGeolocation.js'></script>
 
-</script>
+<script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
 
-<script type="text/html" id="fav_places">
-    <div class="row">
-        <div class="col-sm-8 col-xs-6"><p data-marker-index="{{index}}" class="form-control-static place-name truncate">
-            {{name}}</p></div>
-        <div class="col-sm-4 col-xs-6  no-padding-left text-right">
-            <div class="btn-group btn-group-sm" role="group">
-                <button data-marker-index="{{index}}" type="button" class="btn btn-success pin-btn"><span
-                        class="glyphicon glyphicon-record"></span></button>
-                <button data-marker-index="{{index}}" type="button" class="btn btn-default fav-btn"><span
-                        class="glyphicon glyphicon-star-empty"></span></button>
-                <button data-marker-index="{{index}}" type="button" class="btn btn-danger trash-btn"><span
-                        class="glyphicon glyphicon-trash"></span></button>
-            </div>
-        </div>
-    </div>
-</script>
+<script src="lib/angular-xeditable/dist/js/xeditable.js"></script>
 
-<script type="text/html" id="settings">
-    <form class="form-horizontal">
+<!--todo use loader & promise -->
+<script src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
 
-        <!-- Zoom -->
-        <div class="form-group">
-            <label class="col-md-5 col-xs-5 control-label" for="zoomRange">Default Zoom</label>
+<!-- endbower -->
+<!-- endbuild -->
 
-            <div class="col-md-7 col-xs-7" style="padding-top: 7px">
-                <div class="col-md-5 col-xs-8 no-padding">
-                    <input id="zoomRange" type="range" name="zoom" min="1" max="19" step="1"
-                           value="12">
-                </div>
-                <label class="col-md-4 col-xs-4 zoom-label">12</label>
-            </div>
-        </div>
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="js/traffc.js"></script>
 
-        <!-- Center to ? -->
-        <div class="form-group">
-            <label class="col-md-5 col-xs-5 control-label">Center Map</label>
+<!--<script src="js/controllers/map.style.js"></script>-->
+<script src="js/controllers/map.js"></script>
+<script src="js/controllers/navigation.js"></script>
+<script src="js/controllers/places.js"></script>
+<script src="js/controllers/modals.js"></script>
+<script src="js/controllers/legacy.js"></script>
+<script src="js/services/map.js"></script>
+<script src="js/services/markers.js"></script>
+<script src="js/services/configLoader.js"></script>
+<script src="js/services/settings.js"></script>
+<script src="js/CordovaInit.js"></script>
+<!-- endbuild -->
 
-            <div class="col-md-7 col-xs-7 no-padding">
-                <div class="float-left">
-                    <img class="settings" src="img/marker_user.png">
-                </div>
-                <div class="float-left">
-                    <div class="centermapswitch">
-                        <input type="checkbox" name="centermap" class="centermapswitch-checkbox" id="centermap" checked>
-                        <label class="centermapswitch-label" for="centermap">
-                            <span class="centermapswitch-inner"></span>
-                            <span class="centermapswitch-switch"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="float-left">
-                    <img class="settings" src="img/marker_default.png">
-                </div>
-            </div>
-        </div>
-
-        <!-- is night mode activated -->
-        <div class="form-group">
-            <label class="col-md-5 col-xs-5 control-label" for="nightmode">Night Mode<span class="help-block">Active after 18:00</span></label>
-
-            <div class="col-md-7 col-xs-7 no-padding">
-                <div class="float-left">
-                    <img class="settings" src="img/blank.gif">
-                </div>
-                <div class="float-left">
-                    <div class="onoffswitch">
-                        <input type="checkbox" name="nightmode" class="onoffswitch-checkbox" id="nightmode" checked>
-                        <label class="onoffswitch-label" for="nightmode">
-                            <span class="onoffswitch-inner"></span>
-                            <span class="onoffswitch-switch"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="float-left">
-                    <img class="settings" src="img/blank.gif">
-                </div>
-            </div>
-        </div>
-    </form>
-</script>
-
-
-<script>
-    //__GOOGLE_ANALYTICS__
-</script>
-
+<script src="cordova.js"></script>
 </body>
 </html>
