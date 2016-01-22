@@ -17,3 +17,8 @@
 _phplite
 /resources
 
+/www
+/hooks
+/platforms
+/_garbage_
+/plugins

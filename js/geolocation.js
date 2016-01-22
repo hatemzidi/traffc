@@ -311,7 +311,7 @@ function reloadTiles() {
     var tiles = $("#map_canvas").find("img");
     for (var i = 0; i < tiles.length; i++) {
         var src = $(tiles[i]).attr("src");
-        if (/googleapis.com\/vt\?pb=/.test(src)) {
+        if (/\/vt\?pb=/.test(src)) {
             var new_src = src.split("&ts")[0] + '&ts=' + (new Date()).getTime();
             $(tiles[i]).attr("src", new_src);
         }
