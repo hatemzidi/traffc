@@ -99,6 +99,7 @@ angular.module('traffc')
             };
 
 
+            //todo may be use ng-cordova ?
             $geolocation.getCurrentPosition({
                 timeout: 5000,
                 maximumAge: 100
