@@ -11,7 +11,6 @@ angular.module('traffc', [
     'LocalStorageModule'
 ]).config(['uiGmapGoogleMapApiProvider', 'localStorageServiceProvider', function (GoogleMapApi, $storage) {
 
-
     $storage.setPrefix('traffc');
 
     GoogleMapApi.configure({
@@ -21,7 +20,7 @@ angular.module('traffc', [
         //libraries: 'places'
     });
 
-}]).run(['localStorageService', '$markers', '$rootScope', 'editableOptions', function ($storage, $markers, editableOptions) {
+}]).run(['localStorageService', '$markers','editableOptions', function ($storage, $markers, editableOptions) {
 
     editableOptions.theme = 'bs3';
 

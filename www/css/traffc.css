@@ -730,6 +730,21 @@ img.settings {
 }
 
 
+/* xeditable  override   --------- */
+
+
+form.editable-wrap {
+    background-color: white;
+    padding-right: 55px;
+}
+.places-grid .editable-up {
+    z-index: 2;
+}
+
+.places-grid .editable-down {
+    z-index: 1;
+}
+
 
 /* IOS fixes   --------- */
 body.ios {
