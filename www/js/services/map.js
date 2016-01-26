@@ -3,6 +3,7 @@
 angular.module('traffc')
     .service('$map', ['configLoader', '$settings', function ($config, $settings) {
 
+
         return {
             center: { // Bordeaux, France -- as Default :)
                 latitude: 44.832500,
@@ -22,8 +23,12 @@ angular.module('traffc')
                 streetViewControl: false,
                 panControl: false,
                 maxZoom: 20,
-                minZoom: 3
+                minZoom: 3,
+                styles : []
             },
-            mapStyles: $config
+            mapStyles: $config,
+            setStyle : function(style) {
+                angular.extend(this.options.styles, $config[style]);
+            }
         };
     }]);

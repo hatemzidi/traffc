@@ -15,39 +15,6 @@ angular.module('traffc')
             $scope.markers = $markers.list;
 
 
-            // update dynamically map style according to time
-            // todo refactor/extract this
-            $scope.$watch(function () {
-                    return Date();
-                },
-                function (nv) {
-                    console.log(nv);
-                    var now = new Date();
-
-                    var s = $settings.data.nightMode === true && (6 >= now.getHours() || now.getHours() >= 18) ? 'dark' : 'light';
-                    console.log(s);
-                    $map.options.styles = $map.mapStyles[s];
-
-                }, true);
-
-            // todo refactor/extract this
-            $scope.$watch('markers', function (nv, ov) {
-                //todo try to ignore infowindow.show
-                if (!_.isEqual(nv, ov)) {
-                    var places = _.map(nv, function (i) {
-                        return {
-                            id: i.id,
-                            isFavorite: i.isFavorite,
-                            coords: i.coords,
-                            label: i.infoWindow.label
-                        };
-                    });
-
-                    $storage.set('_traffc_favorite_places', places);
-                }
-            }, true);
-
-
             /* -- set the searchbox ---*/
             $scope.searchbox = {
                 template: 'searchbox.tpl.html',
@@ -78,7 +45,7 @@ angular.module('traffc')
                             $('input.clearable').removeClass('x onX').val('').change();
 
                         } else {
-                            console.log('do something else with the search string: ' + places.name);
+                            console.log('we have to do something else with the search string: ' + places.name);
                         }
                     }
                 }
@@ -99,6 +66,7 @@ angular.module('traffc')
             };
 
 
+            // get the user's position
             $geolocation.getCurrentPosition({
                 timeout: 5000,
                 maximumAge: 100
@@ -116,7 +84,7 @@ angular.module('traffc')
 
             }).catch(function () {
                 console.error('oops, can not locate the user.');
-                $rootScope.$broadcast('modals.GPSError',{});
+                $rootScope.$broadcast('modals.GPSError', {});
             });
 
 
@@ -127,13 +95,16 @@ angular.module('traffc')
             });
 
             $scope.$on('$geolocation.position.changed', function (e, v) {
-                console.debug('Geoposition changed.');
-
                 // todo compare with current coords?
-                $scope.userMarker.coords = {
-                    latitude: v.coords.latitude,
-                    longitude: v.coords.longitude
-                };
+
+                if (!_.isEqual($scope.userMarker.coords, v.coords)) {
+                    console.debug('Geoposition changed.');
+                    $scope.userMarker.coords = {
+                        latitude: v.coords.latitude,
+                        longitude: v.coords.longitude
+
+                    };
+                }
 
             });
 
@@ -221,6 +192,36 @@ angular.module('traffc')
             };
 
 
+            /* ---- some watchers ---- */
+
+            // update dynamically map style according to time
+            // todo refactor/extract this
+            $scope.$watch(function () {
+                return Date();
+            }, function () {
+                var now = new Date();
+                var s = $settings.data.nightMode === true && (6 >= now.getHours() || now.getHours() >= 18) ? 'dark' : 'light';
+                $map.setStyle(s);
+            });
+
+
+            // todo refactor/extract this
+            $scope.$watch('markers', function (nv, ov) {
+                //todo try to ignore infowindow.show
+                if (!_.isEqual(nv, ov)) {
+                    var places = _.map(nv, function (i) {
+                        return {
+                            id: i.id,
+                            isFavorite: i.isFavorite,
+                            coords: i.coords,
+                            label: i.infoWindow.label
+                        };
+                    });
+
+                    $storage.set('_traffc_favorite_places', places);
+                }
+            }, true);
+
             /* ---- some events --- */
             $scope.$on('map.center', function (e, coords) {
                 console.debug('map.center triggered');
@@ -241,7 +242,10 @@ angular.module('traffc')
                         })[0];
 
                         if (!_.isEmpty(c)) {
-                            $map.center = c.coords;
+                            $map.center = {
+                                latitude: c.coords.latitude,
+                                longitude: c.coords.longitude
+                            };
                         }
                     }
 

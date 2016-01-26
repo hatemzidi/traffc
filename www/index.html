@@ -140,10 +140,14 @@
     <div class="body-view" ng-controller="mapCtrl">
         <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
             <div id="map">
-                <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
+                <ui-gmap-google-map center='map.center'
+                                    zoom='map.zoom'
+                                    options="map.options">
                     <ui-gmap-layer type="TrafficLayer" show="true"></ui-gmap-layer>
 
-                    <ui-gmap-marker coords="userMarker.coords" options="userMarker.options" idkey="userMarker.id">
+                    <ui-gmap-marker coords="userMarker.coords"
+                                    options="userMarker.options"
+                                    idkey="userMarker.id">
                     </ui-gmap-marker>
 
 
@@ -177,19 +181,27 @@
                     </ui-gmap-marker>
 
 
-                    <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
-                                        events="searchbox.events" parentdiv="searchbox.parentdiv">
+                    <ui-gmap-search-box options="searchbox.options"
+                                        template="searchbox.template"
+                                        events="searchbox.events"
+                                        parentdiv="searchbox.parentdiv">
                     </ui-gmap-search-box>
 
 
-                    <ui-gmap-map-control template="goCenter.tpl.html" position="left-bottom" index="1"
+                    <ui-gmap-map-control template="goCenter.tpl.html"
+                                         position="left-bottom"
+                                         index="1"
                                          controller="modalCtrl"
                                          ></ui-gmap-map-control>
-                    <ui-gmap-map-control template="getPlaces.tpl.html" position="right-bottom" index="1"
+                    <ui-gmap-map-control template="getPlaces.tpl.html"
+                                         position="right-bottom"
+                                         index="1"
                                          controller="modalCtrl"
                                         ></ui-gmap-map-control>
-                    <ui-gmap-map-control template="addPlace.tpl.html" position="right-bottom"
-                                         index="1" controller="navCtrl"
+                    <ui-gmap-map-control template="addPlace.tpl.html"
+                                         position="right-bottom"
+                                         index="1"
+                                         controller="navCtrl"
                                         ></ui-gmap-map-control>
 
                 </ui-gmap-google-map>
