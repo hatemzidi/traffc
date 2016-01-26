@@ -28,7 +28,7 @@ angular.module('traffc')
         };
 
         $scope.deletePlace = function (idx) {
-            $map.markers.splice(idx, 1);
+            $markers.list.splice(idx, 1);
             $rootScope.$broadcast('map.deletePlace', idx);
         };
 
