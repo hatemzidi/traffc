@@ -16,7 +16,6 @@ angular.module('traffc')
             },
             //todo extract to $utils provider
             isMobile: function () {
-                console.log($.browser.mobile);
                 return $.browser.mobile;
             },
             isEvening: function () {
