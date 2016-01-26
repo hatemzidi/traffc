@@ -199,7 +199,7 @@ angular.module('traffc')
             $scope.$watch(function () {
                 return Date();
             }, function () {
-                var style = $settings.data.nightMode === true && $settings.data.isEvening() ? 'dark' : 'light';
+                var style = $settings.data.nightMode === true && $settings.isEvening() ? 'dark' : 'light';
                 $map.setStyle(style);
             });
 
