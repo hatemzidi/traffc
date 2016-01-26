@@ -16,13 +16,8 @@ angular.module('traffc')
             },
             //todo extract to $utils provider
             isMobile: function () {
-                try {
-                    document.createEvent('TouchEvent');
-                    return true;
-                }
-                catch (e) {
-                    return false;
-                }
+                console.log($.browser.mobile);
+                return $.browser.mobile;
             },
             isEvening: function () {
                 var now = new Date();

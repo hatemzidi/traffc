@@ -74,13 +74,9 @@ angular.module('traffc')
                 $ngBootbox.customDialog($scope.errorModalOptions);
             });
 
-            $scope.showPlacesModal = function () {
+            $scope.$on('modals.showPlaces', function(){
                 $ngBootbox.customDialog($scope.placesModalOptions);
-            };
-
-            $scope.centerMap = function () {
-                $scope.$emit('map.center', {});
-            };
+            });
 
             $scope.$watch('settings', function (nv, ov) {
                 if (!_.isEqual(nv, ov)) {

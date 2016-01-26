@@ -5,13 +5,16 @@ angular.module('traffc')
         function ($scope, $rootScope) {
 
             $scope.backToMyPosition = function () {
-                // based on : http://stackoverflow.com/a/26383781
+                // to read : http://stackoverflow.com/a/26383781
                 $rootScope.$broadcast('map.center', {});
             };
 
             $scope.addPlace = function () {
-                // based on : http://stackoverflow.com/a/26383781
                 $rootScope.$broadcast('map.addPlace', {});
+            };
+
+            $scope.showPlacesModal = function () {
+                $rootScope.$broadcast('modals.showPlaces', {});
             };
 
         }]);

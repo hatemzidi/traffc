@@ -5,7 +5,7 @@ angular.module('traffc')
         $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control clearable" id="map-location-search" placeholder="Search for a location..." autocomplete="off">');
         $templateCache.put('getPlaces.tpl.html', '<div id="getFavoriteUI" ng-click="showPlacesModal()"><i class="fa fa-heart fa-2x"></i></div>');
         $templateCache.put('addPlace.tpl.html', '<div id="setFavoriteUI" ng-click="addPlace()"><i class="fa fa-plus-square fa-2x"></i></div>');
-        $templateCache.put('goCenter.tpl.html', '<div id="goCenterUI" ng-click="centerMap()"><i class="fa fa-crosshairs fa-2x"></i></div>');
+        $templateCache.put('goCenter.tpl.html', '<div id="goCenterUI" ng-click="backToMyPosition()"><i class="fa fa-crosshairs fa-2x"></i></div>');
     }])
     .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$map', '$markers', '$settings', 'localStorageService',
         function ($geolocation, $scope, $rootScope, $map, $markers, $settings, $storage) {
@@ -13,7 +13,7 @@ angular.module('traffc')
             // for the view
             $scope.map = $map;
             $scope.markers = $markers.list;
-
+            $scope.isDeviceMobile = $settings.isMobile();
 
             /* -- set the searchbox ---*/
             $scope.searchbox = {
@@ -199,9 +199,8 @@ angular.module('traffc')
             $scope.$watch(function () {
                 return Date();
             }, function () {
-                var now = new Date();
-                var s = $settings.data.nightMode === true && (6 >= now.getHours() || now.getHours() >= 18) ? 'dark' : 'light';
-                $map.setStyle(s);
+                var style = $settings.data.nightMode === true && $settings.data.isEvening() ? 'dark' : 'light';
+                $map.setStyle(style);
             });
 
 

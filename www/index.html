@@ -191,17 +191,20 @@
                     <ui-gmap-map-control template="goCenter.tpl.html"
                                          position="left-bottom"
                                          index="1"
-                                         controller="modalCtrl"
+                                         controller="navCtrl"
+                                         ng-if="isDeviceMobile"
                                          ></ui-gmap-map-control>
                     <ui-gmap-map-control template="getPlaces.tpl.html"
                                          position="right-bottom"
                                          index="1"
-                                         controller="modalCtrl"
+                                         controller="navCtrl"
+                                         ng-if="isDeviceMobile"
                                         ></ui-gmap-map-control>
                     <ui-gmap-map-control template="addPlace.tpl.html"
                                          position="right-bottom"
                                          index="1"
                                          controller="navCtrl"
+                                         ng-if="isDeviceMobile"
                                         ></ui-gmap-map-control>
 
                 </ui-gmap-google-map>
@@ -257,6 +260,7 @@
 <script src="js/controllers/places.js"></script>
 <script src="js/controllers/modals.js"></script>
 <script src="js/controllers/legacy.js"></script>
+<script src="js/controllers/detectmobilebrowser.js"></script>
 <script src="js/services/map.js"></script>
 <script src="js/services/markers.js"></script>
 <script src="js/services/configLoader.js"></script>

@@ -6,8 +6,9 @@ var CordovaInit = function () {
         receivedEvent('deviceready');
     };
 
-    var receivedEvent = function () {
+    var receivedEvent = function (mode) {
         console.debug('Start event received ..');
+        console.debug('Mode is ' + mode);
 
         console.debug('load config ...');
         $.get('js/config/map.style.json', function (configData) {
