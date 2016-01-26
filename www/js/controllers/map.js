@@ -7,8 +7,8 @@ angular.module('traffc')
         $templateCache.put('addPlace.tpl.html', '<div id="setFavoriteUI" ng-click="addPlace()"><i class="fa fa-plus-square fa-2x"></i></div>');
         $templateCache.put('goCenter.tpl.html', '<div id="goCenterUI" ng-click="centerMap()"><i class="fa fa-crosshairs fa-2x"></i></div>');
     }])
-    .controller('mapCtrl', ['$geolocation', '$scope', '$map', '$markers', '$settings', 'localStorageService',
-        function ($geolocation, $scope, $map, $markers, $settings, $storage) {
+    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$map', '$markers', '$settings', 'localStorageService',
+        function ($geolocation, $scope, $rootScope, $map, $markers, $settings, $storage) {
 
             // for the view
             $scope.map = $map;
@@ -99,7 +99,6 @@ angular.module('traffc')
             };
 
 
-            //todo may be use ng-cordova ?
             $geolocation.getCurrentPosition({
                 timeout: 5000,
                 maximumAge: 100
@@ -115,7 +114,10 @@ angular.module('traffc')
                 //center map to the new position
                 $scope.$emit('map.center', $scope.userMarker.coords);
 
-            }); //todo error -> oops modal ?!
+            }).catch(function () {
+                console.error('oops, can not locate the user.');
+                $rootScope.$broadcast('modals.GPSError',{});
+            });
 
 
             $geolocation.watchPosition({

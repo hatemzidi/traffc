@@ -57,6 +57,23 @@ angular.module('traffc')
                 }
             };
 
+            $scope.errorModalOptions = {
+                title: 'Oops',
+                className : 'error',
+                templateUrl: 'views/gpsError-modal.tpl.html',
+                buttons: {
+                    ok: {
+                        label: 'Close',
+                        className: 'btn-default'
+                    }
+
+                }
+            };
+
+            $scope.$on('modals.GPSError', function(){
+                $ngBootbox.customDialog($scope.errorModalOptions);
+            });
+
             $scope.showPlacesModal = function () {
                 $ngBootbox.customDialog($scope.placesModalOptions);
             };
