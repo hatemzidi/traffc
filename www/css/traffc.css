@@ -24,6 +24,12 @@ html, body {
     background-color: #f8f8f8;
 }
 
+/* AngularJS SECTION
+-------------------------------------------------- */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
 /* HEAEDER
 -------------------------------------------------- */
 .header {
