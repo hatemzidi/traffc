@@ -23,6 +23,7 @@ angular.module('traffc', [
 }]).run(['localStorageService', '$markers','editableOptions', function ($storage, $markers, editableOptions) {
 
     editableOptions.theme = 'bs3';
+    editableOptions.blur = 'cancel';
 
     //init settings if first usage
     if (!$storage.get('_traffc_settings')) {

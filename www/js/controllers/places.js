@@ -32,4 +32,13 @@ angular.module('traffc')
             $rootScope.$broadcast('map.deletePlace', idx);
         };
 
+        $scope.idx = -1;
+        $scope.onShow = function(idx) {
+            $scope.idx = idx;
+        };
+
+        $scope.onHide = function() {
+            $scope.idx = -1;
+        };
+
     });

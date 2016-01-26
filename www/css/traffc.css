@@ -735,10 +735,14 @@ img.settings {
 
 form.editable-wrap {
     background-color: white;
-    padding-right: 55px;
 }
+
 .places-grid .editable-up {
     z-index: 2;
+}
+
+.places-grid .editable-up .form-control-static {
+    padding-top: 5px !important;
 }
 
 .places-grid .editable-down {
