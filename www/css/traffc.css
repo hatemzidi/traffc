@@ -729,3 +729,15 @@ img.settings {
     cursor: pointer;
 }
 
+
+
+/* IOS fixes   --------- */
+body.ios {
+}
+
+.ios .navbar-header,
+.ios #container-map-location-search,
+.ios .bootbox.modal.fade.in{
+    margin-top : 20px;
+}
+

@@ -20,6 +20,8 @@ var CordovaInit = function () {
             angular.bootstrap($('body'), ['traffc']);
         });
 
+        $('body').addClass(device.platform.toLowerCase());
+        resizeBootstrapMap();
     };
 
     this.bindEvents = function () {

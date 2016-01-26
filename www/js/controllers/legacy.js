@@ -1,5 +1,50 @@
 'use strict';
 
+
+function resizeBootstrapMap() {
+    var $map = $('#map');
+    var mapParentWidth = $('#map_canvas').width();
+    $map.width(mapParentWidth);
+    var minus = 52;
+
+    if ($('body').hasClass('ios')) {
+        console.log('here');
+        minus += 20;
+    }
+
+    $map.height($(window).height() - minus);
+
+}
+
+
+function togFnClass(v) {
+    return v ? 'addClass' : 'removeClass';
+}
+
+function reloadTiles() {
+    //debug
+    console.debug('reload layer.');
+    var tiles = $('#map_canvas').find('img');
+    for (var i = 0; i < tiles.length; i++) {
+        var src = $(tiles[i]).attr('src');
+        if (/\/vt\?pb=/.test(src)) {
+            var new_src = src.split('&ts')[0] + '&ts=' + (new Date()).getTime();
+            $(tiles[i]).attr('src', new_src);
+        }
+    }
+
+    refreshSpiner();
+}
+
+function refreshSpiner() {
+    // add animation to the refresh button
+    $('#refresh-btn').addClass('spin').delay(1000)
+        .queue(function () {
+            $(this).removeClass('spin');
+            $(this).dequeue();
+        });
+}
+
 //todo refactor into angular
 $(function () {
 
@@ -18,51 +63,11 @@ $(function () {
     });
 
 
-    resizeBootstrapMap();
-
-
-    function resizeBootstrapMap() {
-        var $map = $('#map');
-        var mapParentWidth = $('#map_canvas').width();
-        $map.width(mapParentWidth);
-        $map.height($(window).height() - 52);
-
-    }
-
-    function togFnClass(v) {
-        return v ? 'addClass' : 'removeClass';
-    }
-
-
+    //resizeBootstrapMap();
     $('#refreshRate, #isRefreshable').on('change', function () {
         if ($('#isRefreshable').is(':checked')) {
             setInterval(reloadTiles, $('#refreshRate').val() * 1000);
         }
     });
-
-    function reloadTiles() {
-        //debug
-        console.debug('reload layer.');
-        var tiles = $('#map_canvas').find('img');
-        for (var i = 0; i < tiles.length; i++) {
-            var src = $(tiles[i]).attr('src');
-            if (/\/vt\?pb=/.test(src)) {
-                var new_src = src.split('&ts')[0] + '&ts=' + (new Date()).getTime();
-                $(tiles[i]).attr('src', new_src);
-            }
-        }
-
-        refreshSpiner();
-    }
-
-    function refreshSpiner() {
-        // add animation to the refresh button
-        $('#refresh-btn').addClass('spin').delay(1000)
-            .queue(function () {
-                $(this).removeClass('spin');
-                $(this).dequeue();
-            });
-    }
-
 
 });
