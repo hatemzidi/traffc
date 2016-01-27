@@ -15,6 +15,7 @@ var useref = require('gulp-useref');
 var cssnano = require('gulp-cssnano');
 var ngHtml2Js = require('gulp-ng-html2js');
 var ngConfig = require('gulp-ng-config');
+var preprocess = require('gulp-preprocess');
 var runSequence = require('run-sequence');
 var rimraf = require('gulp-rimraf');
 
@@ -27,7 +28,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('clean:pre', function () {
-    return gulp.src(['app/js/bundled.js', './dist'], {read: false})
+    return gulp.src(['./tmp/js', './dist'], {read: false})
         .pipe(rimraf({force: true}));
 });
 
@@ -40,6 +41,17 @@ gulp.task('clean:www', function () {
     return gulp.src(['www/**/'], {read: false})
         .pipe(rimraf({force: true}));
 });
+
+
+gulp.task('preprocess', ['useref'], function () {
+    return gulp.src('./dist/*.html')
+        .pipe(preprocess({context: {
+            DESKTOP: true,    // extract into config
+            DEBUG: true}
+        }))
+        .pipe(gulp.dest('./dist/'));
+});
+
 
 gulp.task('loadConfig', function () {
     gulp.src('app/js/config/*.json')
@@ -109,7 +121,6 @@ gulp.task('copy-views', function () {
 });
 
 
-
 gulp.task('prepare-cordova', function () {
     gulp.src('./dist/**/*')
         .pipe(gulp.dest('www'));
@@ -129,8 +140,8 @@ gulp.task('connectDist', function () {
     });
 });
 
-gulp.task('concat', ['useref'], function() {
-    return gulp.src(['dist/js/traffc.js','tmp/js/views/*.js'])
+gulp.task('concat', ['useref'], function () {
+    return gulp.src(['dist/js/traffc.js', 'tmp/js/views/*.js'])
         .pipe(concat('traffc.js'))
         .pipe(gulp.dest('dist/js'));
 });
@@ -156,7 +167,7 @@ gulp.task('default', function () {
 gulp.task('build', function () {
     runSequence(
         ['clean:pre'],
-        ['lint', 'copy-views', 'useref', 'concat', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts' ],
+        ['lint', 'copy-views', 'useref', 'preprocess', 'concat', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts'],
         ['clean:post']
     );
 });
