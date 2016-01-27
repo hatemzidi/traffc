@@ -12,10 +12,64 @@ var concat = require('gulp-concat');
 var useref = require('gulp-useref');
 var cssnano = require('gulp-cssnano');
 var ngHtml2Js = require('gulp-ng-html2js');
-var ngConfig = require('gulp-ng-config');
 var preprocess = require('gulp-preprocess');
 var runSequence = require('run-sequence');
 var rimraf = require('gulp-rimraf');
+var Yargs = require('yargs');
+
+var argv = Yargs.argv;
+
+
+/**
+ * Build Settings
+ */
+var settings = {
+
+    /*
+     * Environment to build our application for
+     *
+     * If we have passed an environment via a
+     * CLI option, then use that. If not attempt
+     * to use the NODE_ENV. If not set, use production.
+     */
+    environment: !!argv.env ?
+        argv.env
+        : process.env.NODE_ENV || 'production',
+
+    /*
+     * mobile or desktop?
+     */
+    device: !!argv.device ?
+        argv.device : 'mobile',
+
+    /*
+     * Where is our config folder?
+     */
+    configFolder: '/js/config',
+
+    /*
+     * Where is our code?
+     */
+    srcFolder: 'app',
+
+    /*
+     * Where are we building to?
+     */
+    buildFolder: 'build',
+
+    /*
+     * Where should the final file be?
+     */
+    destFolder: 'dist',
+
+
+    /*
+     * Where should the final file be?
+     */
+    cordovaFolder: 'www'
+
+};
+
 
 // tasks
 gulp.task('lint', function () {
@@ -36,7 +90,7 @@ gulp.task('clean:post', function () {
 });
 
 gulp.task('clean:www', function () {
-    return gulp.src(['www/**/'], {read: false})
+    return gulp.src(['www/'], {read: false})
         .pipe(rimraf({force: true}));
 });
 
@@ -45,7 +99,7 @@ gulp.task('preprocess', ['concat'], function () {
     return gulp.src('./dist/*.html')
         .pipe(preprocess({
                 context: {
-                    PKG_ENV: 'desktop',
+                    PKG_ENV: settings.device,
                     DEBUG: true
                 }
             })
@@ -66,8 +120,10 @@ gulp.task('useref', function () {
 
 
 gulp.task('copy-js', function () {
-    gulp.src('./app/cordova.js')
-        .pipe(gulp.dest('dist'));
+    if (settings.device === 'mobile') {
+        gulp.src('./app/cordova.js')
+            .pipe(gulp.dest('dist'));
+    }
 
     gulp.src('./app/js/config/**')
         .pipe(gulp.dest('dist/js/config'));
@@ -79,22 +135,39 @@ gulp.task('copy-fonts', function () {
         .pipe(gulp.dest('dist/fonts/'));
 });
 
+// libs other than vendors
 gulp.task('copy-libs', function () {
     gulp.src('./app/js/lib/**')
         .pipe(gulp.dest('dist/js/lib'));
 });
 
-
-gulp.task('copy-vendor', function () {
-    gulp.src('./app/lib/**')
-        .pipe(gulp.dest('dist/lib'));
-});
-
+// Images
 gulp.task('copy-img', function () {
     gulp.src('./app/img/**')
         .pipe(gulp.dest('dist/img'));
 });
 
+// Static files
+gulp.task('copy-static', function () {
+    if (settings.device === 'desktop') {
+        gulp.src([
+                'static/favicon.ico',
+                'static/403.html',
+                'static/404.html',
+                'static/500.html',
+                'static/browserconfig.xml',
+                'static/manifest.*',
+                'static/.htaccess'
+            ])
+            .pipe(gulp.dest('dist/'));
+
+
+        gulp.src('static/favicons/*')
+            .pipe(gulp.dest('dist/favicons'));
+    }
+});
+
+// Views for angular
 gulp.task('copy-views', function () {
     gulp.src('./app/views/*.html')
         .pipe(minifyHtml({
@@ -112,7 +185,7 @@ gulp.task('copy-views', function () {
 });
 
 
-gulp.task('prepare-cordova', function () {
+gulp.task('copy-www', function () {
     gulp.src('./dist/**/*')
         .pipe(gulp.dest('www'));
 });
@@ -138,6 +211,10 @@ gulp.task('concat', ['useref'], function () {
 });
 
 
+gulp.task('setMobile', function () {
+    settings.device = 'mobile';
+});
+
 // // *** default task *** //
 // gulp.task('default',
 //   ['lint', 'browserify', 'connect']
@@ -158,7 +235,7 @@ gulp.task('default', function () {
 gulp.task('build', function () {
     runSequence(
         ['clean:pre'],
-        ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts'],
+        ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts', 'copy-static'],
         ['clean:post']
     );
 });
