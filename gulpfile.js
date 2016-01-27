@@ -27,7 +27,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('clean:pre', function () {
-    return gulp.src(['app/js/bundled.js', 'tmp/js/', './dist'], {read: false})
+    return gulp.src(['app/js/bundled.js', './dist'], {read: false})
         .pipe(rimraf({force: true}));
 });
 
@@ -130,7 +130,7 @@ gulp.task('connectDist', function () {
 });
 
 gulp.task('concat', ['useref'], function() {
-    return gulp.src(['dist/js/traffc.js','./tmp/js/views/*.js'])
+    return gulp.src(['dist/js/traffc.js','tmp/js/views/*.js'])
         .pipe(concat('traffc.js'))
         .pipe(gulp.dest('dist/js'));
 });

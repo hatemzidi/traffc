@@ -43,16 +43,8 @@
                 <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
                 <a class="navbar-brand brand large" href="#"><!--__SUB__-->traffc</a>
                 <!-- todo make this ... -->
-                <div class="navbar-brand" style="width : 100px ">
-                    <a class="header-btn header-persona persona-crouch" href="#">
-                        <span class="tom-small-icon"></span>
-                        <span class="header-btn-text">
-                            <span class="left-arrow"></span>
-                            <span class="js-phrase">New stuff!</span>
-                        </span>
-                    </a>
-                </div>
-                <!-- ... a directive -->
+                <div persona announce="Oops" status="hide" is-alert="true"></div>
+                <!-- ... configurable -->
             </div>
 
             <div id="bs-main-menu" class="collapse navbar-collapse" ng-controller="modalCtrl">
@@ -272,6 +264,7 @@
 <script src="js/services/markers.js"></script>
 <script src="js/services/configLoader.js"></script>
 <script src="js/services/settings.js"></script>
+<script src="js/directives/announcement.js"></script>
 <script src="js/main.js"></script>
 <!-- endbuild -->
 
