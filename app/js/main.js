@@ -3,7 +3,7 @@
 var CordovaInit = function () {
 
     var onDeviceReady = function () {
-        receivedEvent('deviceready');
+        receivedEvent('auto');
     };
 
     var receivedEvent = function (mode) {
@@ -21,7 +21,10 @@ var CordovaInit = function () {
             angular.bootstrap($('body'), ['traffc']);
         });
 
-        $('body').addClass(device.platform.toLowerCase());
+        if ( mode === 'auto') {
+            $('body').addClass(device.platform.toLowerCase());
+        }
+
         /* jshint ignore:start */
         resizeBootstrapMap();
         /* jshint ignore:end */

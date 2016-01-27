@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>traffc</title>
 
-    <!-- @ifdef DESKTOP -->
+    <!-- @if PKG_ENV='desktop' -->
     <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
 
     <!-- no cache -->
@@ -347,7 +347,7 @@ it's just light, simple and instantaneously available."/>
 <script src="js/lib/legacy.js"></script>
 <script src="js/lib/detectmobilebrowser.min.js"></script>
 
-<!-- @ifdef !DESKTOP -->
+<!-- @if PKG_ENV!='desktop' -->
 <script src="cordova.js"></script>
 <!-- @endif -->
 </body>

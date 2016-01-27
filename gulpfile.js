@@ -7,9 +7,7 @@ var connect = require('gulp-connect');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
-var clean = require('gulp-clean');
 var minifyHtml = require('gulp-minify-html');
-var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var useref = require('gulp-useref');
 var cssnano = require('gulp-cssnano');
@@ -43,23 +41,16 @@ gulp.task('clean:www', function () {
 });
 
 
-gulp.task('preprocess', ['useref'], function () {
+gulp.task('preprocess', ['concat'], function () {
     return gulp.src('./dist/*.html')
-        .pipe(preprocess({context: {
-            DESKTOP: true,    // extract into config
-            DEBUG: true}
-        }))
+        .pipe(preprocess({
+                context: {
+                    PKG_ENV: 'desktop',
+                    DEBUG: true
+                }
+            })
+        )
         .pipe(gulp.dest('./dist/'));
-});
-
-
-gulp.task('loadConfig', function () {
-    gulp.src('app/js/config/*.json')
-        .pipe(ngConfig('traffc', {
-            createModule: false,
-            wrap: true
-        }))
-        .pipe(gulp.dest('tmp/js/config'));
 });
 
 
@@ -167,7 +158,7 @@ gulp.task('default', function () {
 gulp.task('build', function () {
     runSequence(
         ['clean:pre'],
-        ['lint', 'copy-views', 'useref', 'preprocess', 'concat', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts'],
+        ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts'],
         ['clean:post']
     );
 });
