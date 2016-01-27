@@ -23,5 +23,6 @@ _phplite
 /app/old
 /app/lib
 /node_modules
+/www
 /dist
 /www
