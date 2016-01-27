@@ -15,7 +15,10 @@
 
 # project files
 /plugins
+/tmp
 /_garbage_
 /platforms
-/www/old
-/www/lib
+/app/old
+/app/lib
+/node_modules
+/dist
