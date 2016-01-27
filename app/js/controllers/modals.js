@@ -23,7 +23,7 @@ angular.module('traffc')
 
             $scope.whyThisModalOptions = {
                 title: 'Why this?',
-                templateUrl: 'views/whyThis-modal.tpl.html',
+                templateUrl: 'views/whythis-modal.tpl.html',
                 buttons: {
                     ok: {
                         label: 'Close',
