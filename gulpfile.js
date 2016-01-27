@@ -40,7 +40,7 @@ var settings = {
      * mobile or desktop?
      */
     device: !!argv.device ?
-        argv.device : 'mobile',
+        argv.device : 'desktop',
 
     /*
      * Where is our config folder?
@@ -164,6 +164,9 @@ gulp.task('copy-static', function () {
 
         gulp.src('static/favicons/*')
             .pipe(gulp.dest('dist/favicons'));
+
+        gulp.src('static/meta_preview.*')
+            .pipe(gulp.dest('dist/img'));
     }
 });
 
@@ -210,10 +213,6 @@ gulp.task('concat', ['useref'], function () {
         .pipe(gulp.dest('dist/js'));
 });
 
-
-gulp.task('setMobile', function () {
-    settings.device = 'mobile';
-});
 
 // // *** default task *** //
 // gulp.task('default',
