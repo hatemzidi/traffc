@@ -28,7 +28,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('clean:pre', function () {
-    return gulp.src(['./tmp/js', './dist'], {read: false})
+    return gulp.src(['./tmp/js  ', './dist'], {read: false})
         .pipe(rimraf({force: true}));
 });
 
@@ -45,21 +45,13 @@ gulp.task('clean:www', function () {
 
 gulp.task('preprocess', ['useref'], function () {
     return gulp.src('./dist/*.html')
-        .pipe(preprocess({context: {
-            DESKTOP: true,    // extract into config
-            DEBUG: true}
+        .pipe(preprocess({
+            context: {
+                DESKTOP: true,    // extract into config
+                DEBUG: true
+            }
         }))
         .pipe(gulp.dest('./dist/'));
-});
-
-
-gulp.task('loadConfig', function () {
-    gulp.src('app/js/config/*.json')
-        .pipe(ngConfig('traffc', {
-            createModule: false,
-            wrap: true
-        }))
-        .pipe(gulp.dest('tmp/js/config'));
 });
 
 
@@ -160,7 +152,7 @@ gulp.task('concat', ['useref'], function () {
 gulp.task('default', function () {
     runSequence(
         ['clean'],
-        ['lint', 'browserify'] // , 'connect'
+        ['lint'] // , 'connect'
     );
 });
 // *** build task *** //
