@@ -36,6 +36,11 @@ gulp.task('clean:post', function () {
         .pipe(rimraf({force: true}));
 });
 
+gulp.task('clean:www', function () {
+    return gulp.src(['www/**/'], {read: false})
+        .pipe(rimraf({force: true}));
+});
+
 gulp.task('loadConfig', function () {
     gulp.src('app/js/config/*.json')
         .pipe(ngConfig('traffc', {
@@ -103,6 +108,13 @@ gulp.task('copy-views', function () {
         .pipe(gulp.dest('tmp/js/views'));
 });
 
+
+
+gulp.task('prepare-cordova', function () {
+    gulp.src('./dist/**/*')
+        .pipe(gulp.dest('www'));
+});
+
 gulp.task('connect', function () {
     connect.server({
         root: 'app/',
@@ -118,7 +130,7 @@ gulp.task('connectDist', function () {
 });
 
 gulp.task('concat', ['useref'], function() {
-    return gulp.src(['dist/js/traffc.js','./tmp/js/views/*.js', './tmp/js/config/*.js'])
+    return gulp.src(['dist/js/traffc.js','./tmp/js/views/*.js'])
         .pipe(concat('traffc.js'))
         .pipe(gulp.dest('dist/js'));
 });
