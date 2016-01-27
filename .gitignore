@@ -8,13 +8,14 @@
 .idea/
 
 
-
 ## File-based project format:
 *.ipr
 *.iws
 
 
 # project files
+_phplite
+/resources
 /plugins
 /tmp
 /_garbage_
