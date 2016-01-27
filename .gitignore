@@ -8,6 +8,7 @@
 .idea/
 
 
+
 ## File-based project format:
 *.ipr
 *.iws
@@ -22,3 +23,4 @@
 /app/lib
 /node_modules
 /dist
+/www
