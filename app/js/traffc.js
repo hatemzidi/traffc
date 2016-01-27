@@ -29,8 +29,8 @@ angular.module('traffc', [
     if (!$storage.get('_traffc_settings')) {
         $storage.set('_traffc_settings', {
             defaultZoom: 12,
-            nightMode: 'off',
-            centerMap: 'user'
+            nightMode: false,
+            centerMap: false
         });
     }
 
