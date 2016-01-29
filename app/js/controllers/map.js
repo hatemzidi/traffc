@@ -141,6 +141,12 @@ angular.module('traffc')
                             $scope.$emit('map.saveNewPlace', {});
                             // reset marker
                             $scope.newPlaceMarker.reset();
+                        },
+                        abort: function (){
+                            // reset marker
+                            $scope.newPlaceMarker.reset();
+                            // hide me
+                            $scope.newPlaceMarker.options.visible = false;
                         }
                     },
                     closeClick: function () {
