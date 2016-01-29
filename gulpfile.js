@@ -43,7 +43,7 @@ var settings = {
      * mobile or desktop?
      */
     device: !!argv.device ?
-        argv.device : 'desktop',
+        argv.device : 'mobile',
 
     /*
      * release / build
@@ -256,4 +256,12 @@ gulp.task('build', function () {
         ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts', 'copy-static'],
         ['clean:post']
     );
+});
+
+// *** build task *** //
+gulp.task('prepare-cordova', function () {
+    runSequence(
+        ['clean:www'],
+        ['copy-www']
+       );
 });
