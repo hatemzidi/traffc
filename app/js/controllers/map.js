@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('traffc')
+//todo extract this, preappend with 'views/'
     .run(['$templateCache', function ($templateCache) {
         $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control clearable" id="map-location-search" placeholder="Search for a location..." autocomplete="off">');
         $templateCache.put('getPlaces.tpl.html', '<div id="getFavoriteUI" ng-click="showPlacesModal()" ng-controller="navCtrl"><i class="fa fa-heart fa-2x"></i></div>');
