@@ -10,18 +10,10 @@ var CordovaInit = function () {
         console.debug('Start event received ..');
         console.debug('Mode is ' + mode);
 
-        console.debug('load config ...');
-        $.get('js/config/map.style.json', function (configData) {
+        console.debug('... bootstrapping application setup.');
+        angular.bootstrap($('body'), ['traffc']);
 
-            angular.module('traffc').config(['configLoaderProvider', function ($config) {
-                $config.config(configData);
-            }]);
-
-            console.debug('... bootstrapping application setup.');
-            angular.bootstrap($('body'), ['traffc']);
-        });
-
-        if ( mode === 'auto') {
+        if (mode === 'auto') {
             $('body').addClass(device.platform.toLowerCase());
         }
 

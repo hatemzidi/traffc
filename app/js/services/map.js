@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('traffc')
-    .service('$map', ['configLoader', '$settings', function ($config, $settings) {
+    .service('$map', ['$mapStyle', '$settings', function ($config, $settings) {
 
 
         return {
