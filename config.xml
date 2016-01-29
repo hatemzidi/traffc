@@ -19,6 +19,7 @@
     <allow-intent href="https://*/*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="http://*/*" />
+    <preference name="loglevel" value="INFO"/>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
@@ -52,7 +53,6 @@
         <allow-intent href="market:*" />
         <preference name="splashscreen" value="screen" />
         <preference name="splashScreenDelay" value="10000" />
-        <preference name="LogLevel" value="INFO"/>
 
         <icon density="ldpi" src="resources/icons/android/icon-36-ldpi.png"/>
         <icon density="mdpi" src="resources/icons/android/icon-48-mdpi.png"/>
