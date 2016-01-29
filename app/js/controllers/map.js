@@ -69,7 +69,8 @@ angular.module('traffc')
             // get the user's position
             $geolocation.getCurrentPosition({
                 timeout: 5000,
-                maximumAge: 100
+                maximumAge: 100,
+                enableHighAccuracy: true
             }).then(function (position) {
                 console.debug('Got the current geoposition.');
 
@@ -229,10 +230,12 @@ angular.module('traffc')
 
                     if ($settings.data.centerMap === false) {  // false = user, true = favorite place
                         // center to user
-                        $map.center = {
-                            latitude: $scope.userMarker.coords.latitude,
-                            longitude: $scope.userMarker.coords.longitude
-                        };
+                        if (!_.isEmpty($scope.userMarker.coords)) {
+                            $map.center = {
+                                latitude: $scope.userMarker.coords.latitude,
+                                longitude: $scope.userMarker.coords.longitude
+                            };
+                        }
 
                     } else {
                         // center to favorite place
