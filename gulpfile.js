@@ -15,8 +15,11 @@ var ngHtml2Js = require('gulp-ng-html2js');
 var preprocess = require('gulp-preprocess');
 var runSequence = require('run-sequence');
 var rimraf = require('gulp-rimraf');
+var git = require('git-rev-sync');
+var dateFormat = require('dateformat');
 var Yargs = require('yargs');
 
+var now = new Date();
 var argv = Yargs.argv;
 
 
@@ -40,7 +43,17 @@ var settings = {
      * mobile or desktop?
      */
     device: !!argv.device ?
-        argv.device : 'mobile',
+        argv.device : 'desktop',
+
+    /*
+     * release / build
+     */
+    version: '0.9.0',
+
+    /*
+     * release / build
+     */
+    release: git.short() + '-' + dateFormat(now, 'yymmddHHMM'),
 
     /*
      * Where is our config folder?
@@ -100,6 +113,7 @@ gulp.task('preprocess', ['concat'], function () {
         .pipe(preprocess({
                 context: {
                     PKG_ENV: settings.device,
+                    RELEASE_TAG: settings.release,
                     DEBUG: true
                 }
             })
@@ -173,9 +187,15 @@ gulp.task('copy-static', function () {
 // Views for angular
 gulp.task('copy-views', function () {
     gulp.src('./app/views/*.html')
+        .pipe(preprocess({
+            context: {
+                VERSION_TAG: settings.version,
+                RELEASE_TAG: settings.release
+            }
+        }))
         .pipe(minifyHtml({
             collapseWhitespace: true,
-            removeComments : true
+            removeComments: true
         }))
         .pipe(ngHtml2Js({
             moduleName: 'traffc',
