@@ -15,6 +15,9 @@ var CordovaInit = function () {
 
         if (mode === 'auto') {
             $('body').addClass(device.platform.toLowerCase());
+            /* jshint ignore:start */
+            setInterval(reloadTiles, 5 * 1000); // update on mobile every 5sec
+            /* jshint ignore:end */
         }
 
         /* jshint ignore:start */

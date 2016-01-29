@@ -63,7 +63,6 @@ $(function () {
     });
 
 
-    //resizeBootstrapMap();
     $('#refreshRate, #isRefreshable').on('change', function () {
         if ($('#isRefreshable').is(':checked')) {
             setInterval(reloadTiles, $('#refreshRate').val() * 1000);
