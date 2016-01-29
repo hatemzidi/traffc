@@ -18,9 +18,7 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="geo:*" />
-    <platform name="android">
-        <allow-intent href="market:*" />
-    </platform>
+    <allow-navigation href="http://*/*" />
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
@@ -49,5 +47,24 @@
         <splash height="2208" src="resources/screens/ios/screen-iphone-portrait-736h.png" width="1242" />
         <splash height="1024" src="resources/screens/ios/screen-ipad-portrait.png" width="768" />
         <splash height="2048" src="resources/screens/ios/screen-ipad-portrait-2x.png" width="1536" />
+    </platform>
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <preference name="splashscreen" value="screen" />
+        <preference name="splashScreenDelay" value="10000" />
+        <preference name="LogLevel" value="INFO"/>
+
+        <icon density="ldpi" src="resources/icons/android/icon-36-ldpi.png"/>
+        <icon density="mdpi" src="resources/icons/android/icon-48-mdpi.png"/>
+        <icon density="hdpi" src="resources/icons/android/icon-72-hdpi.png"/>
+        <icon density="xhdpi" src="resources/icons/android/icon-96-xhdpi.png"/>
+        <icon density="xxhdpi" src="resources/icons/android/icon-144-xxhdpi.png"/>
+        <icon density="xxxhdpi" src="resources/icons/android/icon-192-xxxhdpi.png"/>
+
+        <splash density="port-ldpi" src="resources/screens/android/screen-ldpi-portrait.png" />
+        <splash density="port-mdpi" src="resources/screens/android/screen-mdpi-portrait.png" />
+        <splash density="port-hdpi" src="resources/screens/android/screen-hdpi-portrait.png" />
+        <splash density="port-xhdpi" src="resources/screens/android/screen-xhdpi-portrait.png" />
+
     </platform>
 </widget>

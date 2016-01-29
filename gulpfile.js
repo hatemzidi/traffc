@@ -7,7 +7,7 @@ var connect = require('gulp-connect');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
-var minifyHtml = require('gulp-minify-html');
+var minifyHtml = require('gulp-html-minifier');
 var concat = require('gulp-concat');
 var useref = require('gulp-useref');
 var cssnano = require('gulp-cssnano');
@@ -40,7 +40,7 @@ var settings = {
      * mobile or desktop?
      */
     device: !!argv.device ?
-        argv.device : 'desktop',
+        argv.device : 'mobile',
 
     /*
      * Where is our config folder?
@@ -174,9 +174,8 @@ gulp.task('copy-static', function () {
 gulp.task('copy-views', function () {
     gulp.src('./app/views/*.html')
         .pipe(minifyHtml({
-            empty: true,
-            spare: true,
-            quotes: true
+            collapseWhitespace: true,
+            removeComments : true
         }))
         .pipe(ngHtml2Js({
             moduleName: 'traffc',
