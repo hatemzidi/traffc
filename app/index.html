@@ -8,6 +8,11 @@
     <!-- Set the viewport. -->
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0">
 
+    <!-- @if PKG_ENV!='desktop' -->
+    <!-- Set security; only on mobile -->
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://fonts.googleapis.com http://fonts.gstatic.com; img-src data: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://maps.googleapis.com https://maps.googleapis.com">
+    <!-- @endif -->
+
     <!-- @if PKG_ENV='desktop' -->
     <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
 
