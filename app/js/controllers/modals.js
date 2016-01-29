@@ -10,6 +10,7 @@ angular.module('traffc')
 
             //todo optimize this, extend with buttons
             $scope.settingsModalOptions = {
+                scope: $scope,
                 title: 'Settings',
                 templateUrl: 'views/settings-modal.tpl.html',
                 buttons: {
