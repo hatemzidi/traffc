@@ -17,6 +17,9 @@ var runSequence = require('run-sequence');
 var rimraf = require('gulp-rimraf');
 var git = require('git-rev-sync');
 var dateFormat = require('dateformat');
+var xeditor = require('gulp-xml-editor');
+var jeditor = require('gulp-json-editor');
+var cordova = require('gulp-cordova');
 var Yargs = require('yargs');
 
 var now = new Date();
@@ -48,7 +51,8 @@ var settings = {
     /*
      * release / build
      */
-    version: '0.9.1',
+    version: !!argv.version ?
+        argv.version : '0.9.2',
 
     /*
      * release / build
@@ -121,6 +125,31 @@ gulp.task('preprocess', ['concat'], function () {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('update-version', function () {
+    gulp.src('./config.xml')
+        .pipe(xeditor([
+            {path: '//xmlns:widget', attr: {'version': settings.version}}
+        ], 'http://www.w3.org/ns/widgets'))
+        .pipe(gulp.dest('./'));
+
+
+    gulp.src('./package.json')
+        .pipe(jeditor({
+            'version': settings.version
+        }))
+        .pipe(gulp.dest('./'));
+});
+
+
+gulp.task('cordova-build-android', function () {
+    return gulp.src('./package.json')
+        .pipe(cordova(['build', 'android']));
+});
+
+gulp.task('cordova-build-ios', function () {
+    return gulp.src('./package.json')
+        .pipe(cordova(['build', 'ios']));
+});
 
 gulp.task('useref', function () {
     return gulp.src('app/*.html')
@@ -258,10 +287,23 @@ gulp.task('build', function () {
     );
 });
 
-// *** build task *** //
-gulp.task('prepare-cordova', function () {
+// *** build android *** //
+gulp.task('build-android', function () {
     runSequence(
         ['clean:www'],
-        ['copy-www']
-       );
+        ['update-version'],
+        ['copy-www'],
+        ['cordova-build-android']
+    );
 });
+
+// *** build ios *** //
+gulp.task('build-ios', function () {
+    runSequence(
+        ['clean:www'],
+        ['update-version'],
+        ['copy-www'],
+        ['cordova-build-ios']
+    );
+});
+
