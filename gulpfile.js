@@ -138,6 +138,12 @@ gulp.task('update-version', function () {
             'version': settings.version
         }))
         .pipe(gulp.dest('./'));
+
+    gulp.src('./bower.json')
+        .pipe(jeditor({
+            'version': settings.version
+        }))
+        .pipe(gulp.dest('./'));
 });
 
 
