@@ -20,6 +20,7 @@ var dateFormat = require('dateformat');
 var xeditor = require('gulp-xml-editor');
 var jeditor = require('gulp-json-editor');
 var cordova = require('gulp-cordova');
+var inject = require('gulp-inject');
 var Yargs = require('yargs');
 
 var now = new Date();
@@ -124,6 +125,19 @@ gulp.task('preprocess', ['concat'], function () {
         )
         .pipe(gulp.dest('./dist/'));
 });
+
+
+gulp.task('inject-ga', ['preprocess'], function () {
+    gulp.src('./dist/*.html')
+        .pipe(inject(gulp.src(['./app/js/lib/ga.min.js']), {
+            starttag: '<!-- inject:analytics -->',
+            transform: function (filePath, file) {
+                return file.contents.toString('utf8'); // Return file contents as string
+            }
+        }))
+        .pipe(gulp.dest('./dist/'));
+});
+
 
 gulp.task('update-version', function () {
     gulp.src('./config.xml')
@@ -288,7 +302,7 @@ gulp.task('default', function () {
 gulp.task('build', function () {
     runSequence(
         ['clean:pre'],
-        ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts', 'copy-static'],
+        ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'inject-ga', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts', 'copy-static'],
         ['clean:post']
     );
 });

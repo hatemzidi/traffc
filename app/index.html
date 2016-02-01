@@ -10,7 +10,7 @@
 
     <!-- @if PKG_ENV!='desktop' -->
     <!-- Set security; only on mobile -->
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://fonts.googleapis.com http://fonts.gstatic.com; img-src data: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://maps.googleapis.com https://maps.googleapis.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://fonts.googleapis.com http://fonts.gstatic.com; img-src data: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://maps.googleapis.com https://maps.googleapis.com http://www.google-analytics.com">
     <!-- @endif -->
 
     <!-- @if PKG_ENV='desktop' -->
@@ -352,5 +352,8 @@ it's just light, simple and instantaneously available."/>
 <!-- @if PKG_ENV!='desktop' -->
 <script src="cordova.js"></script>
 <!-- @endif -->
+
+<!-- inject:analytics -->
+<!-- endinject -->
 </body>
 </html>
