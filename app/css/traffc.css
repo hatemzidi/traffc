@@ -25,8 +25,15 @@ html {
     -webkit-user-select: none;
 }
 
-::selection { background: transparent;color:inherit; }
-::-moz-selection { background: transparent;color:inherit; }
+::selection {
+    background: transparent;
+    color: inherit;
+}
+
+::-moz-selection {
+    background: transparent;
+    color: inherit;
+}
 
 #wrap {
     min-height: 100%;
@@ -56,7 +63,7 @@ html {
 }
 
 .logo img {
-    height: 32px;
+    height: 36px;
     width: auto;
 }
 
@@ -112,8 +119,6 @@ html {
     position: absolute;
     display: block;
 }
-
-
 
 /* OVERRIDE BOOTSTRAP
 -------------------------------------------------- */
@@ -200,11 +205,12 @@ html {
 }
 
 .places-grid .empty {
-    height:38px;
+    height: 38px;
     padding: 5px 0;
 }
+
 .places-grid:empty:before,
-.places-grid .empty:before{
+.places-grid .empty:before {
     content: 'No Places.';
 }
 
@@ -242,6 +248,18 @@ html {
 
 .places-grid:empty + .help-block {
     display: none;
+}
+
+.navmenu-nav {
+    margin-top: 45px;
+    margin-left: 15px;
+}
+
+.navmenu-nav .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
 }
 
 /* OVERRIDE BOOTSTRAP SWITCH
@@ -376,6 +394,26 @@ html {
     font-size: 14px;
 }
 
+#floating-logo {
+    position: absolute;
+    top: 6px;
+    z-index: 4;
+    float: left;
+    width: 150px;
+}
+#floating-logo .navbar-brand{
+    color : #555;
+    text-shadow: 0 0 2px #fff;
+}
+
+#extra-controller {
+    position: relative;
+    top: 6px;
+    z-index: 4;
+    float: right;
+}
+
+#container-xs-menu .glyphicon,
 #container-map-location-search .glyphicon {
     position: absolute;
     top: 0;
@@ -386,13 +424,14 @@ html {
     color: #777;
     line-height: 40px;
     text-align: center;
+
 }
 
+#container-xs-menu,
 #container-map-location-search {
-    position: absolute;
-    top: 66px;
-    right: 7px;
-    z-index: 4;
+    float: left;
+    margin-right: 7px;
+    position: relative;
     background-color: #fff;
     border: 1px solid #bbb;
     -webkit-border-radius: 2px;
@@ -404,16 +443,31 @@ html {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
 }
 
+
 #container-map-location-search #map-location-search:focus {
-    width: 300px;
+    width: 250px;
     border: none;
     opacity: 1;
-    /*cursor: text;*/
+}
+
+#container-xs-menu #xs-menu {
+    position: relative;
+    width: 42px;
+    height: 40px;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    -moz-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    -ms-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    -o-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
+    box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
 }
 
 #container-map-location-search #map-location-search {
+
     position: relative;
-    width: 40px;
+    width: 42px;
     height: 40px;
     z-index: 2;
     opacity: 0;
@@ -670,6 +724,10 @@ img.settings {
     .navbar-brand.brand {
         padding-left: 0px;
     }
+
+    .header {
+        min-height: 0;
+    }
 }
 
 /* Input range   --------- */
@@ -750,9 +808,7 @@ img.settings {
     cursor: pointer;
 }
 
-
 /* xeditable  override   --------- */
-
 
 form.editable-wrap {
     background-color: white;
@@ -770,14 +826,13 @@ form.editable-wrap {
     z-index: 1;
 }
 
-
 /* IOS fixes   --------- */
 body.ios {
 }
 
 .ios .navbar-header,
-.ios #container-map-location-search,
-.ios .bootbox.modal.fade.in{
-    margin-top : 20px;
+.ios #extra-controller,
+.ios #floating-logo,
+.ios .bootbox.modal.fade.in {
+    margin-top: 20px;
 }
-

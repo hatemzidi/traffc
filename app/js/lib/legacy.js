@@ -6,10 +6,12 @@ function resizeBootstrapMap() {
     var $map = $('#map');
     var mapParentWidth = $('#map_canvas').width();
     $map.width(mapParentWidth);
-    var minus = 52;
 
-    if ($('body').hasClass('ios')) {
-        minus += 20;
+    var headerHeight = $('nav.header').height();
+
+    var minus = 0;
+    if (headerHeight !== 0) {
+        minus = 52;
     }
 
     $map.height($(window).height() - minus);
@@ -45,6 +47,20 @@ function refreshSpiner() {
         });
 }
 
+function onBackKeyDown(e) {
+    // Handle the back button
+    console.debug('backButton triggered');
+    $('.offcanvas').offcanvas('hide');
+    e.preventDefault();
+}
+
+function onMenuKeyDown(e) {
+    // Handle the menu button
+    console.debug('menuButton triggered');
+    $('.offcanvas').offcanvas('show');
+    e.preventDefault();
+}
+
 //todo refactor into angular
 $(function () {
 
@@ -70,7 +86,7 @@ $(function () {
     });
 
     $(document).click(function () {
-        $('.navbar-collapse').collapse('hide');
+        $('.offcanvas').offcanvas('hide');
     });
 
 });

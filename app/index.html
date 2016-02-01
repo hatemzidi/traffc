@@ -10,7 +10,8 @@
 
     <!-- @if PKG_ENV!='desktop' -->
     <!-- Set security; only on mobile -->
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://fonts.googleapis.com http://fonts.gstatic.com; img-src data: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://maps.googleapis.com https://maps.googleapis.com http://www.google-analytics.com">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src *; style-src 'self' 'unsafe-inline' http://fonts.googleapis.com http://fonts.gstatic.com; img-src data: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://maps.googleapis.com https://maps.googleapis.com http://www.google-analytics.com">
     <!-- @endif -->
 
     <!-- @if PKG_ENV='desktop' -->
@@ -99,6 +100,9 @@ it's just light, simple and instantaneously available."/>
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="lib/angular-xeditable/dist/css/xeditable.css">
     <link rel="stylesheet" href="lib/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="css/navmenu-push.css">
+    <link rel="stylesheet" href="css/jasny-bootstrap.css">
+
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -109,195 +113,221 @@ it's just light, simple and instantaneously available."/>
 </head>
 <body>
 
-<div id="wrap">
-    <nav class="header navbar navbar-default" ng-controller="navCtrl">
+<nav class="header navbar navbar-default" ng-controller="navCtrl">
 
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-main-menu">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
-                <a class="navbar-brand brand large" href="#">traffc</a>
-                <!-- todo make this ... -->
-                <div persona announce="Oops" status="hide" is-alert="true"></div>
-                <!-- ... configurable -->
-            </div>
+    <div class="container-fluid" ng-controller="modalCtrl">
 
-            <div id="bs-main-menu" class="collapse navbar-collapse" ng-controller="modalCtrl">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden-xs">
-                        <div class="navbar-form navbar-left">
-                            <div class="form-group text-right">
-                                <div class="input-group">
-                                    <select id="refreshRate"
-                                            selectpicker d
-                                            ata-width="auto"
-                                            data-style="btn-default no-radius-right"
-                                            class="form-control show-tick show-menu-arrow">
-                                        <option value="10">10 sec</option>
-                                        <option value="30">30 sec</option>
-                                        <option value="60">1 mn</option>
-                                    </select>
+        <div class="navbar-header hidden-xs">
+            <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
+            <a class="navbar-brand brand large" href="#">traffc</a>
+            <!-- todo make this ... -->
+            <div persona announce="Oops" status="hide" is-alert="true"></div>
+            <!-- ... configurable -->
+        </div>
+
+
+        <div class="navmenu navmenu-default navmenu-fixed-right offcanvas">
+            <ul class="nav navmenu-nav">
+                <li><a href="#" class="settingsModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="settingsModalOptions">Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="#" class="whyModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
+                <li class="divider"></li>
+                <li><a href="#" class="aboutModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="aboutModalOptions">About</a></li>
+            </ul>
+        </div>
+
+
+        <div id="bs-main-menu" class="collapse navbar-collapse hidden-xs">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div class="navbar-form navbar-left">
+                        <div class="form-group text-right">
+                            <div class="input-group">
+                                <select id="refreshRate"
+                                        selectpicker d
+                                        data-width="auto"
+                                        data-style="btn-default no-radius-right"
+                                        class="form-control show-tick show-menu-arrow">
+                                    <option value="10">10 sec</option>
+                                    <option value="30">30 sec</option>
+                                    <option value="60">1 mn</option>
+                                </select>
 
                                 <span class="input-group-btn">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="refreshable btn btn-default"
                                                data-toggle="tooltip"
-                                               data-placement="bottom" title="Refresh">
+                                               data-placement="bottom"
+                                               title="Refresh">
                                             <input id="isRefreshable" type="checkbox">
                                             <span id="refresh-btn"
                                                   class="glyphicon glyphicon-repeat"></span>
                                         </label>
                                     </div>
                                 </span>
-                                </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <li class="hidden-xs">
-                        <div class="navbar-form navbar-left">
-                            <div class="form-group">
-                                <button id="backToPosition" class="btn btn-default" data-toggle="tooltip"
-                                        data-placement="bottom" title="Back to my location"
-                                        ng-click="backToMyPosition()">
-                                    <span class="glyphicon glyphicon-record"></span>
-                                </button>
-                                <button id="AllFavorites" class="btn btn-default" data-toggle="tooltip"
-                                        data-placement="bottom" title="Favorite locations"
-                                        ng-bootbox-custom-dialog
-                                        ng-bootbox-options="placesModalOptions">
-                                    <span class="fa fa-heart"></span>
-                                </button>
-                                <button id="AddFavorite" class="btn btn-default" data-toggle="tooltip"
-                                        data-placement="bottom" title="Add Favorite" ng-click="addPlace()">
-                                    <span class="fa fa-plus-square"></span>
-                                </button>
-                            </div>
+                <li>
+                    <div class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <button id="backToPosition"
+                                    class="btn btn-default"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Back to my location"
+                                    ng-click="backToMyPosition()">
+                                <span class="glyphicon glyphicon-record"></span>
+                            </button>
+                            <button id="AllFavorites"
+                                    class="btn btn-default"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Favorite locations"
+                                    ng-bootbox-custom-dialog
+                                    ng-bootbox-options="placesModalOptions">
+                                <span class="fa fa-heart"></span>
+                            </button>
+                            <button id="AddFavorite"
+                                    class="btn btn-default"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Add Favorite"
+                                    ng-click="addPlace()">
+                                <span class="fa fa-plus-square"></span>
+                            </button>
                         </div>
-                    </li>
-                    <!-- todo merge this ... -->
-                    <li class="dropdown hidden-xs">
+                    </div>
+                </li>
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="fa fa-bars"></i>
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#" class="settingsModal"
-                                   ng-bootbox-custom-dialog
-                                   ng-bootbox-options="settingsModalOptions">Settings</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#" class="whyModal"
-                                   ng-bootbox-custom-dialog
-                                   ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#" class="aboutModal"
-                                   ng-bootbox-custom-dialog
-                                   ng-bootbox-options="aboutModalOptions">About</a></li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
 
-                    <li class="visible-xs"><a href="#" class="settingsModal"
-                                              ng-bootbox-custom-dialog
-                                              ng-bootbox-options="settingsModalOptions">Settings</a></li>
-                    <li class="divider visible-xs"></li>
-                    <li class="visible-xs"><a href="#" class="whyModal"
-                                              ng-bootbox-custom-dialog
-                                              ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
-                    <li class="divider visible-xs"></li>
-                    <li class="visible-xs"><a href="#" class="aboutModal"
-                                              ng-bootbox-custom-dialog
-                                              ng-bootbox-options="aboutModalOptions">About</a></li>
-                    <!-- todo ... together! -->
-                </ul>
-            </div>
-
-        </div>
-    </nav>
-
-
-    <div class="body-view" ng-controller="mapCtrl">
-        <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
-            <div id="map">
-                <ui-gmap-google-map center='map.center'
-                                    zoom='map.zoom'
-                                    options="map.options">
-                    <ui-gmap-layer type="TrafficLayer" show="true"></ui-gmap-layer>
-
-                    <ui-gmap-marker coords="userMarker.coords"
-                                    options="userMarker.options"
-                                    idkey="userMarker.id">
-                    </ui-gmap-marker>
-
-
-                    <ui-gmap-marker idkey="newPlaceMarker.id"
-                                    coords="newPlaceMarker.coords"
-                                    options="newPlaceMarker.options"
-                                    events="newPlaceMarker.events">
-                    </ui-gmap-marker>
-                    <ui-gmap-window show="newPlaceMarker.infoWindow.show"
-                                    coords="newPlaceMarker.coords"
-                                    options="newPlaceMarker.infoWindow.options"
-                                    templateurl="newPlaceMarker.infoWindow.templateUrl"
-                                    templateParameter="newPlaceMarker.infoWindow.params"
-                                    closeClick="newPlaceMarker.infoWindow.closeClick()"
-                                    ng-cloak>
-                    </ui-gmap-window>
-
-
-                    <ui-gmap-marker ng-repeat="m in markers"
-                                    idkey="m.id"
-                                    coords="m.coords"
-                                    options="m.options"
-                                    events="m.events"
-                                    ng-cloak>
-                        <ui-gmap-window show="m.infoWindow.show"
-                                        coords="m.coords"
-                                        options="m.infoWindow.options"
-                                        closeClick="m.infoWindow.closeClick()"
-                                        ng-cloak>
-                            {{m.infoWindow.label}}
-                        </ui-gmap-window>
-                    </ui-gmap-marker>
-
-
-                    <ui-gmap-search-box options="searchbox.options"
-                                        template="searchbox.template"
-                                        events="searchbox.events"
-                                        parentdiv="searchbox.parentdiv">
-                    </ui-gmap-search-box>
-
-
-                    <ui-gmap-map-control template="goCenter.tpl.html"
-                                         position="left-bottom"
-                                         index="1"
-                                         ng-if="isDeviceMobile"
-                    ></ui-gmap-map-control>
-                    <ui-gmap-map-control template="getPlaces.tpl.html"
-                                         position="right-bottom"
-                                         index="1"
-                                         ng-if="isDeviceMobile"
-                    ></ui-gmap-map-control>
-                    <ui-gmap-map-control template="addPlace.tpl.html"
-                                         position="right-bottom"
-                                         index="1"
-                                         ng-if="isDeviceMobile"
-                    ></ui-gmap-map-control>
-
-                </ui-gmap-google-map>
-            </div>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-bars"></i>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" class="settingsModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="settingsModalOptions">Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="whyModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="aboutModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="aboutModalOptions">About</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
 
-        <div id="container-map-location-search">
+    </div>
+</nav>
+
+<div id="container" ng-controller="mapCtrl">
+
+
+    <div id="floating-logo" ng-show="isDeviceMobile" ng-cloak>
+        <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
+        <a class="navbar-brand brand large" href="#">traffc</a>
+    </div>
+
+    <div id="extra-controller">
+
+        <div id="container-map-location-search" ng-cloak>
             <i class="glyphicon glyphicon-search"></i>
             <div id="container-location-search"></div>
         </div>
+
+
+        <div id="container-xs-menu" ng-show="isDeviceMobile" ng-cloak>
+            <i class="glyphicon glyphicon-menu-hamburger"></i>
+            <div id="xs-menu" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
+            </div>
+        </div>
     </div>
+
+    <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
+        <div id="map">
+            <ui-gmap-google-map center='map.center'
+                                zoom='map.zoom'
+                                options="map.options">
+                <ui-gmap-layer type="TrafficLayer" show="true"></ui-gmap-layer>
+
+                <ui-gmap-marker coords="userMarker.coords"
+                                options="userMarker.options"
+                                idkey="userMarker.id">
+                </ui-gmap-marker>
+
+
+                <ui-gmap-marker idkey="newPlaceMarker.id"
+                                coords="newPlaceMarker.coords"
+                                options="newPlaceMarker.options"
+                                events="newPlaceMarker.events">
+                </ui-gmap-marker>
+                <ui-gmap-window show="newPlaceMarker.infoWindow.show"
+                                coords="newPlaceMarker.coords"
+                                options="newPlaceMarker.infoWindow.options"
+                                templateurl="newPlaceMarker.infoWindow.templateUrl"
+                                templateParameter="newPlaceMarker.infoWindow.params"
+                                closeClick="newPlaceMarker.infoWindow.closeClick()"
+                                ng-cloak>
+                </ui-gmap-window>
+
+
+                <ui-gmap-marker ng-repeat="m in markers"
+                                idkey="m.id"
+                                coords="m.coords"
+                                options="m.options"
+                                events="m.events"
+                                ng-cloak>
+                    <ui-gmap-window show="m.infoWindow.show"
+                                    coords="m.coords"
+                                    options="m.infoWindow.options"
+                                    closeClick="m.infoWindow.closeClick()"
+                                    ng-cloak>
+                        {{m.infoWindow.label}}
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+
+
+                <ui-gmap-search-box options="searchbox.options"
+                                    template="searchbox.template"
+                                    events="searchbox.events"
+                                    parentdiv="searchbox.parentdiv">
+                </ui-gmap-search-box>
+
+
+                <ui-gmap-map-control template="goCenter.tpl.html"
+                                     position="left-bottom"
+                                     index="1"
+                                     ng-if="isDeviceMobile"
+                ></ui-gmap-map-control>
+                <ui-gmap-map-control template="getPlaces.tpl.html"
+                                     position="right-bottom"
+                                     index="1"
+                                     ng-if="isDeviceMobile"
+                ></ui-gmap-map-control>
+                <ui-gmap-map-control template="addPlace.tpl.html"
+                                     position="right-bottom"
+                                     index="1"
+                                     ng-if="isDeviceMobile"
+                ></ui-gmap-map-control>
+
+            </ui-gmap-google-map>
+        </div>
+    </div>
+
+
 </div>
 
 
@@ -348,6 +378,8 @@ it's just light, simple and instantaneously available."/>
 
 <script src="js/lib/legacy.js"></script>
 <script src="js/lib/detectmobilebrowser.min.js"></script>
+<script src="js/lib/jasny-bootstrap.js"></script>
+<script src="js/lib/offcanvas.js"></script>
 
 <!-- @if PKG_ENV!='desktop' -->
 <script src="cordova.js"></script>

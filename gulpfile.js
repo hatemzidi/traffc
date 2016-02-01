@@ -91,7 +91,7 @@ var settings = {
 
 // tasks
 gulp.task('lint', function () {
-    gulp.src(['./app/**/*.js', '!./app/**/*.min.js', '!./app/lib/**', '!./app/old/**'])
+    gulp.src(['./app/**/*.js', '!./app/**/*.min.js', '!./app/lib/**', '!./app/js/lib/*.js', '!./app/old/**'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(jshint.reporter('fail'));
@@ -312,8 +312,7 @@ gulp.task('build-android', function () {
     runSequence(
         ['clean:www'],
         ['update-version'],
-        ['copy-www'],
-        ['cordova-build-android']
+        ['copy-www']
     );
 });
 
@@ -322,8 +321,7 @@ gulp.task('build-ios', function () {
     runSequence(
         ['clean:www'],
         ['update-version'],
-        ['copy-www'],
-        ['cordova-build-ios']
+        ['copy-www']
     );
 });
 
