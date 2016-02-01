@@ -46,6 +46,18 @@ angular.module('traffc')
                 }
             };
 
+            $scope.creditsModalOptions = {
+                title: 'Credits & Thanks',
+                templateUrl: 'views/credits-modal.tpl.html',
+                buttons: {
+                    ok: {
+                        label: 'Close',
+                        className: 'btn-default'
+                    }
+
+                }
+            };
+
             $scope.placesModalOptions = {
                 title: 'Places',
                 templateUrl: 'views/favoritePlaces-modal.tpl.html',

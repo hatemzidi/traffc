@@ -139,6 +139,10 @@ it's just light, simple and instantaneously available."/>
                 <li><a href="#" class="aboutModal"
                        ng-bootbox-custom-dialog
                        ng-bootbox-options="aboutModalOptions">About</a></li>
+                <li class="divider"></li>
+                <li><a href="#" class="creditsModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="creditsModalOptions">Credits</a></li>
             </ul>
         </div>
 
@@ -225,6 +229,10 @@ it's just light, simple and instantaneously available."/>
                         <li><a href="#" class="aboutModal"
                                ng-bootbox-custom-dialog
                                ng-bootbox-options="aboutModalOptions">About</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="creditsModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="creditsModalOptions">Credits</a></li>
                     </ul>
                 </li>
             </ul>
@@ -249,9 +257,9 @@ it's just light, simple and instantaneously available."/>
         </div>
 
 
-        <div id="container-xs-menu" ng-show="isDeviceMobile" ng-cloak>
-            <i class="glyphicon glyphicon-menu-hamburger"></i>
-            <div id="xs-menu" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
+        <div id="container-xs-menu" ng-show="isDeviceMobile" ng-cloak data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
+            <i class="glyphicon glyphicon-menu-hamburger" ></i>
+            <div id="xs-menu" >
             </div>
         </div>
     </div>
@@ -298,7 +306,6 @@ it's just light, simple and instantaneously available."/>
                         {{m.infoWindow.label}}
                     </ui-gmap-window>
                 </ui-gmap-marker>
-
 
                 <ui-gmap-search-box options="searchbox.options"
                                     template="searchbox.template"
