@@ -18,6 +18,14 @@ var CordovaInit = function () {
             /* jshint ignore:start */
             setInterval(reloadTiles, 5 * 1000); // update on mobile every 5sec
             /* jshint ignore:end */
+
+            /* jshint ignore:start */
+            // handle the back button
+            document.addEventListener('backbutton', onBackKeyDown, true);
+
+            document.addEventListener("menubutton", onMenuKeyDown, true);
+            /* jshint ignore:end */
+
         }
 
         /* jshint ignore:start */
