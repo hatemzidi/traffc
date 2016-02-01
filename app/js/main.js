@@ -26,6 +26,13 @@ var CordovaInit = function () {
             document.addEventListener("menubutton", onMenuKeyDown, true);
             /* jshint ignore:end */
 
+            // force all link to go to default browser
+            $(document).on('click', 'a', function (event) {
+                event.preventDefault();
+                window.open($(this).attr('href'), '_system');
+                return false;
+            });
+
         }
 
         /* jshint ignore:start */
