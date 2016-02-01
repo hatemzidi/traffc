@@ -85,8 +85,9 @@ $(function () {
         }
     });
 
-    $(document).click(function () {
-        $('.offcanvas').offcanvas('hide');
+    $('.offcanvas').offcanvas({
+        toggle : false,
+        autohide : true
     });
 
 });

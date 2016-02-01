@@ -81,7 +81,7 @@ html {
 }
 
 .brand.large {
-    font-size: 25px;
+    font-size: 26px;
 }
 
 .header {
@@ -396,7 +396,7 @@ html {
 
 #floating-logo {
     position: absolute;
-    top: 6px;
+    top: 2px;
     z-index: 4;
     float: left;
     width: 150px;
@@ -450,12 +450,12 @@ html {
     opacity: 1;
 }
 
-#container-xs-menu #xs-menu {
+#container-xs-menu #xs-menu,
+#container-map-location-search #container-location-search {
     position: relative;
-    width: 42px;
+    min-width: 44px;
     height: 40px;
     z-index: 2;
-    opacity: 0;
     cursor: pointer;
     -webkit-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
     -moz-box-shadow: 0 0 3px 0 rgba(0, 188, 102, .25);
@@ -465,7 +465,6 @@ html {
 }
 
 #container-map-location-search #map-location-search {
-
     position: relative;
     width: 42px;
     height: 40px;
@@ -727,6 +726,7 @@ img.settings {
 
     .header {
         min-height: 0;
+        border: 0;
     }
 }
 
