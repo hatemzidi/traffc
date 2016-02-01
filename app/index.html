@@ -100,9 +100,8 @@ it's just light, simple and instantaneously available."/>
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="lib/angular-xeditable/dist/css/xeditable.css">
     <link rel="stylesheet" href="lib/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="lib/jasny-bootstrap/dist/css/jasny-bootstrap.css">
     <link rel="stylesheet" href="css/navmenu-push.css">
-    <link rel="stylesheet" href="css/jasny-bootstrap.css">
-
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -139,6 +138,8 @@ it's just light, simple and instantaneously available."/>
                 <li><a href="#" class="aboutModal"
                        ng-bootbox-custom-dialog
                        ng-bootbox-options="aboutModalOptions">About</a></li>
+                <li class="divider"></li>
+                <li><a href="http://whatis.traffc.info/privacy.html">Privacy Policy</a></li>
                 <li class="divider"></li>
                 <li><a href="#" class="creditsModal"
                        ng-bootbox-custom-dialog
@@ -230,6 +231,8 @@ it's just light, simple and instantaneously available."/>
                                ng-bootbox-custom-dialog
                                ng-bootbox-options="aboutModalOptions">About</a></li>
                         <li class="divider"></li>
+                        <li><a href="http://whatis.traffc.info/privacy.html">Privacy Policy</a></li>
+                        <li class="divider"></li>
                         <li><a href="#" class="creditsModal"
                                ng-bootbox-custom-dialog
                                ng-bootbox-options="creditsModalOptions">Credits</a></li>
@@ -257,9 +260,10 @@ it's just light, simple and instantaneously available."/>
         </div>
 
 
-        <div id="container-xs-menu" ng-show="isDeviceMobile" ng-cloak data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
-            <i class="glyphicon glyphicon-menu-hamburger" ></i>
-            <div id="xs-menu" >
+        <div id="container-xs-menu" ng-show="isDeviceMobile" ng-cloak data-toggle="offcanvas" data-target=".navmenu"
+             data-canvas="body">
+            <i class="glyphicon glyphicon-menu-hamburger"></i>
+            <div id="xs-menu">
             </div>
         </div>
     </div>
@@ -363,6 +367,9 @@ it's just light, simple and instantaneously available."/>
 <script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
 
 <script src="lib/angular-xeditable/dist/js/xeditable.js"></script>
+
+<script src="lib/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
+<script src="lib/jasny-bootstrap/js/offcanvas.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -385,8 +392,7 @@ it's just light, simple and instantaneously available."/>
 
 <script src="js/lib/legacy.js"></script>
 <script src="js/lib/detectmobilebrowser.min.js"></script>
-<script src="js/lib/jasny-bootstrap.js"></script>
-<script src="js/lib/offcanvas.js"></script>
+
 
 <!-- @if PKG_ENV!='desktop' -->
 <script src="cordova.js"></script>
