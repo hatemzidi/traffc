@@ -69,7 +69,7 @@ angular.module('traffc')
 
             // get the user's position
             $geolocation.getCurrentPosition({
-                timeout: 5000,
+                timeout: 11000,
                 maximumAge: 100,
                 enableHighAccuracy: true
             }).then(function (position) {
