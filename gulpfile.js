@@ -53,7 +53,7 @@ var settings = {
      * release / build
      */
     version: !!argv.version ?
-        argv.version : '0.9.2',
+        argv.version : '0.9.3',
 
     /*
      * release / build
@@ -158,6 +158,7 @@ gulp.task('update-version', function () {
             'version': settings.version
         }))
         .pipe(gulp.dest('./'));
+
 });
 
 

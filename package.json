@@ -1,6 +1,6 @@
 {
   "name": "traffc",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "traffc is your new road companion. The minimalistic tool to check, in real time, your area's traffic condition. It's just light, simple and instantaneously available.",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "org.apache.cordova.device",
     "org.apache.cordova.geolocation",
     "org.apache.cordova.statusbar",
+    "cordova-plugin-network-information",
     "org.apache.cordova.whitelist"
   ],
   "dependencies": {},

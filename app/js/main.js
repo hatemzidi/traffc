@@ -33,6 +33,13 @@ var CordovaInit = function () {
                 return false;
             });
 
+        } else {
+            // force all link to go to default browser in manual/desktop mode
+            $(document).on('click', 'a.external', function (event) {
+                event.preventDefault();
+                window.open($(this).attr('href'), '_blank');
+                return false;
+            });
         }
 
         /* jshint ignore:start */

@@ -5,4 +5,13 @@
 var device = {
     platform : ''
 };
+
+var StatusBar = {
+    styleDefault : function(){
+
+    },
+    styleLightContent : function(){
+
+    }
+};
 /* jshint ignore:end */
