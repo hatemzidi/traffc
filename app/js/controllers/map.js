@@ -69,8 +69,8 @@ angular.module('traffc')
 
             // get the user's position
             $geolocation.getCurrentPosition({
-                timeout: 11000,
-                maximumAge: 100,
+                timeout: 10001,
+                maximumAge: 3000,
                 enableHighAccuracy: true
             }).then(function (position) {
                 console.debug('Got the current geoposition.');
@@ -91,8 +91,8 @@ angular.module('traffc')
 
 
             $geolocation.watchPosition({
-                timeout: 1000,
-                maximumAge: 1000,
+                timeout: 10001,
+                maximumAge: 3000,
                 enableHighAccuracy: true
             });
 
