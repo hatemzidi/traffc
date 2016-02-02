@@ -208,6 +208,13 @@ angular.module('traffc')
                 return Date();
             }, function () {
                 var style = $settings.data.nightMode === true && $settings.isEvening() ? 'dark' : 'light';
+
+                if (style === 'light') {
+                    StatusBar.styleDefault();
+                } else {
+                    StatusBar.styleLightContent();
+                }
+
                 $map.setStyle(style);
             });
 
