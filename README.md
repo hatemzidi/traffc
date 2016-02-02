@@ -30,3 +30,7 @@ traffc is licensed under the GPL v2 or later.
 
 A copy of the license is included in the root of this repository. The file is named `LICENSE`.
 
+## Credits
+- Logo inspired from [Alessandro Roncone](https://github.com/alecive/FlatWoken)'s work on FlatWoken.
+- Markers icons are from [dreamstale](http://www.dreamstale.com/free-downloads/).
+- User marker & persona are from : [icons8](https://icons8.com/)</a>.
