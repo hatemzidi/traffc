@@ -22,6 +22,7 @@
     "angular": false,
     "google": false,
     "device": false,  // cordova.device
+    "cordova": false,  // cordova.device
     "$": false,
     "_":false
   }

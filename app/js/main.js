@@ -27,9 +27,9 @@ var CordovaInit = function () {
             /* jshint ignore:end */
 
             // force all link to go to default browser
-            $(document).on('click', 'a', function (event) {
+            $(document).on('click', 'a.external', function (event) {
                 event.preventDefault();
-                window.open($(this).attr('href'), '_system');
+                cordova.InAppBrowser.open($(this).attr('href'), '_blank', 'location=no, hardwareback=yes, toolbar=yes');
                 return false;
             });
 
