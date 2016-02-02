@@ -23,6 +23,7 @@
     "google": false,
     "device": false,  // cordova.device
     "cordova": false,  // cordova.device
+    "StatusBar": false,  // cordova.device
     "$": false,
     "_":false
   }
