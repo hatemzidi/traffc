@@ -59,7 +59,7 @@ angular.module('traffc', [
             isFavorite: p.isFavorite,
             coords: p.coords,
             label: p.label,
-            icon: p.isFavorite ? 'img/marker_fav_place.3.png' : 'img/marker_place.png'
+            icon: p.isFavorite ? 'img/marker_fav_place.png' : 'img/marker_place.png'
         });
 
 

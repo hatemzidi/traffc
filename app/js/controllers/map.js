@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('traffc')
-//todo extract this, preappend with 'views/'
+    //todo extract this, preappend with 'views/'
     .run(['$templateCache', function ($templateCache) {
         $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control clearable" id="map-location-search" placeholder="Search for a location..." autocomplete="off">');
         $templateCache.put('getPlaces.tpl.html', '<div id="getFavoriteUI" ng-click="showPlacesModal()" ng-controller="navCtrl"><i class="fa fa-heart fa-2x"></i></div>');
@@ -31,6 +31,8 @@ angular.module('traffc')
                         var places = autoComplete.getPlace();
 
                         if (places.address_components) {
+                            $markers.delete(2); //reset found marker
+
                             /*jshint camelcase: true */
                             var bounds = new google.maps.LatLngBounds();
                             bounds.extend(places.geometry.location);
@@ -39,6 +41,23 @@ angular.module('traffc')
                             $scope.$emit('map.center', {
                                 latitude: bounds.getNorthEast().lat(),
                                 longitude: bounds.getNorthEast().lng()
+                            });
+
+
+                            //add marker for result
+
+                            $markers.set({
+                                id: 2,
+                                isFavorite: false,
+                                icon: 'img/marker_place_found.png',
+                                coords: {
+                                    latitude: places.geometry.location.lat(),
+                                    longitude: places.geometry.location.lng()
+                                },
+                                /*jshint camelcase: false */
+                                label: places.formatted_address,
+                                /*jshint camelcase: true */
+                                store: false
                             });
 
                             // reset autocomplete input field
@@ -141,7 +160,7 @@ angular.module('traffc')
                             // reset marker
                             $scope.newPlaceMarker.reset();
                         },
-                        abort: function (){
+                        abort: function () {
                             // reset marker
                             $scope.newPlaceMarker.reset();
                             // hide me
@@ -208,7 +227,7 @@ angular.module('traffc')
             }, function () {
                 var style = $settings.data.nightMode === true && $settings.isEvening() ? 'dark' : 'light';
 
-                if ( typeof StatusBar !== 'undefined') {
+                if (typeof StatusBar !== 'undefined') {
                     if (style === 'light') {
                         StatusBar.styleDefault();
                     } else {
@@ -224,14 +243,17 @@ angular.module('traffc')
             $scope.$watch('markers', function (nv, ov) {
                 //todo try to ignore infowindow.show
                 if (!_.isEqual(nv, ov)) {
-                    var places = _.map(nv, function (i) {
-                        return {
-                            id: i.id,
-                            isFavorite: i.isFavorite,
-                            coords: i.coords,
-                            label: i.infoWindow.label
-                        };
-                    });
+                    var places = _.reduce(nv, function (r,i) {
+                        if (i.store === true) {
+                            r.push( {
+                                id: i.id,
+                                isFavorite: i.isFavorite,
+                                coords: i.coords,
+                                label: i.infoWindow.label
+                            });
+                        }
+                        return r;
+                    }, []);
 
                     $storage.set('_traffc_favorite_places', places);
                 }
@@ -290,6 +312,11 @@ angular.module('traffc')
 
             $scope.$on('map.setFavoritePlace', function () {
                 console.debug('map.setFavoritePlace triggered');
+            });
+
+            $scope.$on('map.dragend', function () {
+                console.debug('map.dragend triggered');
+                $markers.delete(2);  // delete the search marker
             });
 
         }]);

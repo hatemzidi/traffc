@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('traffc')
-    .service('$map', ['$mapStyle', '$settings', function ($config, $settings) {
+    .service('$map', ['$rootScope', '$mapStyle', '$settings', function ($rootScope, $config, $settings) {
 
 
         return {
@@ -25,6 +25,11 @@ angular.module('traffc')
                 maxZoom: 20,
                 minZoom: 3,
                 styles : []
+            },
+            events : {
+                dragend : function() {
+                    $rootScope.$broadcast('map.dragend', {});
+                }
             },
             mapStyles: $config,
             setStyle : function(style) {

@@ -10,6 +10,7 @@ angular.module('traffc')
                 var placeMarker = {
                     id: null,
                     isFavorite: false,
+                    store: true,
                     coords: {},
                     options: {
                         visible: true,
@@ -51,6 +52,7 @@ angular.module('traffc')
                 angular.extend(placeMarker, {
                     id: datum.id,
                     isFavorite: datum.isFavorite,
+                    store: (typeof datum.store === 'undefined') ? true : datum.store,
                     coords: datum.coords
                 });
 
@@ -64,6 +66,15 @@ angular.module('traffc')
             },
             get: function () {
                 return this.list;
+            },
+            delete: function (id) {
+                var idx = _.findIndex(this.list, {id: id});
+                if (idx >= 0) {
+                    this.list.splice(idx, 1);
+                }
+            },
+            reset: function () {
+                this.list = [];
             }
         };
 
