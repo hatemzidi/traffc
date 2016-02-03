@@ -20,7 +20,7 @@ angular.module('traffc')
 
             // make it favorite
             $markers.list[idx].isFavorite = true;
-            $markers.list[idx].options.icon.url = 'img/marker_fav_place.3.png';
+            $markers.list[idx].options.icon.url = 'img/marker_fav_place.png';
             $markers.list[idx].options.animation = google.maps.Animation.DROP;
 
 
