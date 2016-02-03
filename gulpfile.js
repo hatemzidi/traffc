@@ -54,7 +54,7 @@ var settings = {
      * release / build
      */
     version: !!argv.version ?
-        argv.version : '0.9.4',
+        argv.version : '0.9.6',
 
     /*
      * release / build
