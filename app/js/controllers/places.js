@@ -3,7 +3,10 @@
 angular.module('traffc')
     .controller('placesCtrl', function ($scope, $rootScope, $markers) {
 
-        $scope.markers = $markers.list;
+        // for the view, minus the search marker, if any
+        $scope.markers = _.filter($markers.list, function (m) {
+            return m.id !== 2;
+        });
 
         $scope.centerTo = function (coords) {
             $rootScope.$broadcast('map.center', coords);
@@ -33,11 +36,11 @@ angular.module('traffc')
         };
 
         $scope.idx = -1;
-        $scope.onShow = function(idx) {
+        $scope.onShow = function (idx) {
             $scope.idx = idx;
         };
 
-        $scope.onHide = function() {
+        $scope.onHide = function () {
             $scope.idx = -1;
         };
 
