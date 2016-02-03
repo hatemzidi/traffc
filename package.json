@@ -1,6 +1,6 @@
 {
   "name": "traffc",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "traffc is your new road companion. The minimalistic tool to check, in real time, your area's traffic condition. It's just light, simple and instantaneously available.",
   "main": "index.js",
   "scripts": {
@@ -40,6 +40,7 @@
     "gulp-minify-css": "^0.3.7",
     "gulp-ng-html2js": "^0.2.2",
     "gulp-preprocess": "^2.0.0",
+    "gulp-props2json": "^2.0.0",
     "gulp-rimraf": "^0.2.0",
     "gulp-uglify": "^0.3.1",
     "gulp-useref": "^3.0.5",

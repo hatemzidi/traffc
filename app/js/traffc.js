@@ -8,8 +8,9 @@ angular.module('traffc', [
     'ngBootbox',
     'xeditable',
     'angular-bootstrap-select',
+    'pascalprecht.translate',
     'LocalStorageModule'
-]).config(['uiGmapGoogleMapApiProvider', 'localStorageServiceProvider', function (GoogleMapApi, $storage) {
+]).config(['uiGmapGoogleMapApiProvider', 'localStorageServiceProvider', '$translateProvider', function (GoogleMapApi, $storage, $translateProvider) {
 
     $storage.setPrefix('traffc');
 
@@ -19,6 +20,15 @@ angular.module('traffc', [
         //sensor : true,
         //libraries: 'places'
     });
+
+   // $translateProvider.useMissingTranslationHandlerLog();
+
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'locales/locale-',
+        suffix: '.json'
+    });
+    $translateProvider.determinePreferredLanguage();
+   // $translateProvider.preferredLanguage('en_US');// is applied on first load
 
 }]).run(['localStorageService', '$markers','editableOptions', function ($storage, $markers, editableOptions) {
 

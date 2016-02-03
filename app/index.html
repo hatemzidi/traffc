@@ -130,21 +130,21 @@ it's just light, simple and instantaneously available."/>
             <ul class="nav navmenu-nav">
                 <li><a href="#" class="settingsModal"
                        ng-bootbox-custom-dialog
-                       ng-bootbox-options="settingsModalOptions">Settings</a></li>
+                       ng-bootbox-options="settingsModalOptions">{{"views.main.menu.settings" | translate}}</a></li>
                 <li class="divider"></li>
                 <li><a href="#" class="whyModal"
                        ng-bootbox-custom-dialog
-                       ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
+                       ng-bootbox-options="whyThisModalOptions">{{"views.main.menu.whythis" | translate}}</a></li>
                 <li class="divider"></li>
                 <li><a href="#" class="aboutModal"
                        ng-bootbox-custom-dialog
-                       ng-bootbox-options="aboutModalOptions">About</a></li>
+                       ng-bootbox-options="aboutModalOptions">{{"views.main.menu.about" | translate}}</a></li>
                 <li class="divider"></li>
-                <li><a href="http://whatis.traffc.info/privacy.html" class="external">Privacy Policy</a></li>
+                <li><a href="http://whatis.traffc.info/privacy.html" class="external">{{"views.main.menu.privacy" | translate}}</a></li>
                 <li class="divider"></li>
                 <li><a href="#" class="creditsModal"
                        ng-bootbox-custom-dialog
-                       ng-bootbox-options="creditsModalOptions">Credits</a></li>
+                       ng-bootbox-options="creditsModalOptions">{{"views.main.menu.credits" | translate}}</a></li>
             </ul>
         </div>
 
@@ -170,7 +170,7 @@ it's just light, simple and instantaneously available."/>
                                         <label class="refreshable btn btn-default"
                                                data-toggle="tooltip"
                                                data-placement="bottom"
-                                               title="Refresh">
+                                               title="{{"views.main.tooltip.refresh" | translate}}">
                                             <input id="isRefreshable" type="checkbox">
                                             <span id="refresh-btn"
                                                   class="glyphicon glyphicon-repeat"></span>
@@ -222,21 +222,21 @@ it's just light, simple and instantaneously available."/>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#" class="settingsModal"
                                ng-bootbox-custom-dialog
-                               ng-bootbox-options="settingsModalOptions">Settings</a></li>
+                               ng-bootbox-options="settingsModalOptions">{{"views.main.menu.settings" | translate}}</a></li>
                         <li class="divider"></li>
                         <li><a href="#" class="whyModal"
                                ng-bootbox-custom-dialog
-                               ng-bootbox-options="whyThisModalOptions">Why this?</a></li>
+                               ng-bootbox-options="whyThisModalOptions">{{"views.main.menu.whythis" | translate}}</a></li>
                         <li class="divider"></li>
                         <li><a href="#" class="aboutModal"
                                ng-bootbox-custom-dialog
-                               ng-bootbox-options="aboutModalOptions">About</a></li>
+                               ng-bootbox-options="aboutModalOptions">{{"views.main.menu.about" | translate}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="http://whatis.traffc.info/privacy.html" class="external">Privacy Policy</a></li>
+                        <li><a href="http://whatis.traffc.info/privacy.html" class="external">{{"views.main.menu.privacy" | translate}}</a></li>
                         <li class="divider"></li>
                         <li><a href="#" class="creditsModal"
                                ng-bootbox-custom-dialog
-                               ng-bootbox-options="creditsModalOptions">Credits</a></li>
+                               ng-bootbox-options="creditsModalOptions">{{"views.main.menu.credits" | translate}}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -371,6 +371,9 @@ it's just light, simple and instantaneously available."/>
 
 <script src="lib/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
 <script src="lib/jasny-bootstrap/js/offcanvas.js"></script>
+
+<script src="lib/angular-translate/angular-translate.js"></script>
+<script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

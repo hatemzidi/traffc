@@ -15,6 +15,7 @@ var ngHtml2Js = require('gulp-ng-html2js');
 var preprocess = require('gulp-preprocess');
 var runSequence = require('run-sequence');
 var rimraf = require('gulp-rimraf');
+var props2json = require('gulp-props2json');
 var git = require('git-rev-sync');
 var dateFormat = require('dateformat');
 var xeditor = require('gulp-xml-editor');
@@ -53,7 +54,7 @@ var settings = {
      * release / build
      */
     version: !!argv.version ?
-        argv.version : '0.9.3',
+        argv.version : '0.9.4',
 
     /*
      * release / build
@@ -199,6 +200,14 @@ gulp.task('copy-fonts', function () {
         .pipe(gulp.dest('dist/fonts/'));
 });
 
+
+// Fonts
+gulp.task('copy-locales', function () {
+    gulp.src('./app/locales/*.properties')
+        .pipe(props2json())
+        .pipe(gulp.dest('./dist/locales'));
+});
+
 // libs other than vendors
 gulp.task('copy-libs', function () {
     gulp.src('./app/js/lib/**')
@@ -303,7 +312,7 @@ gulp.task('default', function () {
 gulp.task('build', function () {
     runSequence(
         ['clean:pre'],
-        ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'inject-ga', 'copy-libs', 'copy-js', 'copy-img', 'copy-fonts', 'copy-static'],
+        ['lint', 'copy-views', 'useref', 'concat', 'preprocess', 'inject-ga', 'copy-libs', 'copy-locales', 'copy-js', 'copy-img', 'copy-fonts', 'copy-static'],
         ['clean:post']
     );
 });
