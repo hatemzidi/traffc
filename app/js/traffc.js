@@ -27,8 +27,9 @@ angular.module('traffc', [
         prefix: 'locales/locale-',
         suffix: '.json'
     });
-    $translateProvider.determinePreferredLanguage();
-   // $translateProvider.preferredLanguage('en_US');// is applied on first load
+    $translateProvider.preferredLanguage('en_US');// is applied on first load
+   // $translateProvider.determinePreferredLanguage();determinePreferredLanguageÂ
+    $translateProvider.useSanitizeValueStrategy('sanitize');
 
 }]).run(['localStorageService', '$markers','editableOptions', function ($storage, $markers, editableOptions) {
 
