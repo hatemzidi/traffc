@@ -12,6 +12,8 @@ You can check [whatis.traffc.info](http://whatis.traffc.info/) for more info.
 ## Live demo
 The site is available at [traffc.info](http://traffc.info/)
 
+The nightly versions is at [dev.traffc.info](http://dev.traffc.info/)
+
 ## Contributing
 
 _everyone_ is encouraged to help improve this project.
