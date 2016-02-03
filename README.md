@@ -5,14 +5,14 @@ This is just a minimalistic web page using Google Maps to ~~quickly~~ visualize 
 There are a lot of existing similar services, web pages or mobile apps, and they are may be more sophisticated, but I was totally bothered by their design and the ads.
 I needed something simple, minimalistic and yet light to render on any web browser (desktop, mobile ...)
 
-traffc is a full html page, with almost no backend, except for the city-searching part.
+traffc is a full standalone HTML5 page, with almost no backend.
 
 You can check [whatis.traffc.info](http://whatis.traffc.info/) for more info.
 
 ## Live demo
 The site is available at [traffc.info](http://traffc.info/)
 
-The nightly versions is at [dev.traffc.info](http://dev.traffc.info/)
+The nightly version is at [dev.traffc.info](http://dev.traffc.info/)
 
 ## Contributing
 
