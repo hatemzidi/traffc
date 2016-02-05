@@ -1,0 +1,37 @@
+<div class="places-grid" ng-controller="placesCtrl">
+    <div class="row" ng-repeat="m in markers">
+        <div class="col-sm-8 col-xs-6 editable-up">
+            <p class="form-control-static place-name truncate"
+               e-required
+               e-placeholder="Enter name"
+               editable-text="m.infoWindow.label"
+               onshow="onShow($index)"
+               onhide="onHide($index)">
+                {{m.infoWindow.label}}
+            </p>
+        </div>
+        <div class="col-sm-4 col-xs-6 no-padding-left text-right editable-down"
+        ng-class="{'hide' : idx === $index} ">
+            <div class="btn-group btn-group-sm" role="group">
+                <button ng-click="centerTo(m.coords)"
+                        type="button"
+                        class="btn btn-success pin-btn">
+                    <span class="glyphicon glyphicon-record"></span>
+                </button>
+                <button ng-click="setFavotirePlace($index)"
+                        type="button"
+                        class="btn fav-btn"
+                        ng-class="m.isFavorite ? 'btn-warning' : 'btn-default'">
+                    <span class="glyphicon" ng-class="m.isFavorite ? 'glyphicon-star' : 'glyphicon-star-empty'"></span>
+                </button>
+                <button ng-click="deletePlace($index)"
+                        type="button"
+                        class="btn btn-danger trash-btn">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="empty" ng-show="markers.length == 0"></div>
+</div>
+<span class="help-block">Click/Tap Name to edit</span>

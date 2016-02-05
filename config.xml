@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://java.sun.com/xml/ns/j2ee" id="com.hatemzidi.traffc" version="0.9.7">
+    <name>traffc</name>
+    <description>
+        traffc is your new road companion. The minimalistic tool to check, in real time, your area's traffic condition.
+        it's just light, simple and instantaneously available.
+    </description>
+    <author email="hatem.zidi@gmail.com" href="http://whatis.traffc.info">
+        Hatem ZIDI
+    </author>
+    <content src="index.html"/>
+    <plugin name="cordova-plugin-whitelist" spec="1"/>
+    <plugin name="cordova-plugin-console" spec="~1.0.2"/>
+    <plugin name="cordova-plugin-network-information" spec="~1.2.0"/>
+    <access origin="*"/>
+    <allow-intent href="http://*/*"/>
+    <allow-intent href="https://*/*"/>
+    <allow-intent href="geo:*"/>
+    <allow-navigation href="http://*/*"/>
+    <preference name="loglevel" value="INFO"/>
+    <platform name="ios">
+        <allow-intent href="itms:*"/>
+        <allow-intent href="itms-apps:*"/>
+        <preference name="AutoHideSplashScreen" value="true"/>
+        <preference name="StatusBarOverlaysWebView" value="true"/>
+        <preference name="StatusBarStyle" value="darkcontent"/>
+        <preference name="BackupWebStorage" value="local"/>
+        <icon height="29" src="resources/icons/ios/icon-small.png" width="29"/>
+        <icon height="58" src="resources/icons/ios/icon-small-2x.png" width="58"/>
+        <icon height="40" src="resources/icons/ios/icon-40.png" width="40"/>
+        <icon height="80" src="resources/icons/ios/icon-40-2x.png" width="80"/>
+        <icon height="50" src="resources/icons/ios/icon-50.png" width="50"/>
+        <icon height="100" src="resources/icons/ios/icon-50-2x.png" width="100"/>
+        <icon height="57" src="resources/icons/ios/icon.png" width="57"/>
+        <icon eight="114" src="resources/icons/ios/icon-2x.png" width="114"/>
+        <icon height="60" src="resources/icons/ios/icon-60.png" width="60"/>
+        <icon height="120" src="resources/icons/ios/icon-60-2x.png" width="120"/>
+        <icon height="180" src="resources/icons/ios/icon-60-3x.png" width="180"/>
+        <icon height="72" src="resources/icons/ios/icon-72.png" width="72"/>
+        <icon height="144" src="resources/icons/ios/icon-72-2x.png" width="144"/>
+        <icon height="76" src="resources/icons/ios/icon-76.png" width="76"/>
+        <icon height="152" src="resources/icons/ios/icon-76-2x.png" width="152"/>
+        <splash height="480" src="resources/screens/ios/screen-iphone-portrait.png" width="320"/>
+        <splash height="960" src="resources/screens/ios/screen-iphone-portrait-2x.png" width="640"/>
+        <splash height="1136" src="resources/screens/ios/screen-iphone-portrait-568h-2x.png" width="640"/>
+        <splash height="1334" src="resources/screens/ios/screen-iphone-portrait-667h.png" width="750"/>
+        <splash height="2208" src="resources/screens/ios/screen-iphone-portrait-736h.png" width="1242"/>
+        <splash height="1024" src="resources/screens/ios/screen-ipad-portrait.png" width="768"/>
+        <splash height="2048" src="resources/screens/ios/screen-ipad-portrait-2x.png" width="1536"/>
+    </platform>
+    <platform name="android">
+        <allow-intent href="market:*"/>
+        <preference name="splashscreen" value="screen"/>
+        <preference name="splashScreenDelay" value="10000"/>
+        <icon density="ldpi" src="resources/icons/android/icon-36-ldpi.png"/>
+        <icon density="mdpi" src="resources/icons/android/icon-48-mdpi.png"/>
+        <icon density="hdpi" src="resources/icons/android/icon-72-hdpi.png"/>
+        <icon density="xhdpi" src="resources/icons/android/icon-96-xhdpi.png"/>
+        <icon density="xxhdpi" src="resources/icons/android/icon-144-xxhdpi.png"/>
+        <icon density="xxxhdpi" src="resources/icons/android/icon-192-xxxhdpi.png"/>
+        <splash density="port-ldpi" src="resources/screens/android/screen-ldpi-portrait.png"/>
+        <splash density="port-mdpi" src="resources/screens/android/screen-mdpi-portrait.png"/>
+        <splash density="port-hdpi" src="resources/screens/android/screen-hdpi-portrait.png"/>
+        <splash density="port-xhdpi" src="resources/screens/android/screen-xhdpi-portrait.png"/>
+    </platform>
+
+</widget>
