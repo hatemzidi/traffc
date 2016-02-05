@@ -1,5 +1,6 @@
 'use strict';
 
+var pause = false;
 
 function resizeBootstrapMap() {
     console.debug('window resized');
@@ -24,18 +25,23 @@ function togFnClass(v) {
 }
 
 function reloadTiles() {
-    //debug
-    console.debug('reload layer.');
-    var tiles = $('#map_canvas').find('img');
-    for (var i = 0; i < tiles.length; i++) {
-        var src = $(tiles[i]).attr('src');
-        if (/\/vt\?pb=/.test(src)) {
-            var newSrc = src.split('&ts')[0] + '&ts=' + (new Date()).getTime();
-            $(tiles[i]).attr('src', newSrc);
-        }
-    }
 
-    refreshSpiner();
+    if (!pause) {
+        //debug
+        console.debug('reload layer.');
+
+
+        var tiles = $('#map_canvas').find('img');
+        for (var i = 0; i < tiles.length; i++) {
+            var src = $(tiles[i]).attr('src');
+            if (/\/vt\?pb=/.test(src)) {
+                var newSrc = src.split('&ts')[0] + '&ts=' + (new Date()).getTime();
+                $(tiles[i]).attr('src', newSrc);
+            }
+        }
+
+        refreshSpiner();
+    }
 }
 
 function refreshSpiner() {
@@ -58,6 +64,21 @@ function onMenuKeyDown(e) {
     // Handle the menu button
     console.debug('menuButton triggered');
     $('.offcanvas').offcanvas('show');
+    e.preventDefault();
+}
+
+
+function onPause(e) {
+    // Handle the back button
+    console.debug('traffc is put on Background');
+    pause = true;
+    e.preventDefault();
+}
+
+function onResume(e) {
+    // Handle the back button
+    console.debug('traffc is resumed');
+    pause = false;
     e.preventDefault();
 }
 

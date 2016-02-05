@@ -15,15 +15,22 @@ var CordovaInit = function () {
 
         if (mode === 'auto') {
             $('body').addClass(device.platform.toLowerCase());
+
+            // todo make this more angular compliant
             /* jshint ignore:start */
             setInterval(reloadTiles, 5 * 1000); // update on mobile every 5sec
-            /* jshint ignore:end */
 
-            /* jshint ignore:start */
             // handle the back button
             document.addEventListener('backbutton', onBackKeyDown, true);
 
+            // handle the menu button
             document.addEventListener("menubutton", onMenuKeyDown, true);
+
+            //what to do on active
+            document.addEventListener("resume", onResume, false);
+
+            // what to do on pause
+            document.addEventListener("pause", onPause, false);
             /* jshint ignore:end */
 
             // force all link to go to default browser
