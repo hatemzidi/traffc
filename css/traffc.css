@@ -1,5 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Courgette);
 
+html, body {
+    height: 100%;
+}
 
 .brand {
     font-family: 'Courgette', cursive;
@@ -15,6 +18,11 @@
 .head .logo img {
     width: 64px;
     height: auto;
+}
+
+a.store img {
+    width: 220px;
+    margin-top: 10px;
 }
 
 .footer-info .brand {
@@ -42,13 +50,6 @@
 }
 
 
-.store img {
-    width : 300px;
-}
-
-html, body {
-    height: 100%;
-}
 .thankyou .head {
     min-height: 100%;
     /* equal to footer height */
