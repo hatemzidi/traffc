@@ -25,6 +25,10 @@ a.store img {
     margin-top: 10px;
 }
 
+.iphone-alone {
+    width:280px;
+}
+
 .footer-info .brand {
     padding: 3px 15px;
     height: 32px !important;
