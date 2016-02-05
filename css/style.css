@@ -337,9 +337,13 @@ h1, h2, h3, h4, h5, h6, p, img, .btn {
 }
 
 .download-section{
-	margin-top: 50px;
-	margin-bottom: 50px;
+	/*margin-top: 50px;*/
+	/*margin-bottom: 50px;*/
+	/*color: #6b6868; */
+	padding-top: 50px;
+	padding-bottom: 50px;
 	color: #6b6868;
+	background-color: #f8f8f8;
 }
 
 .download-section h2{
