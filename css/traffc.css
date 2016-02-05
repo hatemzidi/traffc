@@ -43,8 +43,11 @@ a.store img {
     float: left;
 }
 
+.clients-list img {
+    width : 120px
+}
 
-.our-clients, .clients-logos {
+.clients-logos {
     display: none;
 }
 
