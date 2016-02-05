@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>traffc</title>
+
+    <!-- Set the viewport. -->
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <!-- @if PKG_ENV!='desktop' -->
+    <!-- Set security; only on mobile -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src *; style-src 'self' 'unsafe-inline' http://fonts.googleapis.com http://fonts.gstatic.com; img-src data: *; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://maps.googleapis.com https://maps.googleapis.com http://www.google-analytics.com">
+    <!-- @endif -->
+
+    <!-- @if PKG_ENV='desktop' -->
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
+
+    <!-- no cache -->
+    <meta http-equiv="cache-control" content="max-age=0"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+
+    <!-- for Google -->
+    <meta name="description" content="traffc is your new road companion. The minimalistic tool to check, in real time, your area's traffic condition.
+it's just light, simple and instantaneously available."/>
+    <meta name="keywords" content="traffc, maps, roads, traffic, traffic condition"/>
+    <meta name="copyright" content="2015"/>
+    <meta name="application-name" content="traffc"/>
+    <meta name="author" content="hatem.zidi">
+
+    <!-- for Facebook -->
+    <meta property="og:title" content="traffc"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="http://traffc.info/img/meta_preview.png"/>
+    <meta property="og:url" content="http://traffc.info"/>
+    <meta property="og:description" content="The minimalistic tool to check, in real time, your area's traffic condition.
+it's just light, simple and instantaneously available."/>
+
+    <!-- for Twitter -->
+    <meta property="twitter:card" content="summary"/>
+    <meta property="twitter:url" content="http://traffc.info"/>
+    <meta property="twitter:creator" content="@tom_z"/>
+    <meta property="twitter:title" content="traffc"/>
+    <meta property="twitter:description" content="The minimalistic tool to check, in real time, your area's traffic condition.
+it's just light, simple and instantaneously available."/>
+    <meta property="twitter:image" content="http://traffc.info/img/meta_preview.png"/>
+
+
+    <!-- Allow web app to be run in full-screen mode. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Set the app title -->
+    <meta name="apple-mobile-web-app-title" content="traffc">
+
+    <!-- Configure the status bar. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Disable automatic phone number detection. -->
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- ios & safari -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+
+    <!-- android and others -->
+    <link rel="icon" type="image/png" href="favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- windows desktop & phone -->
+    <meta name="msapplication-config" content="/browserconfig.xml"/>
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- @endif -->
+
+    <!-- build:css css/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/angular-xeditable/dist/css/xeditable.css">
+    <link rel="stylesheet" href="lib/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="lib/jasny-bootstrap/dist/css/jasny-bootstrap.css">
+    <link rel="stylesheet" href="css/navmenu-push.css">
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css css/traffc.css -->
+    <link rel="stylesheet" href="css/traffc.css">
+    <link rel="stylesheet" href="css/persona.css">
+    <!-- endbuild -->
+</head>
+<body>
+
+<nav class="header navbar navbar-default" ng-controller="navCtrl">
+
+    <div class="container-fluid" ng-controller="modalCtrl">
+
+        <div class="navbar-header hidden-xs">
+            <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
+            <a class="navbar-brand brand large" href="#">traffc</a>
+            <!-- todo make this ... -->
+            <div persona announce="Oops" status="hide" is-alert="true"></div>
+            <!-- ... configurable -->
+        </div>
+
+
+        <div class="navmenu navmenu-default navmenu-fixed-right offcanvas">
+            <ul class="nav navmenu-nav">
+                <li><a href="#" class="settingsModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="settingsModalOptions">{{"views.main.menu.settings" | translate}}</a></li>
+                <li class="divider"></li>
+                <li><a href="#" class="whyModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="whyThisModalOptions">{{"views.main.menu.whythis" | translate}}</a></li>
+                <li class="divider"></li>
+                <li><a href="#" class="aboutModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="aboutModalOptions">{{"views.main.menu.about" | translate}}</a></li>
+                <li class="divider"></li>
+                <li><a href="http://whatis.traffc.info/privacy.html" class="external">{{"views.main.menu.privacy" | translate}}</a></li>
+                <li class="divider"></li>
+                <li><a href="#" class="creditsModal"
+                       ng-bootbox-custom-dialog
+                       ng-bootbox-options="creditsModalOptions">{{"views.main.menu.credits" | translate}}</a></li>
+            </ul>
+        </div>
+
+
+        <div id="bs-main-menu" class="collapse navbar-collapse hidden-xs">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div class="navbar-form navbar-left">
+                        <div class="form-group text-right">
+                            <div class="input-group">
+                                <select id="refreshRate"
+                                        selectpicker d
+                                        data-width="auto"
+                                        data-style="btn-default no-radius-right"
+                                        class="form-control show-tick show-menu-arrow">
+                                    <option value="10">10 sec</option>
+                                    <option value="30">30 sec</option>
+                                    <option value="60">1 mn</option>
+                                </select>
+
+                                <span class="input-group-btn">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="refreshable btn btn-default"
+                                               data-toggle="tooltip"
+                                               data-placement="bottom"
+                                               title="Refresh">
+                                            <input id="isRefreshable" type="checkbox">
+                                            <span id="refresh-btn"
+                                                  class="glyphicon glyphicon-repeat"></span>
+                                        </label>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <button id="backToPosition"
+                                    class="btn btn-default"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Back to my location"
+                                    ng-click="backToMyPosition()">
+                                <span class="glyphicon glyphicon-record"></span>
+                            </button>
+                            <button id="AllFavorites"
+                                    class="btn btn-default"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Favorite locations"
+                                    ng-bootbox-custom-dialog
+                                    ng-bootbox-options="placesModalOptions">
+                                <span class="fa fa-heart"></span>
+                            </button>
+                            <button id="AddFavorite"
+                                    class="btn btn-default"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="Add Favorite"
+                                    ng-click="addPlace()">
+                                <span class="fa fa-plus-square"></span>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-bars"></i>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" class="settingsModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="settingsModalOptions">{{"views.main.menu.settings" | translate}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="whyModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="whyThisModalOptions">{{"views.main.menu.whythis" | translate}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="aboutModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="aboutModalOptions">{{"views.main.menu.about" | translate}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://whatis.traffc.info/privacy.html" class="external">{{"views.main.menu.privacy" | translate}}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="creditsModal"
+                               ng-bootbox-custom-dialog
+                               ng-bootbox-options="creditsModalOptions">{{"views.main.menu.credits" | translate}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div id="container" ng-controller="mapCtrl">
+
+
+    <div id="floating-logo" ng-show="isDeviceMobile" ng-cloak>
+        <a class="navbar-brand logo" href="#"><img class="img-responsive" src="img/logo@2x.png"/></a>
+        <a class="navbar-brand brand large" href="#">traffc</a>
+    </div>
+
+    <div id="extra-controller">
+
+        <div id="container-map-location-search" ng-cloak>
+            <i class="glyphicon glyphicon-search"></i>
+            <div id="container-location-search"></div>
+        </div>
+
+
+        <div id="container-xs-menu" ng-show="isDeviceMobile" ng-cloak data-toggle="offcanvas" data-target=".navmenu"
+             data-canvas="body">
+            <i class="glyphicon glyphicon-menu-hamburger"></i>
+            <div id="xs-menu">
+            </div>
+        </div>
+    </div>
+
+    <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
+        <div id="map">
+            <ui-gmap-google-map center='map.center'
+                                zoom='map.zoom'
+                                events='map.events'
+                                options="map.options">
+                <ui-gmap-layer type="TrafficLayer" show="true"></ui-gmap-layer>
+
+                <ui-gmap-marker coords="userMarker.coords"
+                                options="userMarker.options"
+                                idkey="userMarker.id">
+                </ui-gmap-marker>
+
+
+                <ui-gmap-marker idkey="newPlaceMarker.id"
+                                coords="newPlaceMarker.coords"
+                                options="newPlaceMarker.options"
+                                events="newPlaceMarker.events">
+                </ui-gmap-marker>
+                <ui-gmap-window show="newPlaceMarker.infoWindow.show"
+                                coords="newPlaceMarker.coords"
+                                options="newPlaceMarker.infoWindow.options"
+                                templateurl="newPlaceMarker.infoWindow.templateUrl"
+                                templateParameter="newPlaceMarker.infoWindow.params"
+                                closeClick="newPlaceMarker.infoWindow.closeClick()"
+                                ng-cloak>
+                </ui-gmap-window>
+
+
+                <ui-gmap-marker ng-repeat="m in markers"
+                                idkey="m.id"
+                                coords="m.coords"
+                                options="m.options"
+                                events="m.events"
+                                ng-cloak>
+                    <ui-gmap-window show="m.infoWindow.show"
+                                    coords="m.coords"
+                                    options="m.infoWindow.options"
+                                    closeClick="m.infoWindow.closeClick()"
+                                    ng-cloak>
+                        {{m.infoWindow.label}}
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+
+                <ui-gmap-search-box options="searchbox.options"
+                                    template="searchbox.template"
+                                    events="searchbox.events"
+                                    parentdiv="searchbox.parentdiv">
+                </ui-gmap-search-box>
+
+
+                <ui-gmap-map-control template="goCenter.tpl.html"
+                                     position="left-bottom"
+                                     index="1"
+                                     ng-if="isDeviceMobile"
+                ></ui-gmap-map-control>
+                <ui-gmap-map-control template="getPlaces.tpl.html"
+                                     position="right-bottom"
+                                     index="1"
+                                     ng-if="isDeviceMobile"
+                ></ui-gmap-map-control>
+                <ui-gmap-map-control template="addPlace.tpl.html"
+                                     position="right-bottom"
+                                     index="1"
+                                     ng-if="isDeviceMobile"
+                ></ui-gmap-map-control>
+
+            </ui-gmap-google-map>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- build:js js/vendor.js -->
+<!-- bower:js -->
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/es5-shim/es5-shim.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/json3/lib/json3.min.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/angular-cookies/angular-cookies.js"></script>
+<script src="lib/angular-sanitize/angular-sanitize.js"></script>
+
+<script src="lib/bootbox/bootbox.js"></script>
+<script src="lib/ngBootbox/dist/ngBootbox.js"></script>
+
+<script src='lib/lodash/lodash.js'></script>
+<script src='lib/angular-simple-logger/dist/angular-simple-logger.js'></script>
+<script src='lib/angular-google-maps/dist/angular-google-maps.js'></script>
+
+<script src="lib/bootstrap-select/bootstrap-select.js"></script>
+<script src='lib/angular-bootstrap-select/build/angular-bootstrap-select.js'></script>
+
+<script src='lib/ngGeolocation/ngGeolocation.js'></script>
+
+<script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
+
+<script src="lib/angular-xeditable/dist/js/xeditable.js"></script>
+
+<script src="lib/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
+<script src="lib/jasny-bootstrap/js/offcanvas.js"></script>
+
+<script src="lib/angular-translate/angular-translate.js"></script>
+<script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!--todo use loader & promise -->
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+
+<!-- build:js js/traffc.js -->
+<script src="js/traffc.js"></script>
+<script src="js/controllers/map.js"></script>
+<script src="js/controllers/navigation.js"></script>
+<script src="js/controllers/places.js"></script>
+<script src="js/controllers/modals.js"></script>
+<script src="js/services/map.style.js"></script>
+<script src="js/services/map.js"></script>
+<script src="js/services/markers.js"></script>
+<script src="js/services/settings.js"></script>
+<script src="js/directives/persona.js"></script>
+<script src="js/main.js"></script>
+<!-- endbuild -->
+
+<script src="js/lib/legacy.js"></script>
+<script src="js/lib/detectmobilebrowser.min.js"></script>
+
+
+<!-- @if PKG_ENV!='desktop' -->
+<script src="cordova.js"></script>
+<!-- @endif -->
+
+<!-- inject:analytics -->
+<!-- endinject -->
+</body>
+</html>

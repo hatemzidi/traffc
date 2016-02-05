@@ -15,5 +15,14 @@
 
 # project files
 _phplite
-/resources
-
+/plugins
+/tmp
+/_garbage_
+/platforms
+/app/old
+/app/lib
+/node_modules
+/www
+/dist
+/www
+/build.json
