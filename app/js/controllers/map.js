@@ -8,8 +8,10 @@ angular.module('traffc')
         $templateCache.put('addPlace.tpl.html', '<div id="setFavoriteUI" ng-click="addPlace()" ng-controller="navCtrl"><i class="fa fa-plus-square fa-2x"></i></div>');
         $templateCache.put('goCenter.tpl.html', '<div id="goCenterUI" ng-click="backToMyPosition()" ng-controller="navCtrl"><i class="fa fa-crosshairs fa-2x"></i></div>');
     }])
-    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$map', '$markers', '$settings', 'localStorageService',
-        function ($geolocation, $scope, $rootScope, $map, $markers, $settings, $storage) {
+    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$location', '$map', '$markers', '$settings', 'localStorageService',
+        function ($geolocation, $scope, $rootScope, $location, $map, $markers, $settings, $storage) {
+
+            var searchObject = $location.search();
 
             // for the view
             $scope.map = $map;
@@ -84,50 +86,64 @@ angular.module('traffc')
 
             };
 
+            // geo locate only when no options
+            if (typeof searchObject.geo === 'undefined') {
+                // get the user's position
+                $geolocation.getCurrentPosition({
+                    timeout: 10001,
+                    maximumAge: 3000,
+                    enableHighAccuracy: true
+                }).then(function (position) {
+                    console.debug('Got the current geoposition.');
 
-            // get the user's position
-            $geolocation.getCurrentPosition({
-                timeout: 10001,
-                maximumAge: 3000,
-                enableHighAccuracy: true
-            }).then(function (position) {
-                console.debug('Got the current geoposition.');
+                    // point the user marker to the current position
+                    $scope.userMarker.coords = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
 
-                // point the user marker to the current position
-                $scope.userMarker.coords = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
+                    //center map to the new position
+                    $scope.$emit('map.center', $scope.userMarker.coords);
+
+                }).catch(function () {
+                    console.error('oops, can not locate the user.');
+                    $rootScope.$broadcast('modals.GPSError', {});
+                });
+
+
+                $geolocation.watchPosition({
+                    timeout: 10001,
+                    maximumAge: 3000,
+                    enableHighAccuracy: true
+                });
+
+                $scope.$on('$geolocation.position.changed', function (e, v) {
+                    // todo compare with current coords?
+
+                    if (!_.isEqual($scope.userMarker.coords, v.coords)) {
+                        console.debug('Geoposition changed.');
+                        $scope.userMarker.coords = {
+                            latitude: v.coords.latitude,
+                            longitude: v.coords.longitude
+
+                        };
+                    }
+
+                });
+            } else {
+                //todo verify if valid geo
+                console.debug('Got a position from URL : ' + searchObject.geo);
+                var geo = searchObject.geo.split(',').map(parseFloat);
+                $map.center = {
+                    latitude: geo[0],
+                    longitude: geo[1]
                 };
 
-                //center map to the new position
-                $scope.$emit('map.center', $scope.userMarker.coords);
+            }
 
-            }).catch(function () {
-                console.error('oops, can not locate the user.');
-                $rootScope.$broadcast('modals.GPSError', {});
-            });
-
-
-            $geolocation.watchPosition({
-                timeout: 10001,
-                maximumAge: 3000,
-                enableHighAccuracy: true
-            });
-
-            $scope.$on('$geolocation.position.changed', function (e, v) {
-                // todo compare with current coords?
-
-                if (!_.isEqual($scope.userMarker.coords, v.coords)) {
-                    console.debug('Geoposition changed.');
-                    $scope.userMarker.coords = {
-                        latitude: v.coords.latitude,
-                        longitude: v.coords.longitude
-
-                    };
-                }
-
-            });
-
+            if (typeof searchObject.zoom !== 'undefined') {
+                $map.zoom = parseInt(searchObject.zoom);
+            }
 
             /* ----- add new place marker ---*/
             // todo extract this into a $marker provider, and use extend
@@ -243,9 +259,9 @@ angular.module('traffc')
             $scope.$watch('markers', function (nv, ov) {
                 //todo try to ignore infowindow.show
                 if (!_.isEqual(nv, ov)) {
-                    var places = _.reduce(nv, function (r,i) {
+                    var places = _.reduce(nv, function (r, i) {
                         if (i.store === true) {
-                            r.push( {
+                            r.push({
                                 id: i.id,
                                 isFavorite: i.isFavorite,
                                 coords: i.coords,

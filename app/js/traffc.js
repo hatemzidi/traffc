@@ -2,6 +2,7 @@
 
 angular.module('traffc', [
     'ngCookies',
+    'ngRoute',
     'ngSanitize',
     'uiGmapgoogle-maps',
     'ngGeolocation',
@@ -10,28 +11,34 @@ angular.module('traffc', [
     'angular-bootstrap-select',
     'pascalprecht.translate',
     'LocalStorageModule'
-]).config(['uiGmapGoogleMapApiProvider', 'localStorageServiceProvider', '$translateProvider', function (GoogleMapApi, $storage, $translateProvider) {
+]).config(['uiGmapGoogleMapApiProvider', 'localStorageServiceProvider', '$translateProvider', '$locationProvider',
+    function (GoogleMapApi, $storage, $translateProvider, $locationProvider) {
 
-    $storage.setPrefix('traffc');
+        $storage.setPrefix('traffc');
 
-    GoogleMapApi.configure({
-        //key: 'your api key',
-        //v: '3.21',
-        //sensor : true,
-        //libraries: 'places'
-    });
+        GoogleMapApi.configure({
+            //key: 'your api key',
+            //v: '3.21',
+            //sensor : true,
+            //libraries: 'places'
+        });
 
-   // $translateProvider.useMissingTranslationHandlerLog();
+        // $translateProvider.useMissingTranslationHandlerLog();
 
-    $translateProvider.useStaticFilesLoader({
-        prefix: 'locales/locale-',
-        suffix: '.json'
-    });
-    $translateProvider.preferredLanguage('en_US');// is applied on first load
-   // $translateProvider.determinePreferredLanguage();determinePreferredLanguageÂ
-    $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'locales/locale-',
+            suffix: '.json'
+        });
+        $translateProvider.preferredLanguage('en_US');// is applied on first load
+        // $translateProvider.determinePreferredLanguage();determinePreferredLanguageÂ
+        $translateProvider.useSanitizeValueStrategy('sanitize');
 
-}]).run(['localStorageService', '$markers','editableOptions', function ($storage, $markers, editableOptions) {
+        $locationProvider.html5Mode({
+            enabled: false,
+            requireBase: false
+        });
+
+    }]).run(['localStorageService', '$markers', 'editableOptions', function ($storage, $markers, editableOptions) {
 
     editableOptions.theme = 'bs3';
     editableOptions.blur = 'cancel';
