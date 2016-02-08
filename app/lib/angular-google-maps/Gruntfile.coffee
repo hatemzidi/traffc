@@ -1,5 +1,7 @@
 log = require('util').log
 _ = require 'lodash'
+kickoff = require 'karma-kickoff'
+argv = require('yargs').argv
 
 module.exports = (grunt) ->
   # Load the required plugins
@@ -15,7 +17,6 @@ module.exports = (grunt) ->
     "grunt-open"
     "grunt-mkdir"
     "grunt-contrib-coffee"
-    "grunt-contrib-jasmine"
     "grunt-conventional-changelog"
     "grunt-bump"
     'grunt-replace'
@@ -49,23 +50,19 @@ module.exports = (grunt) ->
   options.open = _.extend options.open, allExamplesOpen
   grunt.initConfig options
 
+  grunt.registerTask 'build', ['verbosity', 'clean:dist', 'jshint', 'mkdir', 'coffee',
+  'concat:libs', 'replace', 'webpack', 'concat:dist', 'concat:streetview'
+  'copy']
   # Default task: build a release in dist/
-  grunt.registerTask "default", [
-    'bower', 'curl',
-    'verbosity', 'clean:dist', 'jshint', 'mkdir', 'coffee',
-    'concat:libs', 'replace', 'webpack', 'concat:dist', 'concat:streetview'
-    'copy', 'uglify:dist', 'uglify:streetview', 'jasmine:consoleSpec']
+  grunt.registerTask "default", ['bower', 'curl', 'build', 'uglify:dist', 'uglify:streetview', 'karma']
 
   # run default "grunt" prior to generate _SpecRunner.html
   grunt.registerTask "spec", [
     'bower', 'curl',
     'verbosity', "clean:dist", "jshint", "mkdir", "coffee", "concat:libs", "replace", "webpack", "concat",
-    "copy", "connect:jasmineServer", "jasmine:spec", "open:jasmine", "watch:spec"]
+    "copy", "karma", "open:jasmine", "watch:spec"]
 
-  grunt.registerTask "coverage", [
-    'bower', 'curl',
-    "clean:dist", "jshint", "mkdir", "coffee", "concat:libs", "replace", "concat:dist",
-    "copy", "uglify:dist", "jasmine:coverage"]
+  grunt.registerTask "coverage", ['connect:coverage','open:coverage', "watch:spec"]
 
   grunt.registerTask 'default-no-specs', [
     "clean:dist", "jshint", "mkdir", "coffee", "concat:libs", "replace", "concat:dist",
@@ -75,14 +72,14 @@ module.exports = (grunt) ->
 
   dev = ["clean:dist", "jshint", "mkdir", "coffee", "concat:libs", "replace", "webpack", "concat", "copy"]
 
-  grunt.registerTask "dev", dev.concat ["uglify:distMapped", "uglify:streetviewMapped", "jasmine:spec"]
+  grunt.registerTask "dev", dev.concat ["uglify:distMapped", "uglify:streetviewMapped", "karma"]
 
-  grunt.registerTask "fast", dev.concat ["jasmine:spec"]
+  grunt.registerTask "fast", dev.concat ["karma"]
 
   grunt.registerTask "mappAll", [
     'bower', 'curl',
     "clean:dist", "jshint", "mkdir", "coffee", "concat:libs", "replace", "webpack", "concat", "uglify"
-    "copy", "jasmine:spec", "graph"]
+    "copy", "karma", "graph"]
 
   grunt.registerTask "build-street-view", ['clean:streetview','mkdir','coffee', 'concat:libs', 'replace',
     'concat:streetview', 'concat:streetviewMapped', 'uglify:streetview', 'uglify:streetviewMapped']
@@ -131,4 +128,20 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'server', ["connect:server", "watch:all"]
   grunt.registerTask 's', 'server'
+
+  grunt.registerTask 'karma', 'karma runner', ->
+    kickoff @async(),
+      logFn: grunt.log.oklns
+      configFile: require.resolve './karma.conf.coffee'
+
+  grunt.registerTask 'karmaSpecific', 'karma runner', ->
+    kickoff @async(),
+      configFile: require.resolve './karma.conf.coffee'
+      logFn: grunt.log.oklns
+      appendFiles: argv.files.split(',')
+      lengthToPop: 1
+      reporters: ['mocha']
+
+  grunt.registerTask 'karmaB', ['build', 'karmaSpecific']
+  grunt.registerTask 'karmaSpecB', ['build', 'karma']
 #to see all tasks available don't forget "grunt --help" !!!
