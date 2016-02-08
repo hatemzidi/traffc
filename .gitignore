@@ -24,5 +24,4 @@ _phplite
 /node_modules
 /www
 /dist
-/www
 /build.json
