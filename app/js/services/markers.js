@@ -1,10 +1,80 @@
 'use strict';
 
 angular.module('traffc')
-    .service('$markers', [function () {
+    .service('$markers', ['$rootScope',function ($rootScope) {
+
+
+
+        var newPlaceMarker = {
+            id: 1,
+            coords: {},
+            options: {
+                visible: true,
+                animation: google.maps.Animation.DROP,
+                draggable: true,
+                icon: {
+                    url: 'img/marker_new_place.png',
+                    scaledSize: new google.maps.Size(40, 40)
+                }
+            },
+            infoWindow: {
+                options: {  // some graphical adjustments
+                    maxWidth: 300,
+                    pixelOffset: {
+                        width: 0,
+                        height: -40
+                    }
+                },
+                show: false,
+                templateUrl: 'views/infoWindow.addPlace.tpl.html',
+                params: {
+                    placeName: '',
+                    save: function () {
+                        $rootScope.$broadcast('map.saveNewPlace', {});
+                        // reset marker
+                        newPlaceMarker.reset();
+                    },
+                    abort: function () {
+                        // reset marker
+                        newPlaceMarker.reset();
+                        // hide me
+                        newPlaceMarker.options.visible = false;
+                    }
+                },
+                closeClick: function () {
+                    newPlaceMarker.infoWindow.show = false; // update the show flag
+                }
+            },
+            events: {
+                click: function () {
+                    newPlaceMarker.infoWindow.show = !newPlaceMarker.infoWindow.show;
+                },
+                dragstart: function () {
+                    console.debug('marker drag started');
+                    newPlaceMarker.infoWindow.show = false; // force closing the infoWindow
+                },
+                dragend: function () {
+                    console.debug('marker drag ended');
+                    newPlaceMarker.infoWindow.show = true;  // force opening the infoWindow
+
+                }
+            },
+            reset: function () {
+                // hide this marker and its window
+                newPlaceMarker.options.visible = false;
+                newPlaceMarker.infoWindow.show = false;
+
+                // clean params
+                newPlaceMarker.infoWindow.params.placeName = '';
+            }
+
+        };
+
+
 
         var $markers = {
             list: [],
+            newPlaceMarker : newPlaceMarker,
             set: function (datum) {
 
                 var placeMarker = {
@@ -66,6 +136,9 @@ angular.module('traffc')
             },
             get: function () {
                 return this.list;
+            },
+            getNewMarker : function(){
+                return this.newPlaceMarker;
             },
             delete: function (id) {
                 var idx = _.findIndex(this.list, {id: id});

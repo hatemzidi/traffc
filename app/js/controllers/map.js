@@ -8,69 +8,19 @@ angular.module('traffc')
         $templateCache.put('addPlace.tpl.html', '<div id="setFavoriteUI" ng-click="addPlace()" ng-controller="navCtrl"><i class="fa fa-plus-square fa-2x"></i></div>');
         $templateCache.put('goCenter.tpl.html', '<div id="goCenterUI" ng-click="backToMyPosition()" ng-controller="navCtrl"><i class="fa fa-crosshairs fa-2x"></i></div>');
     }])
-    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$location', '$map', '$markers', '$settings', 'localStorageService',
-        function ($geolocation, $scope, $rootScope, $location, $map, $markers, $settings, $storage) {
+    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$location', '$map', '$markers', '$searchBox', '$settings', 'localStorageService',
+        function ($geolocation, $scope, $rootScope, $location, $map, $markers,$searchBox, $settings, $storage) {
 
             var searchObject = $location.search();
 
             // for the view
             $scope.map = $map;
-            $scope.markers = $markers.list;
+            $scope.markers = $markers.get();
+            $scope.newPlaceMarker = $markers.getNewMarker();
             $scope.isDeviceMobile = $settings.isMobile();
 
             /* -- set the searchbox ---*/
-            $scope.searchbox = {
-                template: 'searchbox.tpl.html',
-                position: 'top-right',
-                parentdiv: 'container-location-search',
-                options: {
-                    autocomplete: true,
-                    visible: true
-                },
-                events: {
-                    /*jshint camelcase: false */
-                    place_changed: function (autoComplete) {
-                        var places = autoComplete.getPlace();
-
-                        if (places.address_components) {
-                            $markers.delete(2); //reset found marker
-
-                            /*jshint camelcase: true */
-                            var bounds = new google.maps.LatLngBounds();
-                            bounds.extend(places.geometry.location);
-
-                            //center map to the selected place
-                            $scope.$emit('map.center', {
-                                latitude: bounds.getNorthEast().lat(),
-                                longitude: bounds.getNorthEast().lng()
-                            });
-
-
-                            //add marker for result
-
-                            $markers.set({
-                                id: 2,
-                                isFavorite: false,
-                                icon: 'img/marker_place_found.png',
-                                coords: {
-                                    latitude: places.geometry.location.lat(),
-                                    longitude: places.geometry.location.lng()
-                                },
-                                /*jshint camelcase: false */
-                                label: places.formatted_address,
-                                /*jshint camelcase: true */
-                                store: false
-                            });
-
-                            // reset autocomplete input field
-                            $('input.clearable').removeClass('x onX').val('').change();
-
-                        } else {
-                            console.log('we have to do something else with the search string: ' + places.name);
-                        }
-                    }
-                }
-            };
+            $scope.searchbox = $searchBox;
 
             /* ---------- user marker and current position --- */
             $scope.userMarker = {
@@ -83,8 +33,7 @@ angular.module('traffc')
                     }
 
                 }
-
-            };
+             };
 
             // geo locate only when no options
             if (typeof searchObject.geo === 'undefined') {
@@ -146,72 +95,6 @@ angular.module('traffc')
             }
 
             /* ----- add new place marker ---*/
-            // todo extract this into a $marker provider, and use extend
-            $scope.newPlaceMarker = {
-                id: 1,
-                coords: {},
-                options: {
-                    visible: true,
-                    animation: google.maps.Animation.DROP,
-                    draggable: true,
-                    icon: {
-                        url: 'img/marker_new_place.png',
-                        scaledSize: new google.maps.Size(40, 40)
-                    }
-                },
-                infoWindow: {
-                    options: {  // some graphical adjustments
-                        maxWidth: 300,
-                        pixelOffset: {
-                            width: 0,
-                            height: -40
-                        }
-                    },
-                    show: false,
-                    templateUrl: 'views/infoWindow.addPlace.tpl.html',
-                    params: {
-                        placeName: '',
-                        save: function () {
-                            $scope.$emit('map.saveNewPlace', {});
-                            // reset marker
-                            $scope.newPlaceMarker.reset();
-                        },
-                        abort: function () {
-                            // reset marker
-                            $scope.newPlaceMarker.reset();
-                            // hide me
-                            $scope.newPlaceMarker.options.visible = false;
-                        }
-                    },
-                    closeClick: function () {
-                        $scope.newPlaceMarker.infoWindow.show = false; // update the show flag
-                    }
-                },
-                events: {
-                    click: function () {
-                        $scope.newPlaceMarker.infoWindow.show = !$scope.newPlaceMarker.infoWindow.show;
-                    },
-                    dragstart: function () {
-                        console.debug('marker drag started');
-                        $scope.newPlaceMarker.infoWindow.show = false; // force closing the infoWindow
-                    },
-                    dragend: function () {
-                        console.debug('marker drag ended');
-                        $scope.newPlaceMarker.infoWindow.show = true;  // force opening the infoWindow
-
-                    }
-                },
-                reset: function () {
-                    // hide this marker and its window
-                    $scope.newPlaceMarker.options.visible = false;
-                    $scope.newPlaceMarker.infoWindow.show = false;
-
-                    // clean params
-                    $scope.newPlaceMarker.infoWindow.params.placeName = '';
-                }
-
-            };
-
             $scope.addNewPlace = function () {
                 $scope.newPlaceMarker.options.visible = true;
                 $scope.newPlaceMarker.coords = {
@@ -219,7 +102,6 @@ angular.module('traffc')
                     longitude: $map.center.longitude
                 };
             };
-
 
             $scope.saveNewPlace = function () {
 
@@ -333,6 +215,12 @@ angular.module('traffc')
             $scope.$on('map.dragend', function () {
                 console.debug('map.dragend triggered');
                 $markers.delete(2);  // delete the search marker
+            });
+
+
+            $scope.$on('map.searchFound', function (e,datum) {
+                console.debug('map.searchFound triggered');
+                $markers.set(datum);
             });
 
         }]);
