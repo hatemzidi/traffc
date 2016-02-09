@@ -4,6 +4,18 @@ angular.module('traffc')
     .service('$markers', ['$rootScope',function ($rootScope) {
 
 
+        var userMarker = {
+            id: 0,
+            coords : {},
+            options: {
+                draggable: false,
+                icon: {
+                    scaledSize: new google.maps.Size(40, 40),
+                    url: 'img/marker_user.png'
+                }
+
+            }
+        };
 
         var newPlaceMarker = {
             id: 1,
@@ -74,6 +86,7 @@ angular.module('traffc')
 
         var $markers = {
             list: [],
+            userMarker : userMarker,
             newPlaceMarker : newPlaceMarker,
             set: function (datum) {
 
@@ -139,6 +152,9 @@ angular.module('traffc')
             },
             getNewMarker : function(){
                 return this.newPlaceMarker;
+            },
+            getUserMarker : function(){
+                return this.userMarker;
             },
             delete: function (id) {
                 var idx = _.findIndex(this.list, {id: id});

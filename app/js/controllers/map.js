@@ -1,39 +1,23 @@
 'use strict';
 
 angular.module('traffc')
-    //todo extract this, preappend with 'views/'
-    .run(['$templateCache', function ($templateCache) {
-        $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control clearable" id="map-location-search" placeholder="Search for a location..." autocomplete="off">');
-        $templateCache.put('getPlaces.tpl.html', '<div id="getFavoriteUI" ng-click="showPlacesModal()" ng-controller="navCtrl"><i class="fa fa-heart fa-2x"></i></div>');
-        $templateCache.put('addPlace.tpl.html', '<div id="setFavoriteUI" ng-click="addPlace()" ng-controller="navCtrl"><i class="fa fa-plus-square fa-2x"></i></div>');
-        $templateCache.put('goCenter.tpl.html', '<div id="goCenterUI" ng-click="backToMyPosition()" ng-controller="navCtrl"><i class="fa fa-crosshairs fa-2x"></i></div>');
-    }])
-    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$location', '$map', '$markers', '$searchBox', '$settings', 'localStorageService',
-        function ($geolocation, $scope, $rootScope, $location, $map, $markers,$searchBox, $settings, $storage) {
+    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$location', '$map', '$markers', '$searchBox', '$settings', '$utils', 'localStorageService',
+        function ($geolocation, $scope, $rootScope, $location, $map, $markers,$searchBox, $settings, $utils, $storage) {
 
             var searchObject = $location.search();
 
             // for the view
             $scope.map = $map;
+
             $scope.markers = $markers.get();
             $scope.newPlaceMarker = $markers.getNewMarker();
-            $scope.isDeviceMobile = $settings.isMobile();
+            $scope.isDeviceMobile = $utils.isMobile();
 
             /* -- set the searchbox ---*/
             $scope.searchbox = $searchBox;
 
-            /* ---------- user marker and current position --- */
-            $scope.userMarker = {
-                id: 0,
-                options: {
-                    draggable: false,
-                    icon: {
-                        scaledSize: new google.maps.Size(40, 40),
-                        url: 'img/marker_user.png'
-                    }
-
-                }
-             };
+            /* ---------- user marker and his current position --- */
+            $scope.userMarker = $markers.getUserMarker();
 
             // geo locate only when no options
             if (typeof searchObject.geo === 'undefined') {
@@ -80,13 +64,17 @@ angular.module('traffc')
 
                 });
             } else {
-                //todo verify if valid geo
-                console.debug('Got a position from URL : ' + searchObject.geo);
-                var geo = searchObject.geo.split(',').map(parseFloat);
-                $map.center = {
-                    latitude: geo[0],
-                    longitude: geo[1]
-                };
+                if ( /^(-?\d{1,2}\.\d{1,6}),(-?\d{1,2}\.\d{1,6})$/.test(searchObject.geo) ) {
+                    console.debug('Got a position from URL : ' + searchObject.geo);
+
+                    var geo = searchObject.geo.split(',').map(parseFloat);
+                    $map.center = {
+                        latitude: geo[0],
+                        longitude: geo[1]
+                    };
+                }else {
+                    console.error('Got malformed position : ' + searchObject.geo);
+                }
 
             }
 
@@ -123,7 +111,7 @@ angular.module('traffc')
             $scope.$watch(function () {
                 return Date();
             }, function () {
-                var style = $settings.data.nightMode === true && $settings.isEvening() ? 'dark' : 'light';
+                var style = $settings.data.nightMode === true && $utils.isEvening() ? 'dark' : 'light';
 
                 if (typeof StatusBar !== 'undefined') {
                     if (style === 'light') {

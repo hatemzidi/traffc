@@ -4,7 +4,7 @@ angular.module('traffc')
     .service('$searchBox', ['$rootScope', function ($rootScope) {
 
         var $search = {
-            template: 'searchbox.tpl.html',
+            template: 'views/searchbox.tpl.html',
             position: 'top-right',
             parentdiv: 'container-location-search',
             options: {
