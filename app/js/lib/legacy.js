@@ -2,23 +2,6 @@
 
 var pause = false;
 
-function resizeBootstrapMap() {
-    console.debug('window resized');
-    var $map = $('#map');
-    var mapParentWidth = $('#map_canvas').width();
-    $map.width(mapParentWidth);
-
-    var headerHeight = $('nav.header').height();
-
-    var minus = 0;
-    if (headerHeight !== 0) {
-        minus = 52;
-    }
-
-    $map.height($(window).height() - minus);
-
-}
-
 
 function togFnClass(v) {
     return v ? 'addClass' : 'removeClass';
@@ -29,7 +12,6 @@ function reloadTiles() {
     if (!pause) {
         //debug
         console.debug('reload layer.');
-
 
         var tiles = $('#map_canvas').find('img');
         for (var i = 0; i < tiles.length; i++) {
@@ -107,7 +89,7 @@ navigator.sayswho = (function () {
 //todo refactor into angular
 $(function () {
 
-    $(window).resize(resizeBootstrapMap); // force responsivness
+    // $(window).resize(resizeBootstrapMap); // force responsivness
 
     $('body').addClass(navigator.sayswho.toLowerCase());
 

@@ -37,9 +37,6 @@ var CordovaInit = function () {
             });
         }
 
-        /* jshint ignore:start */
-        resizeBootstrapMap();
-        /* jshint ignore:end */
     };
 
     this.bindEvents = function () {
