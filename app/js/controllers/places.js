@@ -32,6 +32,7 @@ angular.module('traffc')
 
         $scope.deletePlace = function (idx) {
             $markers.list.splice(idx, 1);
+            $scope.markers.splice(idx, 1);  // force delete on view
             $rootScope.$broadcast('map.deletePlace', idx);
         };
 
