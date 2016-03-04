@@ -1,9 +1,9 @@
 {
   "name": "angular-google-maps",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "main": "./dist/angular-google-maps.js",
   "dependencies": {
-    "angular": "1.2 - 1.4",
+    "angular": "1.2 - 1.5",
     "angular-simple-logger": ">=0.0.1",
     "lodash": "3.X - 4.X"
   },
@@ -27,8 +27,8 @@
     "dist/architecture/"
   ],
   "devDependencies": {
-    "angular-mocks": "1.2 - 1.4",
-    "angular-route": "1.2 - 1.4",
+    "angular-mocks": "1.2 - 1.5",
+    "angular-route": "1.2 - 1.5",
     "bootstrap-without-jquery": "git://github.com/tagawa/bootstrap-without-jquery.git",
     "data-structures": "~1.4.2",
     "OverlappingMarkerSpiderfier": "git://github.com/nmccready/OverlappingMarkerSpiderfier.git",
@@ -36,11 +36,11 @@
     "uuid": "http://github.com/LiosK/UUID.js/archive/v3.2.tar.gz"
   },
   "homepage": "https://github.com/angular-ui/angular-google-maps",
-  "_release": "2.3.1",
+  "_release": "2.3.2",
   "_resolution": {
     "type": "version",
-    "tag": "2.3.1",
-    "commit": "01b66327a5742ad8f2b660ec756c210edf0516f4"
+    "tag": "2.3.2",
+    "commit": "bea23676c7a3bf5097cb605d54e61748c34a0ee8"
   },
   "_source": "git://github.com/angular-ui/angular-google-maps.git",
   "_target": "*",
