@@ -54,7 +54,7 @@ var settings = {
      * release / build
      */
     version: !!argv.version ?
-        argv.version : '0.9.7',
+        argv.version : '0.9.9',
 
     /*
      * release / build
@@ -129,14 +129,17 @@ gulp.task('preprocess', ['concat'], function () {
 
 
 gulp.task('inject-ga', ['preprocess'], function () {
-    gulp.src('./dist/*.html')
-        .pipe(inject(gulp.src(['./app/js/lib/ga.min.js']), {
-            starttag: '<!-- inject:analytics -->',
-            transform: function (filePath, file) {
-                return file.contents.toString('utf8'); // Return file contents as string
-            }
-        }))
-        .pipe(gulp.dest('./dist/'));
+
+    if (settings.device === 'desktop') {
+        gulp.src('./dist/*.html')
+            .pipe(inject(gulp.src(['./app/js/lib/ga.min.js']), {
+                starttag: '<!-- inject:analytics -->',
+                transform: function (filePath, file) {
+                    return file.contents.toString('utf8'); // Return file contents as string
+                }
+            }))
+            .pipe(gulp.dest('./dist/'));
+    }
 });
 
 

@@ -1,6 +1,6 @@
 {
   "name": "traffc",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "dependencies": {
     "angular": "latest",
     "json3": "~3.2.6",
