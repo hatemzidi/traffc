@@ -1,3 +1,37 @@
+<a name"2.3.2"></a>
+### 2.3.2 (2016-02-11)
+
+
+#### Bug Fixes
+
+* **angular 1.5:** working ([8ac35c3e](https://github.com/angular-ui/angular-google-maps/commit/8ac35c3e))
+
+
+<a name"2.3.1"></a>
+### 2.3.1 (2016-01-28)
+
+
+#### Bug Fixes
+
+* **lodash:** #1682 check both directions 3.X to 4.X and 4.X to 3.X. ([cb3a20bd](https://github.com/angular-ui/angular-google-maps/commit/cb3a20bd))
+
+
+<a name"2.2.2"></a>
+### 2.2.2 (2016-01-21)
+
+
+#### Bug Fixes
+
+* **EventsHelper removeEvents:** hasOwnProperty check to protect againt those that override Array.prototype issue ([4aa49942](https://github.com/angular-ui/angular-google-maps/commit/4aa49942))
+* **angular-simple-logger:** point to browser version of the lib ([6136cb81](https://github.com/angular-ui/angular-google-maps/commit/6136cb81))
+* **loader:** replace remove() with removeChild() to delete an existing ([86aa0fe8](https://github.com/angular-ui/angular-google-maps/commit/86aa0fe8))
+* **lodash:** lodash version also fixed to 3.X on devDependencies for node #1682 ([065568aa](https://github.com/angular-ui/angular-google-maps/commit/065568aa))
+* **lodash extensions:** fixed indenting and other mistakes ([4f303c08](https://github.com/angular-ui/angular-google-maps/commit/4f303c08))
+* **mapType:** options watch deep, is now watchCollection as it avoids infinite digests ([222e68f3](https://github.com/angular-ui/angular-google-maps/commit/222e68f3))
+* **travis:** remove underscore spec for now ([84db4848](https://github.com/angular-ui/angular-google-maps/commit/84db4848))
+* **window memory scope leaks:** - WindowsParent model now correctly destroys its child model's scopes. - coffeel ([42cca071](https://github.com/angular-ui/angular-google-maps/commit/42cca071))
+
+
 <a name"2.2.1"></a>
 ### 2.2.1 (2015-09-11)
 

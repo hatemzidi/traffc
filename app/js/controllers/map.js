@@ -1,201 +1,88 @@
 'use strict';
 
 angular.module('traffc')
-    //todo extract this, preappend with 'views/'
-    .run(['$templateCache', function ($templateCache) {
-        $templateCache.put('searchbox.tpl.html', '<input type="text" class="form-control clearable" id="map-location-search" placeholder="Search for a location..." autocomplete="off">');
-        $templateCache.put('getPlaces.tpl.html', '<div id="getFavoriteUI" ng-click="showPlacesModal()" ng-controller="navCtrl"><i class="fa fa-heart fa-2x"></i></div>');
-        $templateCache.put('addPlace.tpl.html', '<div id="setFavoriteUI" ng-click="addPlace()" ng-controller="navCtrl"><i class="fa fa-plus-square fa-2x"></i></div>');
-        $templateCache.put('goCenter.tpl.html', '<div id="goCenterUI" ng-click="backToMyPosition()" ng-controller="navCtrl"><i class="fa fa-crosshairs fa-2x"></i></div>');
-    }])
-    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$map', '$markers', '$settings', 'localStorageService',
-        function ($geolocation, $scope, $rootScope, $map, $markers, $settings, $storage) {
+    .controller('mapCtrl', ['$geolocation', '$scope', '$rootScope', '$location', '$map', '$markers', '$searchBox', '$settings', '$utils', 'localStorageService',
+        function ($geolocation, $scope, $rootScope, $location, $map, $markers,$searchBox, $settings, $utils, $storage) {
+
+            var searchObject = $location.search();
 
             // for the view
             $scope.map = $map;
-            $scope.markers = $markers.list;
-            $scope.isDeviceMobile = $settings.isMobile();
+
+            $scope.markers = $markers.get();
+            $scope.newPlaceMarker = $markers.getNewMarker();
+            $scope.isDeviceMobile = $utils.isMobile();
 
             /* -- set the searchbox ---*/
-            $scope.searchbox = {
-                template: 'searchbox.tpl.html',
-                position: 'top-right',
-                parentdiv: 'container-location-search',
-                options: {
-                    autocomplete: true,
-                    visible: true
-                },
-                events: {
-                    /*jshint camelcase: false */
-                    place_changed: function (autoComplete) {
-                        var places = autoComplete.getPlace();
+            $scope.searchbox = $searchBox;
 
-                        if (places.address_components) {
-                            $markers.delete(2); //reset found marker
+            /* ---------- user marker and his current position --- */
+            $scope.userMarker = $markers.getUserMarker();
 
-                            /*jshint camelcase: true */
-                            var bounds = new google.maps.LatLngBounds();
-                            bounds.extend(places.geometry.location);
+            // geo locate only when no options
+            if (typeof searchObject.geo === 'undefined') {
+                // get the user's position
+                $geolocation.getCurrentPosition({
+                    timeout: 10001,
+                    maximumAge: 3000,
+                    enableHighAccuracy: true
+                }).then(function (position) {
+                    console.debug('Got the current geoposition.');
 
-                            //center map to the selected place
-                            $scope.$emit('map.center', {
-                                latitude: bounds.getNorthEast().lat(),
-                                longitude: bounds.getNorthEast().lng()
-                            });
-
-
-                            //add marker for result
-
-                            $markers.set({
-                                id: 2,
-                                isFavorite: false,
-                                icon: 'img/marker_place_found.png',
-                                coords: {
-                                    latitude: places.geometry.location.lat(),
-                                    longitude: places.geometry.location.lng()
-                                },
-                                /*jshint camelcase: false */
-                                label: places.formatted_address,
-                                /*jshint camelcase: true */
-                                store: false
-                            });
-
-                            // reset autocomplete input field
-                            $('input.clearable').removeClass('x onX').val('').change();
-
-                        } else {
-                            console.log('we have to do something else with the search string: ' + places.name);
-                        }
-                    }
-                }
-            };
-
-            /* ---------- user marker and current position --- */
-            $scope.userMarker = {
-                id: 0,
-                options: {
-                    draggable: false,
-                    icon: {
-                        scaledSize: new google.maps.Size(40, 40),
-                        url: 'img/marker_user.png'
-                    }
-
-                }
-
-            };
-
-
-            // get the user's position
-            $geolocation.getCurrentPosition({
-                timeout: 10001,
-                maximumAge: 3000,
-                enableHighAccuracy: true
-            }).then(function (position) {
-                console.debug('Got the current geoposition.');
-
-                // point the user marker to the current position
-                $scope.userMarker.coords = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                };
-
-                //center map to the new position
-                $scope.$emit('map.center', $scope.userMarker.coords);
-
-            }).catch(function () {
-                console.error('oops, can not locate the user.');
-                $rootScope.$broadcast('modals.GPSError', {});
-            });
-
-
-            $geolocation.watchPosition({
-                timeout: 10001,
-                maximumAge: 3000,
-                enableHighAccuracy: true
-            });
-
-            $scope.$on('$geolocation.position.changed', function (e, v) {
-                // todo compare with current coords?
-
-                if (!_.isEqual($scope.userMarker.coords, v.coords)) {
-                    console.debug('Geoposition changed.');
+                    // point the user marker to the current position
                     $scope.userMarker.coords = {
-                        latitude: v.coords.latitude,
-                        longitude: v.coords.longitude
-
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
                     };
+
+                    //center map to the new position
+                    $scope.$emit('map.center', $scope.userMarker.coords);
+
+                }).catch(function () {
+                    console.error('oops, can not locate the user.');
+                    $rootScope.$broadcast('modals.GPSError', {});
+                });
+
+
+                $geolocation.watchPosition({
+                    timeout: 10001,
+                    maximumAge: 3000,
+                    enableHighAccuracy: true
+                });
+
+                $scope.$on('$geolocation.position.changed', function (e, v) {
+                    // todo compare with current coords?
+
+                    if (!_.isEqual($scope.userMarker.coords, v.coords)) {
+                        console.debug('Geoposition changed.');
+                        $scope.userMarker.coords = {
+                            latitude: v.coords.latitude,
+                            longitude: v.coords.longitude
+
+                        };
+                    }
+
+                });
+            } else {
+                if ( /^(-?\d{1,2}\.\d{1,6}),(-?\d{1,2}\.\d{1,6})$/.test(searchObject.geo) ) {
+                    console.debug('Got a position from URL : ' + searchObject.geo);
+
+                    var geo = searchObject.geo.split(',').map(parseFloat);
+                    $map.center = {
+                        latitude: geo[0],
+                        longitude: geo[1]
+                    };
+                }else {
+                    console.error('Got malformed position : ' + searchObject.geo);
                 }
 
-            });
+            }
 
+            if (typeof searchObject.zoom !== 'undefined') {
+                $map.zoom = parseInt(searchObject.zoom);
+            }
 
             /* ----- add new place marker ---*/
-            // todo extract this into a $marker provider, and use extend
-            $scope.newPlaceMarker = {
-                id: 1,
-                coords: {},
-                options: {
-                    visible: true,
-                    animation: google.maps.Animation.DROP,
-                    draggable: true,
-                    icon: {
-                        url: 'img/marker_new_place.png',
-                        scaledSize: new google.maps.Size(40, 40)
-                    }
-                },
-                infoWindow: {
-                    options: {  // some graphical adjustments
-                        maxWidth: 300,
-                        pixelOffset: {
-                            width: 0,
-                            height: -40
-                        }
-                    },
-                    show: false,
-                    templateUrl: 'views/infoWindow.addPlace.tpl.html',
-                    params: {
-                        placeName: '',
-                        save: function () {
-                            $scope.$emit('map.saveNewPlace', {});
-                            // reset marker
-                            $scope.newPlaceMarker.reset();
-                        },
-                        abort: function () {
-                            // reset marker
-                            $scope.newPlaceMarker.reset();
-                            // hide me
-                            $scope.newPlaceMarker.options.visible = false;
-                        }
-                    },
-                    closeClick: function () {
-                        $scope.newPlaceMarker.infoWindow.show = false; // update the show flag
-                    }
-                },
-                events: {
-                    click: function () {
-                        $scope.newPlaceMarker.infoWindow.show = !$scope.newPlaceMarker.infoWindow.show;
-                    },
-                    dragstart: function () {
-                        console.debug('marker drag started');
-                        $scope.newPlaceMarker.infoWindow.show = false; // force closing the infoWindow
-                    },
-                    dragend: function () {
-                        console.debug('marker drag ended');
-                        $scope.newPlaceMarker.infoWindow.show = true;  // force opening the infoWindow
-
-                    }
-                },
-                reset: function () {
-                    // hide this marker and its window
-                    $scope.newPlaceMarker.options.visible = false;
-                    $scope.newPlaceMarker.infoWindow.show = false;
-
-                    // clean params
-                    $scope.newPlaceMarker.infoWindow.params.placeName = '';
-                }
-
-            };
-
             $scope.addNewPlace = function () {
                 $scope.newPlaceMarker.options.visible = true;
                 $scope.newPlaceMarker.coords = {
@@ -203,7 +90,6 @@ angular.module('traffc')
                     longitude: $map.center.longitude
                 };
             };
-
 
             $scope.saveNewPlace = function () {
 
@@ -225,7 +111,7 @@ angular.module('traffc')
             $scope.$watch(function () {
                 return Date();
             }, function () {
-                var style = $settings.data.nightMode === true && $settings.isEvening() ? 'dark' : 'light';
+                var style = $settings.data.nightMode === true && $utils.isEvening() ? 'dark' : 'light';
 
                 if (typeof StatusBar !== 'undefined') {
                     if (style === 'light') {
@@ -243,9 +129,9 @@ angular.module('traffc')
             $scope.$watch('markers', function (nv, ov) {
                 //todo try to ignore infowindow.show
                 if (!_.isEqual(nv, ov)) {
-                    var places = _.reduce(nv, function (r,i) {
+                    var places = _.reduce(nv, function (r, i) {
                         if (i.store === true) {
-                            r.push( {
+                            r.push({
                                 id: i.id,
                                 isFavorite: i.isFavorite,
                                 coords: i.coords,
@@ -317,6 +203,12 @@ angular.module('traffc')
             $scope.$on('map.dragend', function () {
                 console.debug('map.dragend triggered');
                 $markers.delete(2);  // delete the search marker
+            });
+
+
+            $scope.$on('map.searchFound', function (e,datum) {
+                console.debug('map.searchFound triggered');
+                $markers.set(datum);
             });
 
         }]);

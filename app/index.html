@@ -270,7 +270,7 @@ it's just light, simple and instantaneously available."/>
     </div>
 
     <div id="map_canvas" class="col-lg-10 col-md-8 col-sm-8 col-xs-9 col-centered">
-        <div id="map">
+        <div id="map" height-resize="52" hr-header-element="nav.header">
             <ui-gmap-google-map center='map.center'
                                 zoom='map.zoom'
                                 events='map.events'
@@ -320,17 +320,17 @@ it's just light, simple and instantaneously available."/>
                 </ui-gmap-search-box>
 
 
-                <ui-gmap-map-control template="goCenter.tpl.html"
+                <ui-gmap-map-control template="views/goCenter.tpl.html"
                                      position="left-bottom"
                                      index="1"
                                      ng-if="isDeviceMobile"
                 ></ui-gmap-map-control>
-                <ui-gmap-map-control template="getPlaces.tpl.html"
+                <ui-gmap-map-control template="views/getPlaces.tpl.html"
                                      position="right-bottom"
                                      index="1"
                                      ng-if="isDeviceMobile"
                 ></ui-gmap-map-control>
-                <ui-gmap-map-control template="addPlace.tpl.html"
+                <ui-gmap-map-control template="views/addPlace.tpl.html"
                                      position="right-bottom"
                                      index="1"
                                      ng-if="isDeviceMobile"
@@ -352,6 +352,7 @@ it's just light, simple and instantaneously available."/>
 <script src="lib/json3/lib/json3.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/angular-cookies/angular-cookies.js"></script>
+<script src="lib/angular-route/angular-route.js"></script>
 <script src="lib/angular-sanitize/angular-sanitize.js"></script>
 
 <script src="lib/bootbox/bootbox.js"></script>
@@ -390,8 +391,11 @@ it's just light, simple and instantaneously available."/>
 <script src="js/services/map.style.js"></script>
 <script src="js/services/map.js"></script>
 <script src="js/services/markers.js"></script>
+<script src="js/services/searchBox.js"></script>
 <script src="js/services/settings.js"></script>
+<script src="js/services/utils.js"></script>
 <script src="js/directives/persona.js"></script>
+<script src="js/directives/resize.js"></script>
 <script src="js/main.js"></script>
 <!-- endbuild -->
 

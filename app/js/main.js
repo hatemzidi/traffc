@@ -14,6 +14,11 @@ var CordovaInit = function () {
         angular.bootstrap($('body'), ['traffc']);
 
         if (mode === 'auto') {
+
+            // inject google analytics
+            window.analytics.startTrackerWithId('UA-8405943-9');
+            window.analytics.trackView('Main');
+
             $('body').addClass(device.platform.toLowerCase());
 
             // todo make this more angular compliant
@@ -37,9 +42,6 @@ var CordovaInit = function () {
             });
         }
 
-        /* jshint ignore:start */
-        resizeBootstrapMap();
-        /* jshint ignore:end */
     };
 
     this.bindEvents = function () {
