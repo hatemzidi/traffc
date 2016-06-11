@@ -29,3 +29,9 @@ AddType text/cache-manifest .appcache
      Header set Expires "Tue, 01 Jan 1980 1:00:00 GMT"
   </ifModule>
 </filesMatch>
+
+# force SSL
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^traffc\.info [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://traffc.info/$1 [R,L]
