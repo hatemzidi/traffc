@@ -1,6 +1,6 @@
 # traffc: your road companion
 
-THIS PROJECT ARE DISCONTINUED NOW - FEEL FREE TO CONTINUE IT.
+THIS PROJECT IS DISCONTINUED NOW - FEEL FREE TO CONTINUE IT.
 
 This is just a minimalistic mobile application using Google Maps to ~~quickly~~ visualize your location's traffic condition.
 
